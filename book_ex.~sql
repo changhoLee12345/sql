@@ -44,4 +44,5 @@ WHERE  rn > 0;
 SELECT /*+ INDEX_ASC (tbl_board pk_board) */
  *
 FROM   tbl_board
-WHERE  bno > 0;
+WHERE  bno > 0
+AND    bno < 100;
