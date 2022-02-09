@@ -1,11 +1,5 @@
 SELECT * FROM tab;
 
-CREATE TABLE emp AS
-    SELECT * FROM employees;
-
-grant
-    SELECT , UPDATE, DELETE, INSERT ON emp TO prj;
-
 SELECT * FROM emp ORDER BY 1 DESC;
 
 INSERT INTO emp
