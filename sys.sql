@@ -21,3 +21,6 @@ grant CONNECT, dba TO book_ex;
 ALTER USER book_ex DEFAULT tablespace users quota unlimited ON users;
 
 grant select, update, delete, create on hr.emp to prj;
+
+select * from all_users
+order by 1;

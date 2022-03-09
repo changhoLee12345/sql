@@ -2,9 +2,9 @@ SELECT * FROM tab;
 
 ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
-CREATE USER spring identified BY spring;
-grant CONNECT, RESOURCE, CREATE view TO spring;
-ALTER USER spring DEFAULT tablespace users quota unlimited ON users;
+CREATE USER prj identified BY prj;
+grant CONNECT, RESOURCE, CREATE view TO prj;
+ALTER USER prj DEFAULT tablespace users quota unlimited ON users;
 
 ALTER USER hr identified BY hr account unlock;
 
@@ -19,3 +19,5 @@ grant CONNECT, RESOURCE TO bbs;
 grant CONNECT, dba TO book_ex;
 
 ALTER USER book_ex DEFAULT tablespace users quota unlimited ON users;
+
+grant select, update, delete, create on hr.emp to prj;
