@@ -16,12 +16,12 @@ ORDER  BY 1;
 ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
 CREATE USER hr identified BY hr;
-CREATE USER book_ex identified BY book_ex DEFAULT tablespace users temporary tablespace temp;
+CREATE USER bbs identified BY bbs DEFAULT tablespace users temporary tablespace temp;
 
-grant CONNECT, RESOURCE TO hr;
+grant CONNECT, RESOURCE TO bbs;
 grant CONNECT, dba TO book_ex;
 
-ALTER USER hr DEFAULT tablespace users quota unlimited ON users;
+ALTER USER bbs DEFAULT tablespace users quota unlimited ON users;
 
 grant
     SELECT , UPDATE, DELETE, CREATE ON hr.emp TO prj;
