@@ -15,8 +15,8 @@ ORDER  BY 1;
 
 ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
-CREATE USER bbs identified BY bbs;
-CREATE USER book_ex identified BY book_ex DEFAULT tablespace users temporary tablespace temp;
+CREATE USER hr identified BY hr;
+CREATE USER bbs identified BY bbs DEFAULT tablespace users temporary tablespace temp;
 
 grant CONNECT, RESOURCE TO bbs;
 grant CONNECT, dba TO book_ex;
@@ -27,4 +27,9 @@ grant
     SELECT , UPDATE, DELETE, CREATE ON hr.emp TO prj;
 
 SELECT *
+<<<<<<< HEAD
 FROM   all_users;
+=======
+FROM   all_users
+ORDER  BY 1;
+>>>>>>> e394661230bb740eaa22e1a3e8d9eec12c49d78d
