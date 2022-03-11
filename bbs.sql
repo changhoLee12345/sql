@@ -5,6 +5,7 @@ create table member (
     member_address varchar2(100)
 );
 
+CREATE sequence notice_seq;
 create table notice (
     id number primary key,
     title varchar2(100),
@@ -13,6 +14,7 @@ create table notice (
     hit number
 );
 
+create sequence bbs_id_seq;
 drop table bbs purge;
 create table bbs(
     bbs_id number primary key,
@@ -24,4 +26,7 @@ create table bbs(
     bbs_image varchar2(100)
 );
 
-create sequence bbs_id_seq;
+insert into notice
+select notice_seq.nextval, '공지사항 유의'||notice_seq.currval, '공지사항을 잘 지켜주시기 바랍니다'||notice_seq.currval, wdate, 0 from notice;
+
+select * from notice;
