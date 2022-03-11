@@ -27,9 +27,5 @@ grant
     SELECT , UPDATE, DELETE, CREATE ON hr.emp TO prj;
 
 SELECT *
-<<<<<<< HEAD
-FROM   all_users;
-=======
 FROM   all_users
 ORDER  BY 1;
->>>>>>> e394661230bb740eaa22e1a3e8d9eec12c49d78d

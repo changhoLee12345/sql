@@ -6,7 +6,6 @@ CREATE TABLE cart(no NUMBER primary key
                  ,price NUMBER
                  ,qty NUMBER);
 
-
 SELECT *
 FROM   cart;
 
