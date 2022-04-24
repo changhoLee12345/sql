@@ -1,9 +1,10 @@
 SELECT *
-FROM   tab;
+FROM   tab
+order by tname;
 
 ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
-CREATE USER prj identified BY prj;
+CREATE USER hr identified BY hr;
 grant CONNECT, RESOURCE, CREATE view TO prj;
 ALTER USER prj DEFAULT tablespace users quota unlimited ON users;
 
