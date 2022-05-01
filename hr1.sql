@@ -1,5 +1,8 @@
 SELECT * FROM tab;
 
+select * from emp
+order by 1 desc;
+
 CREATE TABLE emp AS
     SELECT * FROM employees;
 
