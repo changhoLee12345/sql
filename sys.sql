@@ -6,6 +6,7 @@ ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
 CREATE USER hr identified BY hr;
 grant CONNECT, RESOURCE, CREATE view TO prj;
+grant debug connect session to prj;
 ALTER USER prj DEFAULT tablespace users quota unlimited ON users;
 
 ALTER USER hr identified BY hr account unlock;
