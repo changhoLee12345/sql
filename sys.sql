@@ -4,7 +4,7 @@ order by tname;
 
 ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
-CREATE USER hr identified BY hr;
+CREATE USER prj identified BY prj;
 grant CONNECT, RESOURCE, CREATE view TO prj;
 grant debug connect session to prj;
 ALTER USER prj DEFAULT tablespace users quota unlimited ON users;
