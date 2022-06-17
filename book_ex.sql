@@ -4,8 +4,7 @@ FROM   tab;
 CREATE sequence seq_board;
 
 drop TABLE tbl_board purge;
-CREATE TABLE tbl_board(bno NUMBER(10
-                             ,0)
+CREATE TABLE tbl_board(bno NUMBER(10, 0)
                       ,title VARCHAR2(200) NOT NULL
                       ,content VARCHAR2(2000) NOT NULL
                       ,writer VARCHAR2(50) NOT NULL
@@ -30,6 +29,7 @@ VALUES
 SELECT *
 FROM   tbl_board
 ORDER  BY 1;
+
 DELETE FROM tbl_board
 WHERE  bno > 1;
 
