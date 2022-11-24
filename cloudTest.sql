@@ -27,10 +27,10 @@ create table BOOK_INFO (
  book_price number
 );
 
-insert into book_info values('B0001', 'ÀÌ°ÍÀÌÀÚ¹Ù´Ù', '±èÀÚ¹Ù','ÀÚ¹ÙÃâÆÇ»ç',1000);
-insert into book_info values('C0001', 'ÀÌ°ÍÀÌ¾¾´Ù', '±è¾¾','¸Å¿ìÃâÆÇ»ç',2000);
+insert into book_info values('B0001', 'ì´ê²ƒì´ìë°”ë‹¤', 'ê¹€ìë°”','ìë°”ì¶œíŒì‚¬',1000);
+insert into book_info values('C0001', 'ì´ê²ƒì´ì”¨ë‹¤', 'ê¹€ì”¨','ë§¤ìš°ì¶œíŒì‚¬',2000);
 
 select * from book_info;
 
-
+--
 
