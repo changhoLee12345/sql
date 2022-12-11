@@ -4,7 +4,7 @@ select * from member;
 
 alter table member rename column mail to email;
 
-select * from tbl_board order by 1 desc;
+select * from tbl_board order by 1 ;
 
 drop table tbl_reply purge;
 
@@ -33,5 +33,23 @@ insert into book_info values('C0001', '이것이씨다', '김씨','매우출판�
 
 select * from book_info;
 
---
+create table book_file (
+ file_no number primary key,
+ book_code varchar2(50),
+ book_image varchar2(50),
+ book_path varchar2(50)
+);
+select * from book_file;
+
+create table members (
+ id varchar(10) primary key,
+ passwd varchar2(10),
+ name varchar2(30),
+ email varchar2(30),
+ responsibility varchar2(10),
+ pfileName varchar2(50),
+ ofileName varchar2(50),
+ cdate date
+);
+insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
