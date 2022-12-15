@@ -32,6 +32,7 @@ insert into book_info values('B0001', '이것이자바다', '김자바','자바�
 insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
 
 select * from book_info;
+delete from book_info where book_code like 'Groucho%';
 
 create table book_file (
  file_no number primary key,
@@ -40,6 +41,7 @@ create table book_file (
  book_path varchar2(50)
 );
 select * from book_file;
+delete from book_file where book_code like 'Groucho%';
 
 create table members (
  id varchar(10) primary key,
