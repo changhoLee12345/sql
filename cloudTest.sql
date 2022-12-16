@@ -32,3 +32,19 @@ insert into book_info values('B0001', '이것이자바다', '김자바','자바�
 insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
 
 select * from book_info;
+
+create table tbl_notice (
+ notice_id number primary key,
+ notice_writer varchar2(100) not null,
+ notice_title varchar2(100) not null,
+ notice_subject varchar2(1000) not null,
+ notice_date date,
+ hit_count number default 0,
+ attach_file varchar2(100),
+ attach_dir varchar2(100)
+);
+
+insert into tbl_notice (notice_id, notice_writer, notice_title, notice_subject, notice_date)
+values(1, 'user1', 'sample title', 'sample subject', sysdate);
+
+select * from tbl_notice;
