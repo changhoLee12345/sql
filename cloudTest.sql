@@ -34,6 +34,8 @@ insert into book_info values('C0001', '이것이씨다', '김씨','매우출판�
 select * from book_info where book_code = 'B0001';
 select * from book_info;
 
+delete from book_info where book_code like 'Groucho%';
+
 create table book_file (
  file_no number primary key,
  book_code varchar2(50),
@@ -41,6 +43,7 @@ create table book_file (
  book_path varchar2(50)
 );
 select * from book_file;
+delete from book_file where book_code like 'Groucho%';
 
 create table members (
  id varchar(10) primary key,
@@ -53,4 +56,20 @@ create table members (
  cdate date
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
+
+create table tbl_notice (
+ notice_id number primary key,
+ notice_writer varchar2(100) not null,
+ notice_title varchar2(100) not null,
+ notice_subject varchar2(1000) not null,
+ notice_date date,
+ hit_count number default 0,
+ attach_file varchar2(100),
+ attach_dir varchar2(100)
+);
+
+insert into tbl_notice (notice_id, notice_writer, notice_title, notice_subject, notice_date)
+values(1, 'user1', 'sample title', 'sample subject', sysdate);
+
+select * from tbl_notice;
 
