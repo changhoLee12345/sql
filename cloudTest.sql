@@ -31,6 +31,7 @@ insert into book_info values('B0001', '이것이자바다', '김자바','자바�
 insert into book_info values('B0001', '이것이자바다', '김자바','자바출판사',1000);
 insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
 
+select * from book_info where book_code = 'B0001';
 select * from book_info;
 
 create table book_file (
