@@ -28,11 +28,16 @@ create table BOOK_INFO (
 );
 
 insert into book_info values('B0001', '이것이자바다', '김자바','자바출판사',1000);
-insert into book_info values('B0001', '이것이자바다', '김자바','자바출판사',1000);
+insert into book_info values('B0002', '이것이자바다', '김자바','자바출판사',1000);
 insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
 
 select * from book_info where book_code = 'B0001';
 select * from book_info;
+select * from book_info
+where 1 = 1
+and book_title = '이것이자바다' or book_author = '김씨';
+
+
 
 delete from book_info where book_code like 'Groucho%';
 
@@ -57,6 +62,7 @@ create table members (
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
+create sequence notice_seq;
 create table tbl_notice (
  notice_id number primary key,
  notice_writer varchar2(100) not null,
@@ -72,4 +78,3 @@ insert into tbl_notice (notice_id, notice_writer, notice_title, notice_subject, 
 values(1, 'user1', 'sample title', 'sample subject', sysdate);
 
 select * from tbl_notice;
-
