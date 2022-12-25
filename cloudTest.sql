@@ -59,6 +59,11 @@ create table members (
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
+select * from members;
+update members
+set name = '홍길동'
+where id = 'user1';
+
 create sequence notice_seq;
 create table tbl_notice (
  notice_id number primary key,
