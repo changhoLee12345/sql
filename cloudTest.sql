@@ -1,7 +1,18 @@
 select * from tab;
 
-select * from member;
+create table members (
+ id varchar(10) primary key,
+ passwd varchar2(10),
+ name varchar2(30),
+ email varchar2(30),
+ responsibility varchar2(10),
+ pfileName varchar2(50),
+ ofileName varchar2(50),
+ cdate date
+);
+insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
+select * from member;
 alter table member rename column mail to email;
 
 select * from tbl_board order by 1 ;
@@ -32,7 +43,6 @@ insert into book_info values('B0001', '이것이자바다', '김자바','자바�
 insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
 
 select * from book_info;
-
 delete from book_info where book_code like 'Groucho%';
 
 create table book_file (
@@ -43,18 +53,6 @@ create table book_file (
 );
 select * from book_file;
 delete from book_file where book_code like 'Groucho%';
-
-create table members (
- id varchar(10) primary key,
- passwd varchar2(10),
- name varchar2(30),
- email varchar2(30),
- responsibility varchar2(10),
- pfileName varchar2(50),
- ofileName varchar2(50),
- cdate date
-);
-insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
 create table tbl_notice (
  notice_id number primary key,
