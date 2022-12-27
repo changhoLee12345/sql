@@ -120,4 +120,4 @@ set notice_writer = case mod(notice_id , 4) when 1 then 'user1'
                                             else 'user4'
                     end
 where notice_id > 10;
-select * from tbl_notice order by 1 desc;
+select * from tbl_notice order by 1;
