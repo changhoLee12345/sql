@@ -101,3 +101,11 @@ where b.rn >= (1*10-9);
 select * from tbl_notice
 where notice_id = 1;
 
+update tbl_notice
+set notice_writer = case mod(notice_id , 4) when 1 then 'user1' 
+                                            when 2 then 'user2'
+                                            when 3 then 'user3'
+                                            else 'user4'
+                    end
+where notice_id > 10;
+select * from tbl_notice order by 1 desc;
