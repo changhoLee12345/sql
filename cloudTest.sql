@@ -1,7 +1,18 @@
 select * from tab;
 
-select * from member;
+create table members (
+ id varchar(10) primary key,
+ passwd varchar2(10),
+ name varchar2(30),
+ email varchar2(30),
+ responsibility varchar2(10),
+ pfileName varchar2(50),
+ ofileName varchar2(50),
+ cdate date
+);
+insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
+select * from member;
 alter table member rename column mail to email;
 
 select * from tbl_board order by 1 ;
@@ -32,10 +43,13 @@ insert into book_info values('C0001', '이것이씨다', '김씨','매우출판�
 
 select * from book_info where book_code = 'B0001';
 select * from book_info;
+<<<<<<< HEAD
+=======
 select * from book_info
 where 1 = 1
 and book_title = '이것이자바다' or book_author = '김씨';
 
+>>>>>>> cbd86b2a05ec071990534d060f7ce6d26a0ef653
 delete from book_info where book_code like 'Groucho%';
 
 create table book_file (
