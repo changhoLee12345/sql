@@ -1,5 +1,6 @@
 select * from tab;
 
+-- members table.
 create table members (
  id varchar(10) primary key,
  passwd varchar2(10),
@@ -29,6 +30,7 @@ create table tbl_reply (
 
 select * from tbl_reply;
 
+-- book_info table.
 create table BOOK_INFO (
  book_code varchar2(20) primary key,
  book_title varchar2(30),
@@ -50,6 +52,7 @@ and book_title = '이것이자바다' or book_author = '김씨';
 
 delete from book_info where book_code like 'Groucho%';
 
+-- book_file table.
 create table book_file (
  file_no number primary key,
  book_code varchar2(50),
@@ -59,24 +62,7 @@ create table book_file (
 select * from book_file;
 delete from book_file where book_code like 'Groucho%';
 
-create table members (
- id varchar(10) primary key,
- passwd varchar2(10),
- name varchar2(30),
- email varchar2(30),
- responsibility varchar2(10),
- pfileName varchar2(50),
- ofileName varchar2(50),
- cdate date
-);
-insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
-
-select * from members;
-
-update members
-set name = '홍길동'
-where id = 'user1';
-
+-- tbl_notice table.
 create sequence notice_seq;
 create table tbl_notice (
  notice_id number primary key,
@@ -122,3 +108,22 @@ set notice_writer = case mod(notice_id , 4) when 1 then 'user1'
                     end
 where notice_id > 10;
 select * from tbl_notice order by 1;
+
+-- center_info table.
+create table center_info (
+ id number primary key,
+ center_name varchar2(100),
+ center_type varchar2(50),
+ facility_name varchar2(100),
+ org varchar2(100),
+ phone_number varchar2(20),
+ sido varchar2(40),
+ sigungu varchar2(40),
+ address varchar2(100),
+ lat varchar2(20),
+ lnt varchar2(20),
+ zip_code varchar2(10),
+ created_at varchar2(30),
+ updated_at varchar2(30)
+);
+
