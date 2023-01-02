@@ -110,8 +110,9 @@ where notice_id > 10;
 select * from tbl_notice order by 1;
 
 -- center_info table.
+drop table center_info purge;
 create table center_info (
- id number primary key,
+ id number,
  center_name varchar2(100),
  center_type varchar2(50),
  facility_name varchar2(100),
@@ -121,9 +122,18 @@ create table center_info (
  sigungu varchar2(40),
  address varchar2(100),
  lat varchar2(20),
- lnt varchar2(20),
+ lng varchar2(20),
  zip_code varchar2(10),
  created_at varchar2(30),
  updated_at varchar2(30)
 );
+
+delete from center_info where id is not null;
+commit;
+select * from center_info order by 1;
+insert into center_info (id, center_name, center_type, facility_name, org, phone_number, sido, sigungu, address, lat, lng, zip_code, created_at, updated_at)
+values(1,'centername','centertype','facilityname','org','phone-number','sido','sigungu','address','lat','lng','zipcode','createdat','updatedat');
+
+
+
 
