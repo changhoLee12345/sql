@@ -13,8 +13,10 @@ create table members (
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
-select * from member;
+select * from members order by 1;
 alter table member rename column mail to email;
+alter table members add (phone_number varchar2(20));
+alter table members add (addr varchar2(100));
 
 select * from tbl_board order by 1 ;
 
@@ -38,7 +40,7 @@ create table BOOK_INFO (
  book_press varchar2(50),
  book_price number
 );
-
+alter table book_info add (book_desc varchar2(1000));
 insert into book_info values('B0001', '이것이자바다', '김자바','자바출판사',1000);
 insert into book_info values('B0002', '이것이자바다', '김자바','자바출판사',1000);
 insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
