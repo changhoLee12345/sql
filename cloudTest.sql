@@ -1,7 +1,9 @@
 select * from tab;
 
-select * from member;
+select * from members;
 
+insert into members values('admin','1234','°ü¸®ÀÚ','admin@email.com','Admin','','',sysdate);
+update members set responsibility='User' where id ='user1';
 alter table member rename column mail to email;
 
 select * from tbl_board order by 1 ;
@@ -27,11 +29,11 @@ create table BOOK_INFO (
  book_price number
 );
 
-insert into book_info values('B0001', 'ì´ê²ƒì´ìë°”ë‹¤', 'ê¹€ìë°”','ìë°”ì¶œíŒì‚¬',1000);
-insert into book_info values('B0001', 'ì´ê²ƒì´ìë°”ë‹¤', 'ê¹€ìë°”','ìë°”ì¶œíŒì‚¬',1000);
-insert into book_info values('C0001', 'ì´ê²ƒì´ì”¨ë‹¤', 'ê¹€ì”¨','ë§¤ìš°ì¶œíŒì‚¬',2000);
+insert into book_info values('B0001', '?´ê²ƒì´?ë°”ë‹¤', 'ê¹??ë°?','?ë°”ì¶œ?Œ?‚¬',1000);
+insert into book_info values('B0001', '?´ê²ƒì´?ë°”ë‹¤', 'ê¹??ë°?','?ë°”ì¶œ?Œ?‚¬',1000);
+insert into book_info values('C0001', '?´ê²ƒì´?”¨?‹¤', 'ê¹??”¨','ë§¤ìš°ì¶œíŒ?‚¬',2000);
 
-select * from book_info;
+select * from book_info order by book_code;
 delete from book_info where book_code like 'Groucho%';
 
 create table book_file (
@@ -54,4 +56,78 @@ create table members (
  cdate date
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
+
+drop table genesis purge;
+create table genesis (
+ member_order varchar2(3) primary key,
+ member_name varchar2(100),
+ col1 char(1) default 'N',
+ col2 char(1) default 'N',
+ col3 char(1) default 'N',
+ col4 char(1) default 'N',
+ col5 char(1) default 'N',
+ col6 char(1) default 'N',
+ col7 char(1) default 'N',
+ col8 char(1) default 'N',
+ col9 char(1) default 'N',
+ col10 char(1) default 'N',
+ col11 char(1) default 'N',
+ col12 char(1) default 'N',
+ col13 char(1) default 'N',
+ col14 char(1) default 'N',
+ col15 char(1) default 'N'
+);
+
+insert into genesis(member_order, member_name)
+values('1-1', '?´ì°½í˜¸');
+insert into genesis(member_order, member_name)
+values('1-2', 'ê¹??´?ƒ');
+insert into genesis(member_order, member_name)
+values('1-3', 'ê¹??ƒ?˜¸');
+insert into genesis(member_order, member_name)
+values('1-4', 'ë§ˆë™?¼');
+insert into genesis(member_order, member_name)
+values('1-5', 'ë°°ë‹¤?°');
+insert into genesis(member_order, member_name)
+values('1-6', '?´ì¢…ê²½');
+insert into genesis(member_order, member_name)
+values('1-7', '? •?ˆ˜?™˜');
+
+insert into genesis(member_order, member_name)
+values('2-1', 'ìµœì‹ ?• ');
+insert into genesis(member_order, member_name)
+values('2-2', 'ê³½ë??˜');
+insert into genesis(member_order, member_name)
+values('2-3', '?†ëª…êµ­');
+insert into genesis(member_order, member_name)
+values('2-4', '?„?ƒì¤?');
+insert into genesis(member_order, member_name)
+values('2-5', '?´?‚¬?˜„');
+insert into genesis(member_order, member_name)
+values('2-6', '?†¡?ƒœ?•˜');
+insert into genesis(member_order, member_name)
+values('2-7', 'ê¶Œì˜?š´');
+insert into genesis(member_order, member_name)
+values('2-8', 'ìµœì„ ?—´');
+
+insert into genesis(member_order, member_name)
+values('3-1', 'ê¹?ì§??˜');
+insert into genesis(member_order, member_name)
+values('3-2', 'ê¹?ì£¼ì—°');
+insert into genesis(member_order, member_name)
+values('3-3', 'ê¹???ê²?');
+insert into genesis(member_order, member_name)
+values('3-4', 'ë¬¸í¬?˜');
+insert into genesis(member_order, member_name)
+values('3-5', '?‚¨?†Œ?˜œ');
+insert into genesis(member_order, member_name)
+values('3-6', 'ìµœìœ ì§?');
+insert into genesis(member_order, member_name)
+values('3-7', 'ê¹?ì§??˜„');
+
+select * from genesis
+order by member_order;
+
+update genesis   set col1 = 'Y'   where member_order = '1-1';
+update genesis set col2 = 'Y' where member_order = '11';
 
