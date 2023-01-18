@@ -203,3 +203,4 @@ insert into center_info (id, center_name, center_type, facility_name, org, phone
 values(1,'centername','centertype','facilityname','org','phone-number','sido','sigungu','address','lat','lng','zipcode','createdat','updatedat');
 
 select * from tab;
+select * from tab;
