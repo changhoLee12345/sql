@@ -9,7 +9,8 @@ values(board_seq.nextval, 'title'||board_seq.currval, 'content'||board_seq.currv
 select board_seq.currval from dual;
 
 select * from tbl_board
-order by 1 desc;
+order by 1;
+
 delete from tbl_board where board_no > 500;
 
 drop table tbl_reply purge;
