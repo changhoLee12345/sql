@@ -4,7 +4,7 @@ select * from members;
 
 alter table member rename column mail to email;
 
-select * from tbl_board order by 1 ;
+select * from tbl_board order by 1 desc;
 
 drop table tbl_reply purge;
 
@@ -175,7 +175,8 @@ set notice_writer = case mod(notice_id , 4) when 1 then 'user1'
                                             else 'user4'
                     end
 where notice_id > 10;
-select * from tbl_notice order by 1;
+
+select * from tbl_notice order by 1 desc;
 
 -- center_info table.
 drop table center_info purge;
