@@ -1,8 +1,23 @@
 select * from tab;
 
+select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+*
+from tbl_board
+where board_no > 0;
 
+select /*+ FULL(tbl_board) */
+*
+from tbl_board
+order by board_no desc;
+
+select * from tbl_board order by board_no desc;
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
+--여러건 넣기.
+insert into tbl_board (board_no, title, content, writer)
+select board_seq.nextval, title, content, writer from tbl_board;
+select count(*) from tbl_board;
+
 insert into tbl_board (board_no, title, content, writer)
 values(board_seq.nextval, 'title'||board_seq.currval, 'content'||board_seq.currval, 'writer'||board_seq.currval);
 
