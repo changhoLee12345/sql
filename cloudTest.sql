@@ -85,7 +85,6 @@ create table members (
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
-=======
 select * from members order by 1;
 alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
