@@ -44,9 +44,6 @@ create table tbl_reply (
 );
 select * from tbl_reply;
 
-
-
-
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 -- book_info table.
@@ -81,8 +78,6 @@ create table book_file (
 select * from book_file;
 delete from book_file where book_code like 'Groucho%';
 
-
-
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 -- members table.
@@ -98,7 +93,6 @@ create table members (
 );
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
-=======
 select * from members order by 1;
 alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
@@ -187,9 +181,6 @@ commit;
 select * from center_info order by 1;
 insert into center_info (id, center_name, center_type, facility_name, org, phone_number, sido, sigungu, address, lat, lng, zip_code, created_at, updated_at)
 values(1,'centername','centertype','facilityname','org','phone-number','sido','sigungu','address','lat','lng','zipcode','createdat','updatedat');
-
-
-
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
