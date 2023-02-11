@@ -6,9 +6,17 @@ from tbl_board
 where board_no > 0;
 
 select /*+ FULL(tbl_board) */
-*
+rownum rn, board_no, title
 from tbl_board
-order by board_no desc;
+where board_no > 0
+order by board_no;
+
+select rn, board_no, title, content from (
+select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+rownum rn, board_no, title, content
+from tbl_board
+where rownum <= 20
+) where rn > 10;
 
 select * from tbl_board order by board_no desc;
 --------------------------------------------------------------------------------------
