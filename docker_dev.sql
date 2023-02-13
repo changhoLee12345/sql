@@ -15,11 +15,17 @@ insert into product values('P2023002', '니카라구아 아라비카','니카라
 insert into product values('P2023003', '브라질산토스','브라질산토스 맛있는 커피입니다', 6000, 5000, 3.5, '브라질산토스.jpg');
 insert into product values('P2023004', '에티오피아 예가체프','에티오피아 예가체프 맛있는 커피입니다', 4000, 3500, 4.0, '에티오피아 예가체프.jpg');
 insert into product values('P2023005', '케냐 오크라톡신','케냐 오크라톡신 맛있는 커피입니다', 4500, 3000, 3.0, '케냐 오크라톡신.jpg');
-insert into product values('P2023006', '코스타리카 따라주','코스타리카 따라주 맛있는 커피입니다', 3000, 2500, 4.5, '코스타리카 따라주.jpg');
+insert into product values('P2023006', '코스타리카 따라주','코스타리카 따라주 맛있는 커피입니다', 3000, 2500, 5.0, '코스타리카 따라주.jpg');
 
-select * from product;
+select * from (
+  select * from product
+  order by like_it desc
+) where rownum <= 4;
 
 
+update product
+set like_it = 5
+where product_code = 'P2023006';
 
 create table tbl_sample1(col1 varchar2(500));
 drop table tbl_sample2 purge;
