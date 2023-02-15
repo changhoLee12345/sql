@@ -5,6 +5,14 @@ select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 from tbl_board
 where board_no > 0;
 
+update tbl_board
+set writer = case mod(board_no, 4) when 0 then 'user0'
+                                when 1 then 'user1'
+                                when 2 then 'user2'
+                                else 'user3'
+            end
+where board_no > 0;
+
 select /*+ FULL(tbl_board) */
 rownum rn, board_no, title
 from tbl_board
