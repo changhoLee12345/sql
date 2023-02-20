@@ -7,6 +7,13 @@ create table tbl_sample2(col2 varchar2(50));
 select * from tbl_reply
 order by 1 desc;
 
+select * from tbl_reply where bno = 2490387
+order by 1;
+
+insert into tbl_reply (rno, bno, reply, replyer)
+select seq_reply.nextval, bno, reply, replyer from tbl_reply where bno = 2490387;
+
+
 select rno, bno, reply, replyer, replydate, updatedate
 from (
     select /*+INDEX(tbl_reply idx_reply) */
@@ -65,8 +72,6 @@ order by bno desc;
 
 select to_char(replydate,'rrrr/mm/dd hh24:mi:ss') from tbl_reply order by 1 desc;
 select sysdate,to_char(sysdate,'rrrr/mm/dd hh24:mi:ss')  from dual;
-
-select * from tbl_reply;
 
 insert into tbl_reply (rno, bno, reply, replyer)
 values(seq_reply.nextval, 2490385, 'reply'||seq_reply.currval, 'replyer2');
