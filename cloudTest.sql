@@ -219,3 +219,16 @@ order by member_order;
 
 update genesis   set col1 = 'Y'   where member_order = '1-1';
 update genesis set col2 = 'Y' where member_order = '11';
+
+---------------------------------------
+create table cart (
+	no number primary key,
+	product_nm varchar2(50),
+	price number,
+	qty number
+);
+
+insert into cart values( 1, '코드 스프링', 45000, 3);
+insert into cart values( 2, '혼자 자바', 35000, 1);
+
+commit;
