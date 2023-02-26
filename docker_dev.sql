@@ -1,5 +1,8 @@
 select * from tab;
 
+select * from tbl_board order by bno desc;
+select * from tbl_attach;
+
 create table tbl_sample1(col1 varchar2(500));
 drop table tbl_sample2 purge;
 create table tbl_sample2(col2 varchar2(50));
