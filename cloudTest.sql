@@ -1,4 +1,5 @@
-select * from tab;
+select * from tab
+order by tname;
 
 select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 *
@@ -100,6 +101,11 @@ create table members (
  cdate date
 );
 
+<<<<<<< HEAD
+=======
+select * from members order by 1;
+
+>>>>>>> 9c229139926af4127ea278f1967208f121bf1585
 alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
 alter table members add (addr varchar2(100));
@@ -113,7 +119,6 @@ set pfilename = 'admin1.png'
 where id='admin';
 
 select * from tbl_board order by 1 ;
-
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
@@ -192,10 +197,14 @@ create table center_info (
 
 delete from center_info where id is not null;
 commit;
+
 select * from center_info order by 1;
+
 insert into center_info (id, center_name, center_type, facility_name, org, phone_number, sido, sigungu, address, lat, lng, zip_code, created_at, updated_at)
 values(1,'centername','centertype','facilityname','org','phone-number','sido','sigungu','address','lat','lng','zipcode','createdat','updatedat');
 
+select * from center_info
+order by id;
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
@@ -225,3 +234,16 @@ order by member_order;
 
 update genesis   set col1 = 'Y'   where member_order = '1-1';
 update genesis set col2 = 'Y' where member_order = '11';
+
+---------------------------------------
+create table cart (
+	no number primary key,
+	product_nm varchar2(50),
+	price number,
+	qty number
+);
+
+insert into cart values( 1, '코드 스프링', 45000, 3);
+insert into cart values( 2, '혼자 자바', 35000, 1);
+
+commit;
