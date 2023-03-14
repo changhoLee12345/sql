@@ -1,4 +1,5 @@
-select * from tab;
+select * from tab
+order by tname;
 
 select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 *
@@ -102,12 +103,10 @@ create table members (
 insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
 select * from members order by 1;
+
 alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
 alter table members add (addr varchar2(100));
-
-select * from tbl_board order by 1 ;
-
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
@@ -186,10 +185,14 @@ create table center_info (
 
 delete from center_info where id is not null;
 commit;
+
 select * from center_info order by 1;
+
 insert into center_info (id, center_name, center_type, facility_name, org, phone_number, sido, sigungu, address, lat, lng, zip_code, created_at, updated_at)
 values(1,'centername','centertype','facilityname','org','phone-number','sido','sigungu','address','lat','lng','zipcode','createdat','updatedat');
 
+select * from center_info
+order by id;
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
