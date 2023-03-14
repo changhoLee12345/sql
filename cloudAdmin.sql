@@ -1,1 +1,3 @@
-select * from all_users order by 1;
+select * from all_users order by user_id;
+
+alter user dev identified by '';
