@@ -101,11 +101,8 @@ create table members (
  cdate date
 );
 
-<<<<<<< HEAD
-=======
 select * from members order by 1;
 
->>>>>>> 9c229139926af4127ea278f1967208f121bf1585
 alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
 alter table members add (addr varchar2(100));
