@@ -111,13 +111,25 @@ create table members (
  ofileName varchar2(50),
  cdate date
 );
-insert into members values('user1','1234','username','email.com','user',null,null,sysdate);
 
+<<<<<<< HEAD
+=======
 select * from members order by 1;
 
+>>>>>>> 9c229139926af4127ea278f1967208f121bf1585
 alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
 alter table members add (addr varchar2(100));
+
+insert into members values('user6','1234','사용자6','user6@email','User','member6.png',null,sysdate,'010-1111-2222','Daegu, jungangno-6');
+
+select * from members order by 1;
+delete from members where responsibility='User';
+update members
+set pfilename = 'admin1.png'
+where id='admin';
+
+select * from tbl_board order by 1 ;
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
