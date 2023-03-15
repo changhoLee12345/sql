@@ -56,20 +56,31 @@ select * from tbl_reply;
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 -- book_info table.
+drop table book_info purge;
 create table BOOK_INFO (
  book_code varchar2(20) primary key,
- book_title varchar2(30),
- book_author varchar2(50),
+ book_title varchar2(300),
+ book_author varchar2(500),
  book_press varchar2(50),
  book_price number
 );
 alter table book_info add (book_desc varchar2(1000));
-insert into book_info values('B0001', '이것이자바다', '김자바','자바출판사',1000);
-insert into book_info values('B0002', '이것이자바다', '김자바','자바출판사',1000);
-insert into book_info values('C0001', '이것이씨다', '김씨','매우출판사',2000);
+insert into book_info values('B0001', '더좋은삶을위한철학', '김철학','이야기',21000, '더좋은삶을위한철학 아주 재미있습니다');
+insert into book_info values('B0002', '현대철학매뉴', '박철학','뉴욕타임즈',23000, '현대철학매뉴 아주 재미있습니다');
+insert into book_info values('B0003', '호모픽투스의모험', '모닝글로리','자바출판사',15500, '호모픽투스의모험 아주 재미있습니다');
+insert into book_info values('B0004', '인류의여정', '조여정','김영사',10000, '인류의여정 아주 재미있습니다');
+insert into book_info values('B0005', '세상은어떻게돌아가는가', '저세상','그린비',22000, '세상은어떻게돌아가는가 아주 재미있습니다');
+insert into book_info values('B0006', '삶은문제해결의연속이다', '황연속','시공사',11000, '삶은문제해결의연속이다 아주 재미있습니다');
+
+insert into book_file values(1, 'B0001', '더좋은삶을위한철학.png', 'bookImages');
+insert into book_file values(2, 'B0002', '현대철학매뉴.png', 'bookImages');
+insert into book_file values(3, 'B0003', '호모픽투스의모험.png', 'bookImages');
+insert into book_file values(4, 'B0004', '인류의여정.png', 'bookImages');
+insert into book_file values(5, 'B0005', '세상은어떻게돌아가는가.png', 'bookImages');
+insert into book_file values(6, 'B0006', '삶은문제해결의연속이다.png', 'bookImages');
 
 select * from book_info where book_code = 'B0001';
-select * from book_info;
+select * from book_info order by book_code;
 
 select * from book_info
 where 1 = 1
