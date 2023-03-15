@@ -27,7 +27,6 @@ from tbl_board
 where rownum <= 20
 ) where rn > 10;
 
-select * from tbl_board order by board_no desc;
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 --여러건 넣기.
@@ -79,15 +78,6 @@ insert into book_file values(4, 'B0004', '인류의여정.png', 'bookImages');
 insert into book_file values(5, 'B0005', '세상은어떻게돌아가는가.png', 'bookImages');
 insert into book_file values(6, 'B0006', '삶은문제해결의연속이다.png', 'bookImages');
 
-select * from book_info where book_code = 'B0001';
-select * from book_info order by book_code;
-
-select * from book_info
-where 1 = 1
-and book_title = '이것이자바다' or book_author = '김씨';
-
-delete from book_info where book_code like 'Groucho%';
-
 -- book_file table.
 create table book_file (
  file_no number primary key,
@@ -95,8 +85,6 @@ create table book_file (
  book_image varchar2(50),
  book_path varchar2(50)
 );
-select * from book_file;
-delete from book_file where book_code like 'Groucho%';
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
