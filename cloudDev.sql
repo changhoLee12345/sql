@@ -34,6 +34,8 @@ create table sales (
 );
 select * from sales;
 
+select max(sales_no)+1 from sales;
+
 create sequence orders_seq;
 create table sale_orders (
  order_no number primary key,
