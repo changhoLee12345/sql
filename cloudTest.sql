@@ -1,6 +1,6 @@
 select * from tab
 order by tname;
-
+--git form연습.
 select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 *
 from tbl_board
