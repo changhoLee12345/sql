@@ -1,5 +1,18 @@
 select * from tab;
 
+drop table member purge;
+create table member (
+ id varchar2(10) primary key,
+ name varchar2(50) not null,
+ passwd varchar2(10) not null,
+ email varchar2(100)
+);
+insert into member(id, name, passwd, email) values('user1','사용자1','1111','user1@email.com');
+insert into member(id, name, passwd, email) values('user2','사용자2','1111','user2@email.com');
+insert into member(id, name, passwd, email) values('user3','사용자3','1111','user3@email.com');
+
+select * from member;
+
 select * from tbl_board order by bno desc;
 select * from tbl_attach;
 
