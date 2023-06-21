@@ -1,5 +1,6 @@
 select * from tab
 order by tname;
+
 --git form연습.
 select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 *
@@ -20,11 +21,12 @@ from tbl_board
 where board_no > 0
 order by board_no;
 
-select rn, board_no, title, content from (
-select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
-rownum rn, board_no, title, content
-from tbl_board
-where rownum <= 20
+select rn, board_no, title, content
+from (
+    select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+    rownum rn, board_no, title, content
+    from tbl_board
+    where rownum <= 20
 ) where rn > 10;
 
 --------------------------------------------------------------------------------------
@@ -141,14 +143,14 @@ from tbl_notice;
 
 select b.notice_id, b.notice_writer, b.notice_title, b.notice_date, b.hit_count from
 (
-    select rownum rn, a.* from
-    (select n.*
-     from tbl_notice n
-     where 1 = 1
-     --and notice_writer like '%writer3%'
-     --and notice_title like '%title3%'
-     --and notice_subject like '%subject31%'
-     order by 1) a
+    select rownum rn, a.* 
+    from (select n.*
+         from tbl_notice n
+         where 1 = 1
+         --and notice_writer like '%writer3%'
+         --and notice_title like '%title3%'
+         --and notice_subject like '%subject31%'
+         order by 1) a
     where rownum <= (1*10)
 ) b
 where b.rn >= (1*10-9);

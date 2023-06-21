@@ -8,3 +8,6 @@ alter session set "_ORACLE_SCRIPT" = true;
 create user proj identified by proj;
 grant connect, resource to proj;
 alter user proj default tablespace users quota unlimited on users;
+
+alter user prj identified by Qwerty123456;
+alter user dev identified by Qwerty123456;
