@@ -111,10 +111,11 @@ alter table members add (addr varchar2(100));
 insert into members values('user6','1234','사용자6','user6@email','User','member6.png',null,sysdate,'010-1111-2222','Daegu, jungangno-6');
 
 select * from members order by 1;
+
 delete from members where responsibility='User';
 update members
 set pfilename = 'admin1.png'
-where id='admin';
+where pfilename is null;
 
 select * from tbl_board order by 1 ;
 
@@ -245,3 +246,5 @@ insert into cart values( 1, '코드 스프링', 45000, 3);
 insert into cart values( 2, '혼자 자바', 35000, 1);
 
 commit;
+
+select * from employees;

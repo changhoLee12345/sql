@@ -1,6 +1,5 @@
 select * from tab;
 
-select * from tab;
 
 drop table member purge;
 create table member (
