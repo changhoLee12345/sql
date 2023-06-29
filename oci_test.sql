@@ -53,6 +53,8 @@ create table tbl_reply (
  create_date date default sysdate
 );
 select * from tbl_reply;
+insert into tbl_reply 
+values(reply_seq.nextval, 3813048, 'test reply', 'user01', sysdate);
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
