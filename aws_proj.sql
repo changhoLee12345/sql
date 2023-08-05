@@ -1,5 +1,8 @@
 select * from tab;
 
+-------------------------------------------------------------------------------------------------------
+-- proj -----------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
 
 drop table member purge;
 create table member (
@@ -154,3 +157,44 @@ insert into product values('P2023003', '브라질산토스','브라질산토스 
 insert into product values('P2023004', '에티오피아 예가체프','에티오피아 예가체프 맛있는 커피입니다', 4000, 3500, 4.0, '에티오피아 예가체프.jpg');
 insert into product values('P2023005', '케냐 오크라톡신','케냐 오크라톡신 맛있는 커피입니다', 4500, 3000, 3.0, '케냐 오크라톡신.jpg');
 insert into product values('P2023006', '코스타리카 따라주','코스타리카 따라주 맛있는 커피입니다', 3000, 2500, 5.0, '코스타리카 따라주.jpg');
+
+
+-------------------------------------------------------------------------------------------------------
+-- book_ex --------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------------
+select * from tab;
+create sequence seq_board;
+create table tbl_board (
+ bno number(10, 0),
+ title varchar2(200) not null,
+ content varchar2(2000) not null,
+ writer varchar2(50) not null,
+ regdate date default sysdate,
+ updatedate date default sysdate
+);
+alter table tbl_board add constraint pk_board primary key (bno);
+
+insert into tbl_board(bno, title, content, writer)
+values(seq_board.nextval, 'test title', 'test content', 'user00');
+
+select * from tbl_board;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

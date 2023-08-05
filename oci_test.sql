@@ -249,4 +249,10 @@ insert into cart values( 2, '혼자 자바', 35000, 1);
 
 commit;
 
-select * from employees;
+select * from tab;
+select * from product;
+
+
+create table tbl_product  (
+  
+);
