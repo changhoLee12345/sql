@@ -48,3 +48,11 @@ from   tbl_member mem
 left outer join tbl_member_auth auth
 on mem.userid = auth.userid
 where mem.userid = 'user5';
+
+create table persistent_logins (
+ username varchar(64) not null,
+ series varchar(64) primary key,
+ token varchar(64) not null,
+ last_used timestamp not null);
+ 
+ 
