@@ -1,5 +1,5 @@
 
-select * from all_users order by user_id;
+select * from all_users order by username;
 
 --oracle 11g.
 alter user hr identified by hr account unlock;
@@ -14,3 +14,6 @@ alter user book_ex default tablespace users quota unlimited on users;
 
 alter user prj identified by Qwerty123456;
 alter user dev identified by QWErty123456;
+
+
+grant select on hr.employees to book_ex;
