@@ -12,8 +12,8 @@ create user book_ex identified by book_ex;
 grant connect, resource to book_ex;
 alter user book_ex default tablespace users quota unlimited on users;
 
-alter user prj identified by Qwerty123456;
-alter user dev identified by QWErty123456;
+alter user prj identified by prj;
+alter user dev identified by dev;
 
 
 grant select on hr.employees to book_ex;

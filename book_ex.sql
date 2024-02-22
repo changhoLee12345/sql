@@ -260,8 +260,11 @@ select reply_seq.nextval, 157, '157 reply', replyer
 from tbl_reply;
 
 select * from tbl_reply
-where board_no = 157
+where 1=1--board_no != 157
 order by 1 desc;
+
+update tbl_reply
+set board_no = 521;
 
 select rn
       ,reply_no
@@ -275,7 +278,3 @@ from (select /*+ INDEX(r reply_pk)*/rownum rn
       where board_no = :bno
       and   rownum <= :page * 5) a
 where a.rn > (:page - 1) * 5;
-
-
-
-
