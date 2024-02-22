@@ -263,6 +263,9 @@ select * from tbl_reply
 where 1=1--board_no != 157
 order by 1 desc;
 
+select count(*) from tbl_reply
+where board_no = 521;
+
 update tbl_reply
 set board_no = 521;
 
