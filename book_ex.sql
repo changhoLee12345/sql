@@ -1,3 +1,6 @@
+-------------------------------------------------------
+-- spring jdbc user security --
+drop table users purge;
 create table users (
  username varchar2(50) not null primary key,
  password varchar2(50) not null,
@@ -23,7 +26,6 @@ insert into authorities (username, authority) values('admin00', 'ROLE_ADMIN');
 select * from users;
 select * from authorities;
 
-
 -------------------- user table 을 사용하기 ----------------------------
 drop table tbl_member purge;
 create table tbl_member (
@@ -34,6 +36,7 @@ create table tbl_member (
  updatedate date default sysdate,
  enabled char(1) default '1');
 
+drop table tbl_member_auth purge;
 create table tbl_member_auth (
  userid varchar2(50) not null,
  auth varchar2(50) not null,
@@ -148,7 +151,7 @@ from (select /*+ INDEX_DESC(e SYS_C008368) */
       where rownum <= 10) a
 where rn > 0;
 
-
+drop table tbl_board purge;
 create table tbl_board (
  board_no number,
  title varchar2(50) not null,
@@ -263,8 +266,11 @@ select * from tbl_reply
 where 1=1--board_no != 157
 order by 1 desc;
 
-select count(*) from tbl_reply
-where board_no = 521;
+select board_no, count(*) 
+from tbl_reply
+where 1=1--board_no = 521
+group by board_no
+;
 
 update tbl_reply
 set board_no = 521;
@@ -275,9 +281,109 @@ select rn
       ,replyer
       ,reply_date
       ,board_no
-from (select /*+ INDEX(r reply_pk)*/rownum rn
+from (select /*+ INDEX_DESC(r reply_pk)*/rownum rn
             ,r.*
       from tbl_reply r
       where board_no = :bno
       and   rownum <= :page * 5) a
 where a.rn > (:page - 1) * 5;
+
+select /*+ INDEX_DESC(r reply_pk)*/rownum rn
+    ,r.*
+    ,to_char(r.reply_date,'yyyy-mm-dd hh24:mi:ss')
+from tbl_reply r
+where board_no = 521;
+
+create table tbl_center (
+ id number,
+ center_name varchar2(200),
+ sido varchar2(100)
+);
+
+select * from tbl_center
+order by 1;
+
+------------------------
+create table cart (
+	no number primary key,
+	porduct_nm varchar2(50),
+	price number,
+	qty number
+);
+
+insert into cart values( 1, '코드 스프링', 45000, 3);
+insert into cart values( 2, '혼자 자바', 35000, 1);
+
+commit;
+
+
+  --drop table pet;
+  --drop table adopt;
+  create table pet(
+    id number primary key,
+    name varchar2(50),
+    picture varchar2(100),
+    age number,
+    breed varchar2(100),
+    location varchar2(100)
+  );
+  
+  create table adopt(
+  	id number primary key,
+  	price number
+  );
+
+insert into pet values( 0, 'Frieda','resources/images/scottish-terrier.jpeg', 3, 'Scottish Terrier','Lisco, Alabama');
+insert into pet values( 1, 'Gina','resources/images/scottish-terrier.jpeg', 3, 'Scottish Terrier','Tooleville, West Virginia');
+insert into pet values( 2, 'Collins','resources/images/french-bulldog.jpeg', 2, 'French Bulldog','Freeburn, Idaho');
+insert into pet values( 3, 'Melissa','resources/images/boxer.jpeg', 2, 'Boxer','Camas, Pennsylvania');
+insert into pet values( 4, 'Jeanine','resources/images/french-bulldog.jpeg', 2,'French Bulldog','Gerber, South Dakota');
+insert into pet values( 5, 'Elvia','resources/images/french-bulldog.jpeg',3, 'French Bulldog','Innsbrook, Illinois');
+insert into pet values( 6, 'Latisha','resources/images/golden-retriever.jpeg', 3, 'Golden Retriever','Soudan, Louisiana');
+insert into pet values( 7, 'Coleman','resources/images/golden-retriever.jpeg', 3, 'Golden Retriever','Jacksonwald, Palau');
+insert into pet values( 8, 'Nichole','resources/images/french-bulldog.jpeg', 2, 'French Bulldog','Honolulu, Hawaii');
+insert into pet values( 9, 'Fran','resources/images/boxer.jpeg', 3, '"Boxer','Matheny, Utah');
+insert into pet values( 10, 'Leonor','resources/images/boxer.jpeg',2,  'Boxer','Tyhee, Indiana');
+insert into pet values( 11, 'Dean','resources/images/scottish-terrier.jpeg', 3, 'Scottish Terrier','Windsor, Montana');
+insert into pet values( 12, 'Stevenson','resources/images/french-bulldog.jpeg', 3,'French Bulldog','Kingstowne, Nevada');
+insert into pet values( 13, 'Kristina','resources/images/golden-retriever.jpeg', 4, 'Golden Retriever','Sultana, Massachusetts');
+insert into pet values( 14, 'Ethel','resources/images/golden-retriever.jpeg', 2, 'Golden Retriever','Broadlands, Oregon');
+insert into pet values( 15, 'Terry','resources/images/golden-retriever.jpeg', 2, 'Golden Retriever','Dawn, Wisconsin');
+
+insert into adopt values (1, 100);
+insert into adopt values (3, 200);
+
+commit;
+
+select * from pet;
+select * from adopt;
+
+create table todo (
+	no number primary key,
+	contents varchar2(100),
+	todoyn char(1) default '0'
+);
+
+insert into todo values(1, 'java', '1');
+insert into todo values(2, 'html', '1');
+insert into todo values(3, 'javascript', '0');
+insert into todo values(4, 'spring', '0');
+
+commit;
+
+create table users(
+id       varchar2(8) primary key,
+password varchar2(8),
+name     varchar2(20),
+role     varchar2(5));
+
+insert into users values('test','test123','관리자','Admin');
+insert into users values('user1','user1','사용자','User');
+
+commit;
+
+
+
+
+
+
