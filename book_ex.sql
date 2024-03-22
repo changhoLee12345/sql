@@ -281,3 +281,7 @@ from (select /*+ INDEX(r reply_pk)*/rownum rn
       where board_no = :bno
       and   rownum <= :page * 5) a
 where a.rn > (:page - 1) * 5;
+
+
+
+
