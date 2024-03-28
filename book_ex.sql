@@ -238,6 +238,8 @@ commit;
 
 select * from tbl_member;
 
+select * from tab;
+
 drop table tbl_reply purge;
 create table tbl_reply (
  reply_no number,
