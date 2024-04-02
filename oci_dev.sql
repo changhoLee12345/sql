@@ -127,3 +127,7 @@ insert into tbl_board(board_no, title, content, writer)
 values(board_seq.nextval, 'good', 'good content', 'user03');
 insert into tbl_board(board_no, title, content, writer)
 values(board_seq.nextval, 'every', 'every content', 'user01');
+
+insert into tbl_board (board_no, title, content, writer)
+select board_seq.nextval, title, content, writer
+from tbl_board;
