@@ -119,3 +119,39 @@ insert into tbl_board(board_no, title, content, writer)
 values(board_seq.nextval, 'good', 'good content', 'user03');
 insert into tbl_board(board_no, title, content, writer)
 values(board_seq.nextval, 'every', 'every content', 'user01');
+
+select *
+from (
+      select /*+ INDEX(b BOARD_PK) */ rownum rn, b.*
+      from tbl_board b
+      where rownum <= (:page * 5)
+     ) a
+where rn > (:page - 1 )* 5;
+
+select a.*
+from   (select rownum rn, b.*
+        from tbl_board b
+        where rownum <= (:page * 5)
+        order by b.board_no) a
+where 1=1
+and   rn > (:page - 1) * 5;
+
+-- title: today, content: nice, writer: user01
+insert into tbl_board (board_no, title, content, writer)
+select board_seq.nextval, title, content, writer
+from tbl_board;
+
+drop table cart purge;
+create table tbl_cart (
+	no number primary key,
+	product_nm varchar2(50),
+	price number,
+	qty number
+);
+insert into tbl_cart values(1, '과테말라 안티구아', 1200, 2);
+insert into tbl_cart values(2, '케냐 오크라톡신', 1500, 2);
+insert into tbl_cart values(3, '코스타리카 따라주', 1800, 2);
+insert into tbl_cart values(4, '니카라구아 더치핸드드립', 2200, 2);
+insert into tbl_cart values(5, '브라질산토스', 3200, 2);
+insert into tbl_cart values(6, '에티오피아 예가체프', 3300, 2);
+
