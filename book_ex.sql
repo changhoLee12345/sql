@@ -238,6 +238,8 @@ commit;
 
 select * from tbl_member;
 
+select * from tab;
+
 drop table tbl_reply purge;
 create table tbl_reply (
  reply_no number,
@@ -381,9 +383,3 @@ insert into users values('test','test123','관리자','Admin');
 insert into users values('user1','user1','사용자','User');
 
 commit;
-
-
-
-
-
-
