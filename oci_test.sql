@@ -1,6 +1,119 @@
 select * from tab
 order by tname;
 
+--procedure 연습내용.
+--상품테이블의 상품정보를 활용해서 장바구니의 상품을 구매할 때...주문정보와 주문상세정보를 만드는 작업을 실행. 
+create table tbl_product  (
+  product_no number,
+  product_name varchar2(100) not null,
+  product_desc varchar2(300) not null,
+  price number not null,
+  sale_price number,
+  like_it number default 0,
+  creation_date date default sysdate
+);
+alter table tbl_product add primary key (product_no);
+create sequence product_seq;
+
+insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
+values(product_seq.nextval, '샤프2000', '모나미의 샤프 2000은 좋습니다', 2000, 1800);
+insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
+values(product_seq.nextval, '마우스5000', '다이소의 마우스로 5000은 좋습니다', 5000, 4000);
+insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
+values(product_seq.nextval, '지우개1000', '모나미의 지우개 1000은 좋습니다', 1000, 900);
+insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
+values(product_seq.nextval, '필통2000', '모나미의 필통 2000은 좋습니다', 2000, 1500);
+
+select *
+from tbl_product
+order by 1;
+
+delete from tbl_product
+where product_no = 4;
+
+drop table tbl_cart purge;
+create table tbl_cart (
+ cart_no number, 
+ product_no number not null,
+ qty number default 1,
+ user_id varchar2(20) not null,
+ creation_date date default sysdate
+);
+create sequence cart_seq;
+
+insert into tbl_cart (cart_no, product_no, qty, user_id)
+values(cart_seq.nextval, 1,2,'user01');
+insert into tbl_cart (cart_no, product_no, qty, user_id)
+values(cart_seq.nextval, 2,3,'user01');
+insert into tbl_cart (cart_no, product_no, qty, user_id)
+values(cart_seq.nextval, 3,1,'user01');
+
+begin
+create_order_proc('user01');
+end;
+
+select *
+from tbl_cart
+where user_id = 'user01';
+
+delete from order_details;
+delete from purchase_order;
+
+select *
+from order_details;
+
+select po.order_no, po.order_status, po.address_to, od.order_detail_no, od.product_no, pd.product_name, od.qty, od.order_price
+from purchase_order po
+join order_details od
+on po.order_no = od.order_no
+join tbl_product pd
+on pd.product_no = od.product_no
+order  by od.order_detail_no;
+
+--주문정보.
+drop table purchase_order purge;
+create table purchase_order (
+ order_no varchar2(10), --P202406001
+ user_id varchar2(10) not null,
+ address_to varchar2(100) not null,
+ order_status varchar2(20) not null, --주문, 배송, 완료
+ order_date date default sysdate
+);
+alter table purchase_order add constraint order_pk primary key (order_no);
+
+drop table order_details purge;
+create table order_details (
+ order_detail_no number,
+ order_no varchar2(10), --P202406001
+ product_no number not null,
+ qty number not null,
+ order_price number,
+ creation_date date default sysdate
+);
+create sequence order_details_seq;
+alter table order_details add constraint odetail_pk primary key (order_detail_no);
+
+drop table tbl_member purge;
+create table tbl_member (
+  member_id varchar2(20),
+  member_pw varchar2(10) not null,
+  member_nm varchar2(100) not null,
+  responsibility varchar2(10) default 'User',
+  phone varchar2(20),
+  creation_date date default sysdate
+);
+insert into tbl_member (member_id, member_pw, member_nm)
+values('user01','1111','User1');
+insert into tbl_member (member_id, member_pw, member_nm)
+values('user02','1111','User2');
+insert into tbl_member (member_id, member_pw, member_nm)
+values('user03','1111','User3');
+insert into tbl_member (member_id, member_pw, member_nm, responsibility)
+values('user04','1111','User4', 'Admin');
+
+select *
+from tbl_member;
+
 --git form연습.
 select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 *
@@ -249,10 +362,3 @@ insert into cart values( 2, '혼자 자바', 35000, 1);
 
 commit;
 
-select * from tab;
-select * from product;
-
-
-create table tbl_product  (
-  
-);
