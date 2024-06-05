@@ -34,11 +34,11 @@ where product_no = 4;
 
 drop table tbl_cart purge;
 create table tbl_cart (
- cart_no number, 
- product_no number not null,
- qty number default 1,
- user_id varchar2(20) not null,
- creation_date date default sysdate
+  cart_no number, 
+  product_no number not null,
+  qty number default 1,
+  user_id varchar2(20) not null,
+  creation_date date default sysdate
 );
 alter table tbl_cart add constraint cart_pk primary key (cart_no);
 create sequence cart_seq;
@@ -120,10 +120,10 @@ where board_no > 0;
 
 update tbl_board
 set writer = case mod(board_no, 4) when 0 then 'user0'
-                                when 1 then 'user1'
-                                when 2 then 'user2'
-                                else 'user3'
-            end
+                                   when 1 then 'user1'
+                                   when 2 then 'user2'
+                                   else 'user3'
+             end
 where board_no > 0;
 
 select /*+ FULL(tbl_board) */
@@ -344,15 +344,20 @@ create table genesis (
 select * from genesis
 order by member_order;
 
-update genesis   set col1 = 'Y'   where member_order = '1-1';
-update genesis set col2 = 'Y' where member_order = '11';
+update genesis   
+set col1 = 'Y'   
+where member_order = '1-1';
+
+update genesis 
+set col2 = 'Y' 
+where member_order = '11';
 
 ---------------------------------------
 create table cart (
-	no number primary key,
-	product_nm varchar2(50),
-	price number,
-	qty number
+  no number primary key,
+  product_nm varchar2(50),
+  price number,
+  qty number
 );
 
 insert into cart values( 1, '코드 스프링', 45000, 3);
@@ -361,5 +366,5 @@ insert into cart values( 2, '혼자 자바', 35000, 1);
 commit;
 
 begin
-create_order_proc('user01');
+  create_order_proc('user01');
 end;
