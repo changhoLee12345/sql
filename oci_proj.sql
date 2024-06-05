@@ -11,15 +11,17 @@ insert into cart values( 1, '코드 스프링', 45000, 3);
 insert into cart values( 2, '혼자 자바', 35000, 1);
 
 commit;
+
 select * from tbl_cart;
 select *
-    from tbl_cart
-    order by 1;
+from tbl_cart
+order by 1;
+
 create table tbl_cart (
-	no number primary key,
-	product_nm varchar2(50),
-	price number,
-	qty number
+  no number primary key,
+  product_nm varchar2(50),
+  price number,
+  qty number
 );
 insert into tbl_cart values(1, '과테말라 안티구아', 1200, 2);
 insert into tbl_cart values(2, '케냐 오크라톡신', 1500, 2);
@@ -29,16 +31,16 @@ insert into tbl_cart values(5, '브라질산토스', 3200, 2);
 insert into tbl_cart values(6, '에티오피아 예가체프', 3300, 2);
 -----------------------------------------------------------------------------------------------------
 
-
 drop table tbl_users purge;
 create table tbl_users (
-user_id varchar2(100) primary key,
-user_pw varchar2(10) not null,
-user_name varchar2(100) not null,
-user_birth date,
-user_phone varchar2(20),
-user_addr varchar2(100)
+  user_id varchar2(100) primary key,
+  user_pw varchar2(10) not null,
+  user_name varchar2(100) not null,
+  user_birth date,
+  user_phone varchar2(20),
+  user_addr varchar2(100)
 );
+
 insert into tbl_users (user_id, user_pw, user_name, user_birth)
 values('user1', '1111', 'Hong', to_date('2005-01-01','yyyy-mm-dd'));
 
@@ -57,9 +59,9 @@ set    user_pw = '2222',
 where user_id = 'user3';
 
 update tbl_users
-				 set    user_pw = '3333',
-				        user_addr = 'Seoul 100'
-				where user_id = 'user3';
+set    user_pw = '3333',
+       user_addr = 'Seoul 100'
+where user_id = 'user3';
 
 delete from tbl_users where user_id = 'user2';
 
@@ -72,8 +74,10 @@ create table tbl_board (
   brd_writer varchar2(10) not null, -- user1, user2
   brd_content varchar2(100) not null,
   create_date date default sysdate,
-  click_cnt number default 0);
+  click_cnt number default 0
+);
 create sequence board_seq;
+
 insert into tbl_board (brd_no, brd_title, brd_content, brd_writer)
 values (board_seq.nextval, 'title test'||board_seq.currval, 'content test', 'user1');
 
@@ -92,26 +96,27 @@ where brd_no = 3;
 
 drop table prod_info purge;
 create table prod_info (
- prod_code char(4) primary key,
- prod_name varchar2(100) not null,
- prod_desc varchar2(500),
- rct_price number default 1000,
- sale_price number default 2000,
- safe_qty number default 5,
- create_date date default sysdate,
- update_date date default sysdate
+  prod_code char(4) primary key,
+  prod_name varchar2(100) not null,
+  prod_desc varchar2(500),
+  rct_price number default 1000,
+  sale_price number default 2000,
+  safe_qty number default 5,
+  create_date date default sysdate,
+  update_date date default sysdate
 );
 insert into prod_info (prod_code, prod_name, prod_desc) values('P001', '노트북1', '좋은노트북입니다.1');
 
 select * from prod_info;
 
-create sequence txn_seq;
 create table in_out_txn (
- txn_id number primary key,
- prod_code char(4) not null,
- qty number not null,
- txn_date date default sysdate
- );
+  txn_id number primary key,
+  prod_code char(4) not null,
+  qty number not null,
+  txn_date date default sysdate
+);
+create sequence txn_seq;
+
 insert into in_out_txn values(txn_seq.nextval, 'P001', 10, sysdate);
 insert into in_out_txn values(txn_seq.nextval, 'P001', -5, sysdate);
 insert into in_out_txn values(txn_seq.nextval, 'P001', -3, sysdate);
@@ -148,10 +153,10 @@ select * from (
 where rn > 5
 ;
 
-select count(*) from (
-select  prod_code from in_out_txn group by prod_code
-having sum(qty) > 0);
+select count(*) 
+from (select  prod_code 
+      from in_out_txn 
+      group by prod_code
+      having sum(qty) > 0);
 
 select * from prod_info order by 1;
-
-
