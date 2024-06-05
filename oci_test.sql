@@ -12,7 +12,8 @@ create table tbl_product  (
   like_it number default 0,
   creation_date date default sysdate
 );
-alter table tbl_product add primary key (product_no);
+--alter table tbl_product add primary key (product_no);
+alter table tbl_product add constraint product_pk primary key (product_no);
 create sequence product_seq;
 
 insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
@@ -39,6 +40,7 @@ create table tbl_cart (
  user_id varchar2(20) not null,
  creation_date date default sysdate
 );
+alter table tbl_cart add constraint cart_pk primary key (cart_no);
 create sequence cart_seq;
 
 insert into tbl_cart (cart_no, product_no, qty, user_id)
@@ -47,10 +49,6 @@ insert into tbl_cart (cart_no, product_no, qty, user_id)
 values(cart_seq.nextval, 2,3,'user01');
 insert into tbl_cart (cart_no, product_no, qty, user_id)
 values(cart_seq.nextval, 3,1,'user01');
-
-begin
-create_order_proc('user01');
-end;
 
 select *
 from tbl_cart
@@ -362,3 +360,6 @@ insert into cart values( 2, '혼자 자바', 35000, 1);
 
 commit;
 
+begin
+create_order_proc('user01');
+end;
