@@ -60,6 +60,10 @@ delete from purchase_order;
 select *
 from order_details;
 
+select *
+from v_order_items;
+
+create or replace view v_order_items as
 select po.order_no, po.order_status, po.address_to, od.order_detail_no, od.product_no, pd.product_name, od.qty, od.order_price
 from purchase_order po
 join order_details od

@@ -11,6 +11,7 @@ alter session set "_ORACLE_SCRIPT" = true;
 create user jsp identified by jsp;
 grant connect, resource to jsp;
 alter user jsp default tablespace users quota unlimited on users;
+grant create view to jsp;
 
 alter user prj identified by prj;
 alter user dev identified by dev;
