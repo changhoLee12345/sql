@@ -1,6 +1,9 @@
 select * from tab
 order by tname;
 
+select jsp_common.get_version2()
+from dual;
+
 --procedure 연습내용.
 --상품테이블의 상품정보를 활용해서 장바구니의 상품을 구매할 때...주문정보와 주문상세정보를 만드는 작업을 실행. 
 create table tbl_product  (
