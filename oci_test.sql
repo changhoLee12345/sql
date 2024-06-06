@@ -1,8 +1,8 @@
 select * from tab
 order by tname;
 
---procedure ì—°ìŠµë‚´ìš©.
---ìƒí’ˆí…Œì´ë¸”ì˜ ìƒí’ˆì •ë³´ë¥¼ í™œìš©í•´ì„œ ì¥ë°”êµ¬ë‹ˆì˜ ìƒí’ˆì„ êµ¬ë§¤í•  ë•Œ...ì£¼ë¬¸ì •ë³´ì™€ ì£¼ë¬¸ìƒì„¸ì •ë³´ë¥¼ ë§Œë“œëŠ” ì‘ì—…ì„ ì‹¤í–‰. 
+--procedure ¿¬½À³»¿ë.
+--»óÇ°Å×ÀÌºíÀÇ »óÇ°Á¤º¸¸¦ È°¿ëÇØ¼­ Àå¹Ù±¸´ÏÀÇ »óÇ°À» ±¸¸ÅÇÒ ¶§...ÁÖ¹®Á¤º¸¿Í ÁÖ¹®»ó¼¼Á¤º¸¸¦ ¸¸µå´Â ÀÛ¾÷À» ½ÇÇà. 
 create table tbl_product  (
   product_no number,
   product_name varchar2(100) not null,
@@ -16,13 +16,13 @@ alter table tbl_product add primary key (product_no);
 create sequence product_seq;
 
 insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'ìƒ¤í”„2000', 'ëª¨ë‚˜ë¯¸ì˜ ìƒ¤í”„ 2000ì€ ì¢‹ìŠµë‹ˆë‹¤', 2000, 1800);
+values(product_seq.nextval, '»şÇÁ2000', '¸ğ³ª¹ÌÀÇ »şÇÁ 2000Àº ÁÁ½À´Ï´Ù', 2000, 1800);
 insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'ë§ˆìš°ìŠ¤5000', 'ë‹¤ì´ì†Œì˜ ë§ˆìš°ìŠ¤ë¡œ 5000ì€ ì¢‹ìŠµë‹ˆë‹¤', 5000, 4000);
+values(product_seq.nextval, '¸¶¿ì½º5000', '´ÙÀÌ¼ÒÀÇ ¸¶¿ì½º·Î 5000Àº ÁÁ½À´Ï´Ù', 5000, 4000);
 insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'ì§€ìš°ê°œ1000', 'ëª¨ë‚˜ë¯¸ì˜ ì§€ìš°ê°œ 1000ì€ ì¢‹ìŠµë‹ˆë‹¤', 1000, 900);
+values(product_seq.nextval, 'Áö¿ì°³1000', '¸ğ³ª¹ÌÀÇ Áö¿ì°³ 1000Àº ÁÁ½À´Ï´Ù', 1000, 900);
 insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'í•„í†µ2000', 'ëª¨ë‚˜ë¯¸ì˜ í•„í†µ 2000ì€ ì¢‹ìŠµë‹ˆë‹¤', 2000, 1500);
+values(product_seq.nextval, 'ÇÊÅë2000', '¸ğ³ª¹ÌÀÇ ÇÊÅë 2000Àº ÁÁ½À´Ï´Ù', 2000, 1500);
 
 select *
 from tbl_product
@@ -48,12 +48,11 @@ values(cart_seq.nextval, 2,3,'user01');
 insert into tbl_cart (cart_no, product_no, qty, user_id)
 values(cart_seq.nextval, 3,1,'user01');
 
-begin
-create_order_proc('user01');
-end;
-
 select *
 from tbl_cart
+where user_id = 'user01';
+
+delete from tbl_cart
 where user_id = 'user01';
 
 delete from order_details;
@@ -69,14 +68,14 @@ on po.order_no = od.order_no
 join tbl_product pd
 on pd.product_no = od.product_no
 order  by od.order_detail_no;
-
---ì£¼ë¬¸ì •ë³´.
+--PP202406001
+--ÁÖ¹®Á¤º¸.
 drop table purchase_order purge;
 create table purchase_order (
  order_no varchar2(10), --P202406001
  user_id varchar2(10) not null,
  address_to varchar2(100) not null,
- order_status varchar2(20) not null, --ì£¼ë¬¸, ë°°ì†¡, ì™„ë£Œ
+ order_status varchar2(20) not null, --ÁÖ¹®, ¹è¼Û, ¿Ï·á
  order_date date default sysdate
 );
 alter table purchase_order add constraint order_pk primary key (order_no);
@@ -114,7 +113,7 @@ values('user04','1111','User4', 'Admin');
 select *
 from tbl_member;
 
---git formì—°ìŠµ.
+--git form¿¬½À.
 select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 *
 from tbl_board
@@ -122,10 +121,10 @@ where board_no > 0;
 
 update tbl_board
 set writer = case mod(board_no, 4) when 0 then 'user0'
-                                when 1 then 'user1'
-                                when 2 then 'user2'
-                                else 'user3'
-            end
+                                   when 1 then 'user1'
+                                   when 2 then 'user2'
+                                   else 'user3'
+             end
 where board_no > 0;
 
 select /*+ FULL(tbl_board) */
@@ -144,7 +143,7 @@ from (
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
---ì—¬ëŸ¬ê±´ ë„£ê¸°.
+--¿©·¯°Ç ³Ö±â.
 insert into tbl_board (board_no, title, content, writer)
 select board_seq.nextval, title, content, writer from tbl_board;
 select count(*) from tbl_board;
@@ -181,19 +180,19 @@ create table BOOK_INFO (
  book_price number
 );
 alter table book_info add (book_desc varchar2(1000));
-insert into book_info values('B0001', 'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™', 'ê¹€ì² í•™','ì´ì•¼ê¸°',21000, 'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0002', 'í˜„ëŒ€ì² í•™ë§¤ë‰´', 'ë°•ì² í•™','ë‰´ìš•íƒ€ì„ì¦ˆ',23000, 'í˜„ëŒ€ì² í•™ë§¤ë‰´ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0003', 'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜', 'ëª¨ë‹ê¸€ë¡œë¦¬','ìë°”ì¶œíŒì‚¬',15500, 'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0004', 'ì¸ë¥˜ì˜ì—¬ì •', 'ì¡°ì—¬ì •','ê¹€ì˜ì‚¬',10000, 'ì¸ë¥˜ì˜ì—¬ì • ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0005', 'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€', 'ì €ì„¸ìƒ','ê·¸ë¦°ë¹„',22000, 'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0006', 'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤', 'í™©ì—°ì†','ì‹œê³µì‚¬',11000, 'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
+insert into book_info values('B0001', '´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇĞ', '±èÃ¶ÇĞ','ÀÌ¾ß±â',21000, '´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇĞ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+insert into book_info values('B0002', 'Çö´ëÃ¶ÇĞ¸Å´º', '¹ÚÃ¶ÇĞ','´º¿åÅ¸ÀÓÁî',23000, 'Çö´ëÃ¶ÇĞ¸Å´º ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+insert into book_info values('B0003', 'È£¸ğÇÈÅõ½ºÀÇ¸ğÇè', '¸ğ´×±Û·Î¸®','ÀÚ¹ÙÃâÆÇ»ç',15500, 'È£¸ğÇÈÅõ½ºÀÇ¸ğÇè ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+insert into book_info values('B0004', 'ÀÎ·ùÀÇ¿©Á¤', 'Á¶¿©Á¤','±è¿µ»ç',10000, 'ÀÎ·ùÀÇ¿©Á¤ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+insert into book_info values('B0005', '¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡', 'Àú¼¼»ó','±×¸°ºñ',22000, '¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+insert into book_info values('B0006', '»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù', 'È²¿¬¼Ó','½Ã°ø»ç',11000, '»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
 
-insert into book_file values(1, 'B0001', 'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™.png', 'bookImages');
-insert into book_file values(2, 'B0002', 'í˜„ëŒ€ì² í•™ë§¤ë‰´.png', 'bookImages');
-insert into book_file values(3, 'B0003', 'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜.png', 'bookImages');
-insert into book_file values(4, 'B0004', 'ì¸ë¥˜ì˜ì—¬ì •.png', 'bookImages');
-insert into book_file values(5, 'B0005', 'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€.png', 'bookImages');
-insert into book_file values(6, 'B0006', 'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤.png', 'bookImages');
+insert into book_file values(1, 'B0001', '´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇĞ.png', 'bookImages');
+insert into book_file values(2, 'B0002', 'Çö´ëÃ¶ÇĞ¸Å´º.png', 'bookImages');
+insert into book_file values(3, 'B0003', 'È£¸ğÇÈÅõ½ºÀÇ¸ğÇè.png', 'bookImages');
+insert into book_file values(4, 'B0004', 'ÀÎ·ùÀÇ¿©Á¤.png', 'bookImages');
+insert into book_file values(5, 'B0005', '¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡.png', 'bookImages');
+insert into book_file values(6, 'B0006', '»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù.png', 'bookImages');
 
 -- book_file table.
 create table book_file (
@@ -223,7 +222,7 @@ alter table member rename column mail to email;
 alter table members add (phone_number varchar2(20));
 alter table members add (addr varchar2(100));
 
-insert into members values('user6','1234','ì‚¬ìš©ì6','user6@email','User','member6.png',null,sysdate,'010-1111-2222','Daegu, jungangno-6');
+insert into members values('user6','1234','»ç¿ëÀÚ6','user6@email','User','member6.png',null,sysdate,'010-1111-2222','Daegu, jungangno-6');
 
 select * from members order by 1;
 
@@ -357,8 +356,8 @@ create table cart (
 	qty number
 );
 
-insert into cart values( 1, 'ì½”ë“œ ìŠ¤í”„ë§', 45000, 3);
-insert into cart values( 2, 'í˜¼ì ìë°”', 35000, 1);
+insert into cart values( 1, 'ÄÚµå ½ºÇÁ¸µ', 45000, 3);
+insert into cart values( 2, 'È¥ÀÚ ÀÚ¹Ù', 35000, 1);
 
 commit;
 
