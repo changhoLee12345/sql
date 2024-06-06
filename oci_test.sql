@@ -1,377 +1,644 @@
-select * from tab
-order by tname;
+SELECT *
+FROM   tab
+ORDER  BY tname;
 
-select jsp_common.get_version2()
-from dual;
+SELECT jsp_common.get_version2()
+FROM   dual;
 
---procedure ì—°ìŠµë‚´ìš©.
---ìƒí’ˆí…Œì´ë¸”ì˜ ìƒí’ˆì •ë³´ë¥¼ í™œìš©í•´ì„œ ì¥ë°”êµ¬ë‹ˆì˜ ìƒí’ˆì„ êµ¬ë§¤í•  ë•Œ...ì£¼ë¬¸ì •ë³´ì™€ ì£¼ë¬¸ìƒì„¸ì •ë³´ë¥¼ ë§Œë“œëŠ” ì‘ì—…ì„ ì‹¤í–‰. 
-create table tbl_product  (
-  product_no number,
-  product_name varchar2(100) not null,
-  product_desc varchar2(300) not null,
-  price number not null,
-  sale_price number,
-  like_it number default 0,
-  creation_date date default sysdate
-);
+--procedure ¿¬½À³»¿ë.
+--»óÇ°Å×ÀÌºíÀÇ »óÇ°Á¤º¸¸¦ È°¿ëÇØ¼­ Àå¹Ù±¸´ÏÀÇ »óÇ°À» ±¸¸ÅÇÒ ¶§...ÁÖ¹®Á¤º¸¿Í ÁÖ¹®»ó¼¼Á¤º¸¸¦ ¸¸µå´Â ÀÛ¾÷À» ½ÇÇà. 
+CREATE TABLE tbl_product(product_no NUMBER
+                        ,product_name VARCHAR2(100) NOT NULL
+                        ,product_desc VARCHAR2(300) NOT NULL
+                        ,price NUMBER NOT NULL
+                        ,sale_price NUMBER
+                        ,like_it       NUMBER DEFAULT 0
+                        ,creation_date DATE DEFAULT SYSDATE);
 --alter table tbl_product add primary key (product_no);
-alter table tbl_product add constraint product_pk primary key (product_no);
-create sequence product_seq;
+ALTER TABLE tbl_product add CONSTRAINT product_pk primary key(product_no);
+CREATE sequence product_seq;
 
-insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'ìƒ¤í”„2000', 'ëª¨ë‚˜ë¯¸ì˜ ìƒ¤í”„ 2000ì€ ì¢‹ìŠµë‹ˆë‹¤', 2000, 1800);
-insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'ë§ˆìš°ìŠ¤5000', 'ë‹¤ì´ì†Œì˜ ë§ˆìš°ìŠ¤ë¡œ 5000ì€ ì¢‹ìŠµë‹ˆë‹¤', 5000, 4000);
-insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'ì§€ìš°ê°œ1000', 'ëª¨ë‚˜ë¯¸ì˜ ì§€ìš°ê°œ 1000ì€ ì¢‹ìŠµë‹ˆë‹¤', 1000, 900);
-insert into tbl_product (product_no, product_name, product_desc, price, sale_price)
-values(product_seq.nextval, 'í•„í†µ2000', 'ëª¨ë‚˜ë¯¸ì˜ í•„í†µ 2000ì€ ì¢‹ìŠµë‹ˆë‹¤', 2000, 1500);
+INSERT INTO tbl_product
+    (product_no
+    ,product_name
+    ,product_desc
+    ,price
+    ,sale_price)
+VALUES
+    (product_seq.nextval
+    ,'»şÇÁ2000'
+    ,'¸ğ³ª¹ÌÀÇ »şÇÁ 2000Àº ÁÁ½À´Ï´Ù'
+    ,2000
+    ,1800);
+INSERT INTO tbl_product
+    (product_no
+    ,product_name
+    ,product_desc
+    ,price
+    ,sale_price)
+VALUES
+    (product_seq.nextval
+    ,'¸¶¿ì½º5000'
+    ,'´ÙÀÌ¼ÒÀÇ ¸¶¿ì½º·Î 5000Àº ÁÁ½À´Ï´Ù'
+    ,5000
+    ,4000);
+INSERT INTO tbl_product
+    (product_no
+    ,product_name
+    ,product_desc
+    ,price
+    ,sale_price)
+VALUES
+    (product_seq.nextval
+    ,'Áö¿ì°³1000'
+    ,'¸ğ³ª¹ÌÀÇ Áö¿ì°³ 1000Àº ÁÁ½À´Ï´Ù'
+    ,1000
+    ,900);
+INSERT INTO tbl_product
+    (product_no
+    ,product_name
+    ,product_desc
+    ,price
+    ,sale_price)
+VALUES
+    (product_seq.nextval
+    ,'ÇÊÅë2000'
+    ,'¸ğ³ª¹ÌÀÇ ÇÊÅë 2000Àº ÁÁ½À´Ï´Ù'
+    ,2000
+    ,1500);
 
-select *
-from tbl_product
-order by 1;
+SELECT *
+FROM   tbl_product
+ORDER  BY 1;
 
-delete from tbl_product
-where product_no = 4;
+DELETE FROM tbl_product
+WHERE  product_no = 4;
 
-drop table tbl_cart purge;
-create table tbl_cart (
-  cart_no number, 
-  product_no number not null,
-  qty number default 1,
-  user_id varchar2(20) not null,
-  creation_date date default sysdate
-);
-alter table tbl_cart add constraint cart_pk primary key (cart_no);
-create sequence cart_seq;
+drop TABLE tbl_cart purge;
+CREATE TABLE tbl_cart(cart_no NUMBER
+                     ,product_no NUMBER NOT NULL
+                     ,qty           NUMBER DEFAULT 1
+                     ,user_id VARCHAR2(20) NOT NULL
+                     ,creation_date DATE DEFAULT SYSDATE);
+ALTER TABLE tbl_cart add CONSTRAINT cart_pk primary key(cart_no);
+CREATE sequence cart_seq;
 
-insert into tbl_cart (cart_no, product_no, qty, user_id)
-values(cart_seq.nextval, 1,2,'user01');
-insert into tbl_cart (cart_no, product_no, qty, user_id)
-values(cart_seq.nextval, 2,3,'user01');
-insert into tbl_cart (cart_no, product_no, qty, user_id)
-values(cart_seq.nextval, 3,1,'user01');
+INSERT INTO tbl_cart
+    (cart_no
+    ,product_no
+    ,qty
+    ,user_id)
+VALUES
+    (cart_seq.nextval
+    ,1
+    ,2
+    ,'user01');
+INSERT INTO tbl_cart
+    (cart_no
+    ,product_no
+    ,qty
+    ,user_id)
+VALUES
+    (cart_seq.nextval
+    ,2
+    ,3
+    ,'user01');
+INSERT INTO tbl_cart
+    (cart_no
+    ,product_no
+    ,qty
+    ,user_id)
+VALUES
+    (cart_seq.nextval
+    ,3
+    ,1
+    ,'user01');
 
-select *
-from tbl_cart
-where user_id = 'user01';
+SELECT *
+FROM   tbl_cart
+WHERE  user_id = 'user01';
 
-delete from order_details;
-delete from purchase_order;
+DELETE FROM order_details;
+DELETE FROM purchase_order;
 
-select *
-from order_details;
+SELECT *
+FROM   order_details;
 
-select *
-from v_order_items;
+SELECT *
+FROM   v_order_items;
 
-create or replace view v_order_items as
-select po.order_no, po.order_status, po.address_to, od.order_detail_no, od.product_no, pd.product_name, od.qty, od.order_price
-from purchase_order po
-join order_details od
-on po.order_no = od.order_no
-join tbl_product pd
-on pd.product_no = od.product_no
-order  by od.order_detail_no;
+CREATE OR REPLACE view v_order_items AS
+    SELECT po.order_no
+          ,po.order_status
+          ,po.address_to
+          ,od.order_detail_no
+          ,od.product_no
+          ,pd.product_name
+          ,od.qty
+          ,od.order_price
+    FROM   purchase_order po
+    JOIN   order_details od
+    ON     po.order_no = od.order_no
+    JOIN   tbl_product pd
+    ON     pd.product_no = od.product_no
+    ORDER  BY od.order_detail_no;
 
---ì£¼ë¬¸ì •ë³´.
-drop table purchase_order purge;
-create table purchase_order (
- order_no varchar2(10), --P202406001
- user_id varchar2(10) not null,
- address_to varchar2(100) not null,
- order_status varchar2(20) not null, --ì£¼ë¬¸, ë°°ì†¡, ì™„ë£Œ
- order_date date default sysdate
-);
-alter table purchase_order add constraint order_pk primary key (order_no);
+--ÁÖ¹®Á¤º¸.
+drop TABLE purchase_order purge;
+CREATE TABLE purchase_order(order_no VARCHAR2(10) --P202406001
+                           ,user_id VARCHAR2(10) NOT NULL
+                           ,address_to VARCHAR2(100) NOT NULL
+                           ,order_status VARCHAR2(20) NOT NULL --ÁÖ¹®, ¹è¼Û, ¿Ï·á
+                           ,order_date   DATE DEFAULT SYSDATE);
+ALTER TABLE purchase_order add CONSTRAINT order_pk primary key(order_no);
 
-drop table order_details purge;
-create table order_details (
- order_detail_no number,
- order_no varchar2(10), --P202406001
- product_no number not null,
- qty number not null,
- order_price number,
- creation_date date default sysdate
-);
-create sequence order_details_seq;
-alter table order_details add constraint odetail_pk primary key (order_detail_no);
+drop TABLE order_details purge;
+CREATE TABLE order_details(order_detail_no NUMBER
+                          ,order_no VARCHAR2(10) --P202406001
+                          ,product_no NUMBER NOT NULL
+                          ,qty NUMBER NOT NULL
+                          ,order_price NUMBER
+                          ,creation_date   DATE DEFAULT SYSDATE);
+CREATE sequence order_details_seq;
+ALTER TABLE order_details add CONSTRAINT odetail_pk primary key(order_detail_no);
 
-drop table tbl_member purge;
-create table tbl_member (
-  member_id varchar2(20),
-  member_pw varchar2(10) not null,
-  member_nm varchar2(100) not null,
-  responsibility varchar2(10) default 'User',
-  phone varchar2(20),
-  creation_date date default sysdate
-);
-insert into tbl_member (member_id, member_pw, member_nm)
-values('user01','1111','User1');
-insert into tbl_member (member_id, member_pw, member_nm)
-values('user02','1111','User2');
-insert into tbl_member (member_id, member_pw, member_nm)
-values('user03','1111','User3');
-insert into tbl_member (member_id, member_pw, member_nm, responsibility)
-values('user04','1111','User4', 'Admin');
+drop TABLE tbl_member purge;
+CREATE TABLE tbl_member(member_id VARCHAR2(20)
+                       ,member_pw VARCHAR2(10) NOT NULL
+                       ,member_nm VARCHAR2(100) NOT NULL
+                       ,responsibility VARCHAR2(10) DEFAULT 'User'
+                       ,phone VARCHAR2(20)
+                       ,creation_date  DATE DEFAULT SYSDATE);
+INSERT INTO tbl_member
+    (member_id
+    ,member_pw
+    ,member_nm)
+VALUES
+    ('user01'
+    ,'1111'
+    ,'User1');
+INSERT INTO tbl_member
+    (member_id
+    ,member_pw
+    ,member_nm)
+VALUES
+    ('user02'
+    ,'1111'
+    ,'User2');
+INSERT INTO tbl_member
+    (member_id
+    ,member_pw
+    ,member_nm)
+VALUES
+    ('user03'
+    ,'1111'
+    ,'User3');
+INSERT INTO tbl_member
+    (member_id
+    ,member_pw
+    ,member_nm
+    ,responsibility)
+VALUES
+    ('user04'
+    ,'1111'
+    ,'User4'
+    ,'Admin');
 
-select *
-from tbl_member;
+SELECT *
+FROM   tbl_member;
 
---git formì—°ìŠµ.
-select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
-*
-from tbl_board
-where board_no > 0;
+--git form¿¬½À.
+SELECT /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+ *
+FROM   tbl_board
+WHERE  board_no > 0;
 
-update tbl_board
-set writer = case mod(board_no, 4) when 0 then 'user0'
-                                   when 1 then 'user1'
-                                   when 2 then 'user2'
-                                   else 'user3'
-             end
-where board_no > 0;
+UPDATE tbl_board
+SET    writer = CASE MOD(board_no, 4)
+                    WHEN 0 THEN 'user0'
+                    WHEN 1 THEN 'user1'
+                    WHEN 2 THEN 'user2'
+                    ELSE 'user3'
+                END
+WHERE  board_no > 0;
 
-select /*+ FULL(tbl_board) */
-rownum rn, board_no, title
-from tbl_board
-where board_no > 0
-order by board_no;
+SELECT /*+ FULL(tbl_board) */
+ ROWNUM rn
+,board_no
+,title
+FROM   tbl_board
+WHERE  board_no > 0
+ORDER  BY board_no;
 
-select rn, board_no, title, content
-from (
-    select /*+ INDEX_DESC(tbl_board SYS_C0031805) */
-    rownum rn, board_no, title, content
-    from tbl_board
-    where rownum <= 20
-) where rn > 10;
+SELECT rn
+      ,board_no
+      ,title
+      ,content
+FROM   (SELECT /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+         ROWNUM rn
+        ,board_no
+        ,title
+        ,content
+        FROM   tbl_board
+        WHERE  ROWNUM <= 20)
+WHERE  rn > 10;
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
---ì—¬ëŸ¬ê±´ ë„£ê¸°.
-insert into tbl_board (board_no, title, content, writer)
-select board_seq.nextval, title, content, writer from tbl_board;
-select count(*) from tbl_board;
+--¿©·¯°Ç ³Ö±â.
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+    SELECT board_seq.nextval
+          ,title
+          ,content
+          ,writer
+    FROM   tbl_board;
+SELECT COUNT(*)
+FROM   tbl_board;
 
-insert into tbl_board (board_no, title, content, writer)
-values(board_seq.nextval, 'title'||board_seq.currval, 'content'||board_seq.currval, 'writer'||board_seq.currval);
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (board_seq.nextval
+    ,'title' || board_seq.currval
+    ,'content' || board_seq.currval
+    ,'writer' || board_seq.currval);
 
-select * from tbl_board order by 1 desc;
+SELECT *
+FROM   tbl_board
+ORDER  BY 1 DESC;
 
-delete from tbl_board where board_no > 500;
+DELETE FROM tbl_board
+WHERE  board_no > 500;
 
-drop table tbl_reply purge;
-create sequence reply_seq;
-create table tbl_reply (
- reply_no int primary key,
- bno int not null,
- content varchar2(300) not null,
- writer varchar2(100) not null,
- create_date date default sysdate
-);
-select * from tbl_reply;
-insert into tbl_reply 
-values(reply_seq.nextval, 3813048, 'test reply', 'user01', sysdate);
+drop TABLE tbl_reply purge;
+CREATE sequence reply_seq;
+CREATE TABLE tbl_reply(reply_no INT primary key
+                      ,bno INT NOT NULL
+                      ,content VARCHAR2(300) NOT NULL
+                      ,writer VARCHAR2(100) NOT NULL
+                      ,create_date DATE DEFAULT SYSDATE);
+SELECT *
+FROM   tbl_reply;
+INSERT INTO tbl_reply
+VALUES
+    (reply_seq.nextval
+    ,3813048
+    ,'test reply'
+    ,'user01'
+    ,SYSDATE);
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 -- book_info table.
-drop table book_info purge;
-create table BOOK_INFO (
- book_code varchar2(20) primary key,
- book_title varchar2(300),
- book_author varchar2(500),
- book_press varchar2(50),
- book_price number
-);
-alter table book_info add (book_desc varchar2(1000));
-insert into book_info values('B0001', 'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™', 'ê¹€ì² í•™','ì´ì•¼ê¸°',21000, 'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0002', 'í˜„ëŒ€ì² í•™ë§¤ë‰´', 'ë°•ì² í•™','ë‰´ìš•íƒ€ì„ì¦ˆ',23000, 'í˜„ëŒ€ì² í•™ë§¤ë‰´ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0003', 'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜', 'ëª¨ë‹ê¸€ë¡œë¦¬','ìë°”ì¶œíŒì‚¬',15500, 'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0004', 'ì¸ë¥˜ì˜ì—¬ì •', 'ì¡°ì—¬ì •','ê¹€ì˜ì‚¬',10000, 'ì¸ë¥˜ì˜ì—¬ì • ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0005', 'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€', 'ì €ì„¸ìƒ','ê·¸ë¦°ë¹„',22000, 'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
-insert into book_info values('B0006', 'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤', 'í™©ì—°ì†','ì‹œê³µì‚¬',11000, 'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤ ì•„ì£¼ ì¬ë¯¸ìˆìŠµë‹ˆë‹¤');
+drop TABLE book_info purge;
+CREATE TABLE book_info(book_code VARCHAR2(20) primary key
+                      ,book_title VARCHAR2(300)
+                      ,book_author VARCHAR2(500)
+                      ,book_press VARCHAR2(50)
+                      ,book_price NUMBER);
+ALTER TABLE book_info add(book_desc VARCHAR2(1000));
+INSERT INTO book_info
+VALUES
+    ('B0001'
+    ,'´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇĞ'
+    ,'±èÃ¶ÇĞ'
+    ,'ÀÌ¾ß±â'
+    ,21000
+    ,'´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇĞ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+INSERT INTO book_info
+VALUES
+    ('B0002'
+    ,'Çö´ëÃ¶ÇĞ¸Å´º'
+    ,'¹ÚÃ¶ÇĞ'
+    ,'´º¿åÅ¸ÀÓÁî'
+    ,23000
+    ,'Çö´ëÃ¶ÇĞ¸Å´º ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+INSERT INTO book_info
+VALUES
+    ('B0003'
+    ,'È£¸ğÇÈÅõ½ºÀÇ¸ğÇè'
+    ,'¸ğ´×±Û·Î¸®'
+    ,'ÀÚ¹ÙÃâÆÇ»ç'
+    ,15500
+    ,'È£¸ğÇÈÅõ½ºÀÇ¸ğÇè ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+INSERT INTO book_info
+VALUES
+    ('B0004'
+    ,'ÀÎ·ùÀÇ¿©Á¤'
+    ,'Á¶¿©Á¤'
+    ,'±è¿µ»ç'
+    ,10000
+    ,'ÀÎ·ùÀÇ¿©Á¤ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+INSERT INTO book_info
+VALUES
+    ('B0005'
+    ,'¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡'
+    ,'Àú¼¼»ó'
+    ,'±×¸°ºñ'
+    ,22000
+    ,'¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+INSERT INTO book_info
+VALUES
+    ('B0006'
+    ,'»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù'
+    ,'È²¿¬¼Ó'
+    ,'½Ã°ø»ç'
+    ,11000
+    ,'»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
 
-insert into book_file values(1, 'B0001', 'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™.png', 'bookImages');
-insert into book_file values(2, 'B0002', 'í˜„ëŒ€ì² í•™ë§¤ë‰´.png', 'bookImages');
-insert into book_file values(3, 'B0003', 'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜.png', 'bookImages');
-insert into book_file values(4, 'B0004', 'ì¸ë¥˜ì˜ì—¬ì •.png', 'bookImages');
-insert into book_file values(5, 'B0005', 'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€.png', 'bookImages');
-insert into book_file values(6, 'B0006', 'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤.png', 'bookImages');
+INSERT INTO book_file
+VALUES
+    (1
+    ,'B0001'
+    ,'´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇĞ.png'
+    ,'bookImages');
+INSERT INTO book_file
+VALUES
+    (2
+    ,'B0002'
+    ,'Çö´ëÃ¶ÇĞ¸Å´º.png'
+    ,'bookImages');
+INSERT INTO book_file
+VALUES
+    (3
+    ,'B0003'
+    ,'È£¸ğÇÈÅõ½ºÀÇ¸ğÇè.png'
+    ,'bookImages');
+INSERT INTO book_file
+VALUES
+    (4
+    ,'B0004'
+    ,'ÀÎ·ùÀÇ¿©Á¤.png'
+    ,'bookImages');
+INSERT INTO book_file
+VALUES
+    (5
+    ,'B0005'
+    ,'¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡.png'
+    ,'bookImages');
+INSERT INTO book_file
+VALUES
+    (6
+    ,'B0006'
+    ,'»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù.png'
+    ,'bookImages');
 
 -- book_file table.
-create table book_file (
- file_no number primary key,
- book_code varchar2(50),
- book_image varchar2(50),
- book_path varchar2(50)
-);
+CREATE TABLE book_file(file_no NUMBER primary key
+                      ,book_code VARCHAR2(50)
+                      ,book_image VARCHAR2(50)
+                      ,book_path VARCHAR2(50));
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 -- members table.
-create table members (
- id varchar(10) primary key,
- passwd varchar2(10),
- name varchar2(30),
- email varchar2(30),
- responsibility varchar2(10),
- pfileName varchar2(50),
- ofileName varchar2(50),
- cdate date
-);
+CREATE TABLE members(id VARCHAR(10) primary key
+                    ,passwd VARCHAR2(10)
+                    ,NAME VARCHAR2(30)
+                    ,email VARCHAR2(30)
+                    ,responsibility VARCHAR2(10)
+                    ,pfilename VARCHAR2(50)
+                    ,ofilename VARCHAR2(50)
+                    ,cdate DATE);
 
-select * from members order by 1;
+SELECT *
+FROM   members
+ORDER  BY 1;
 
-alter table member rename column mail to email;
-alter table members add (phone_number varchar2(20));
-alter table members add (addr varchar2(100));
+ALTER TABLE member rename column mail TO email;
+ALTER TABLE members add(phone_number VARCHAR2(20));
+ALTER TABLE members add(addr VARCHAR2(100));
 
-insert into members values('user6','1234','ì‚¬ìš©ì6','user6@email','User','member6.png',null,sysdate,'010-1111-2222','Daegu, jungangno-6');
+INSERT INTO members
+VALUES
+    ('user6'
+    ,'1234'
+    ,'»ç¿ëÀÚ6'
+    ,'user6@email'
+    ,'User'
+    ,'member6.png'
+    ,NULL
+    ,SYSDATE
+    ,'010-1111-2222'
+    ,'Daegu, jungangno-6');
 
-select * from members order by 1;
+SELECT *
+FROM   members
+ORDER  BY 1;
 
-delete from members where responsibility='User';
-update members
-set pfilename = 'admin1.png'
-where pfilename is null;
+DELETE FROM members
+WHERE  responsibility = 'User';
+UPDATE members
+SET    pfilename = 'admin1.png'
+WHERE  pfilename IS NULL;
 
-select * from tbl_board order by 1 ;
+SELECT *
+FROM   tbl_board
+ORDER  BY 1;
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 -- tbl_notice table.
-create sequence notice_seq;
-create table tbl_notice (
- notice_id number primary key,
- notice_writer varchar2(100) not null,
- notice_title varchar2(100) not null,
- notice_subject varchar2(1000) not null,
- notice_date date,
- hit_count number default 0,
- attach_file varchar2(100),
- attach_dir varchar2(100)
-);
+CREATE sequence notice_seq;
+CREATE TABLE tbl_notice(notice_id NUMBER primary key
+                       ,notice_writer VARCHAR2(100) NOT NULL
+                       ,notice_title VARCHAR2(100) NOT NULL
+                       ,notice_subject VARCHAR2(1000) NOT NULL
+                       ,notice_date DATE
+                       ,hit_count      NUMBER DEFAULT 0
+                       ,attach_file VARCHAR2(100)
+                       ,attach_dir VARCHAR2(100));
 
-select notice_seq.nextval from dual;
-insert into tbl_notice (notice_id, notice_writer, notice_title, notice_subject, notice_date)
-values(1, 'user1', 'sample title', 'sample subject', sysdate);
+SELECT notice_seq.nextval
+FROM   dual;
+INSERT INTO tbl_notice
+    (notice_id
+    ,notice_writer
+    ,notice_title
+    ,notice_subject
+    ,notice_date)
+VALUES
+    (1
+    ,'user1'
+    ,'sample title'
+    ,'sample subject'
+    ,SYSDATE);
 
-insert into tbl_notice (notice_id, notice_writer, notice_title, notice_subject, notice_date)
-select notice_seq.nextval, 'writer'||notice_seq.currval, 'title'||notice_seq.currval, 'subject'||notice_seq.currval, sysdate
-from tbl_notice;
+INSERT INTO tbl_notice
+    (notice_id
+    ,notice_writer
+    ,notice_title
+    ,notice_subject
+    ,notice_date)
+    SELECT notice_seq.nextval
+          ,'writer' || notice_seq.currval
+          ,'title' || notice_seq.currval
+          ,'subject' || notice_seq.currval
+          ,SYSDATE
+    FROM   tbl_notice;
 
-select b.notice_id, b.notice_writer, b.notice_title, b.notice_date, b.hit_count from
-(
-    select rownum rn, a.* 
-    from (select n.*
-         from tbl_notice n
-         where 1 = 1
-         --and notice_writer like '%writer3%'
-         --and notice_title like '%title3%'
-         --and notice_subject like '%subject31%'
-         order by 1) a
-    where rownum <= (1*10)
-) b
-where b.rn >= (1*10-9);
+SELECT b.notice_id
+      ,b.notice_writer
+      ,b.notice_title
+      ,b.notice_date
+      ,b.hit_count
+FROM   (SELECT ROWNUM rn
+              ,a.*
+        FROM   (SELECT n.*
+                FROM   tbl_notice n
+                WHERE  1 = 1
+                --and notice_writer like '%writer3%'
+                --and notice_title like '%title3%'
+                --and notice_subject like '%subject31%'
+                ORDER  BY 1) a
+        WHERE  ROWNUM <= (1 * 10)) b
+WHERE  b.rn >= (1 * 10 - 9);
 
-select * from tbl_notice
-where notice_id = 1;
+SELECT *
+FROM   tbl_notice
+WHERE  notice_id = 1;
 
-update tbl_notice
-set notice_writer = case mod(notice_id , 4) when 1 then 'user1'
-                                            when 2 then 'user2'
-                                            when 3 then 'user3'
-                                            else 'user4'
-                    end
-where notice_id > 10;
+UPDATE tbl_notice
+SET    notice_writer = CASE MOD(notice_id, 4)
+                           WHEN 1 THEN 'user1'
+                           WHEN 2 THEN 'user2'
+                           WHEN 3 THEN 'user3'
+                           ELSE 'user4'
+                       END
+WHERE  notice_id > 10;
 
-select * from tbl_notice order by 1 desc;
+SELECT *
+FROM   tbl_notice
+ORDER  BY 1 DESC;
 
-delete from tbl_notice where notice_id = 484;
-commit;
+DELETE FROM tbl_notice
+WHERE  notice_id = 484;
+COMMIT;
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
 -- center_info table.
-drop table center_info purge;
-create table center_info (
- id number,
- center_name varchar2(100),
- center_type varchar2(50),
- facility_name varchar2(100),
- org varchar2(100),
- phone_number varchar2(20),
- sido varchar2(40),
- sigungu varchar2(40),
- address varchar2(100),
- lat varchar2(20),
- lng varchar2(20),
- zip_code varchar2(10),
- created_at varchar2(30),
- updated_at varchar2(30)
-);
+drop TABLE center_info purge;
+CREATE TABLE center_info(id NUMBER
+                        ,center_name VARCHAR2(100)
+                        ,center_type VARCHAR2(50)
+                        ,facility_name VARCHAR2(100)
+                        ,org VARCHAR2(100)
+                        ,phone_number VARCHAR2(20)
+                        ,sido VARCHAR2(40)
+                        ,sigungu VARCHAR2(40)
+                        ,address VARCHAR2(100)
+                        ,lat VARCHAR2(20)
+                        ,lng VARCHAR2(20)
+                        ,zip_code VARCHAR2(10)
+                        ,created_at VARCHAR2(30)
+                        ,updated_at VARCHAR2(30));
 
-delete from center_info where id is not null;
-commit;
+DELETE FROM center_info
+WHERE  id IS NOT NULL;
+COMMIT;
 
-select * from center_info order by 1;
+SELECT *
+FROM   center_info
+ORDER  BY 1;
 
-insert into center_info (id, center_name, center_type, facility_name, org, phone_number, sido, sigungu, address, lat, lng, zip_code, created_at, updated_at)
-values(1,'centername','centertype','facilityname','org','phone-number','sido','sigungu','address','lat','lng','zipcode','createdat','updatedat');
+INSERT INTO center_info
+    (id
+    ,center_name
+    ,center_type
+    ,facility_name
+    ,org
+    ,phone_number
+    ,sido
+    ,sigungu
+    ,address
+    ,lat
+    ,lng
+    ,zip_code
+    ,created_at
+    ,updated_at)
+VALUES
+    (1
+    ,'centername'
+    ,'centertype'
+    ,'facilityname'
+    ,'org'
+    ,'phone-number'
+    ,'sido'
+    ,'sigungu'
+    ,'address'
+    ,'lat'
+    ,'lng'
+    ,'zipcode'
+    ,'createdat'
+    ,'updatedat');
 
-select * from center_info
-order by id;
+SELECT *
+FROM   center_info
+ORDER  BY id;
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
-drop table genesis purge;
-create table genesis (
- member_order varchar2(3) primary key,
- member_name varchar2(100),
- col1 char(1) default 'N',
- col2 char(1) default 'N',
- col3 char(1) default 'N',
- col4 char(1) default 'N',
- col5 char(1) default 'N',
- col6 char(1) default 'N',
- col7 char(1) default 'N',
- col8 char(1) default 'N',
- col9 char(1) default 'N',
- col10 char(1) default 'N',
- col11 char(1) default 'N',
- col12 char(1) default 'N',
- col13 char(1) default 'N',
- col14 char(1) default 'N',
- col15 char(1) default 'N'
-);
+drop TABLE genesis purge;
+CREATE TABLE genesis(member_order VARCHAR2(3) primary key
+                    ,member_name VARCHAR2(100)
+                    ,col1         CHAR(1) DEFAULT 'N'
+                    ,col2         CHAR(1) DEFAULT 'N'
+                    ,col3         CHAR(1) DEFAULT 'N'
+                    ,col4         CHAR(1) DEFAULT 'N'
+                    ,col5         CHAR(1) DEFAULT 'N'
+                    ,col6         CHAR(1) DEFAULT 'N'
+                    ,col7         CHAR(1) DEFAULT 'N'
+                    ,col8         CHAR(1) DEFAULT 'N'
+                    ,col9         CHAR(1) DEFAULT 'N'
+                    ,col10        CHAR(1) DEFAULT 'N'
+                    ,col11        CHAR(1) DEFAULT 'N'
+                    ,col12        CHAR(1) DEFAULT 'N'
+                    ,col13        CHAR(1) DEFAULT 'N'
+                    ,col14        CHAR(1) DEFAULT 'N'
+                    ,col15        CHAR(1) DEFAULT 'N');
 
-select * from genesis
-order by member_order;
+SELECT *
+FROM   genesis
+ORDER  BY member_order;
 
-update genesis   
-set col1 = 'Y'   
-where member_order = '1-1';
+UPDATE genesis
+SET    col1 = 'Y'
+WHERE  member_order = '1-1';
 
-update genesis 
-set col2 = 'Y' 
-where member_order = '11';
+UPDATE genesis
+SET    col2 = 'Y'
+WHERE  member_order = '11';
 
 ---------------------------------------
-create table cart (
-  no number primary key,
-  product_nm varchar2(50),
-  price number,
-  qty number
-);
+CREATE TABLE cart(no NUMBER primary key
+                 ,product_nm VARCHAR2(50)
+                 ,price NUMBER
+                 ,qty NUMBER);
 
-insert into cart values( 1, 'ì½”ë“œ ìŠ¤í”„ë§', 45000, 3);
-insert into cart values( 2, 'í˜¼ì ìë°”', 35000, 1);
+INSERT INTO cart
+VALUES
+    (1
+    ,'ÄÚµå ½ºÇÁ¸µ'
+    ,45000
+    ,3);
+INSERT INTO cart
+VALUES
+    (2
+    ,'È¥ÀÚ ÀÚ¹Ù'
+    ,35000
+    ,1);
 
-commit;
+COMMIT;
 
-begin
-  create_order_proc('user01');
-end;
+BEGIN
+    create_order_proc('user01');
+END;

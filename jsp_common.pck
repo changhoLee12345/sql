@@ -147,21 +147,16 @@ CREATE OR REPLACE PACKAGE BODY jsp_common IS
     
     BEGIN
         -- P202406001,
-        SELECT 'P' || TO_CHAR(SYSDATE
-                             ,'yyyymm')
+        SELECT 'P' || TO_CHAR(SYSDATE, 'yyyymm')
         INTO   v_prefix
         FROM   dual;
     
         SELECT COUNT(1)
         INTO   v_cnt
         FROM   purchase_order
-        WHERE  SUBSTR(order_no
-                     ,1
-                     ,7) = v_prefix;
+        WHERE  SUBSTR(order_no, 1, 7) = v_prefix;
     
-        v_suffix := LPAD(v_cnt + 1
-                        ,3
-                        ,'0');
+        v_suffix := LPAD(v_cnt + 1, 3, '0');
     
         RETURN v_prefix || v_suffix;
     END create_po_number;
