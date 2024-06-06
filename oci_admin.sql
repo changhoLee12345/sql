@@ -1,21 +1,23 @@
 
-select * from all_users order by username;
+SELECT *
+FROM   all_users
+ORDER  BY username;
 
 --oracle 11g.
-alter user hr identified by hr account unlock;
+ALTER USER hr identified BY hr account unlock;
 
-alter user dev identified by '';
+ALTER USER dev identified BY '';
 
-alter session set "_ORACLE_SCRIPT" = true;
+ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
-create user jsp identified by jsp;
-grant connect, resource to jsp;
-alter user jsp default tablespace users quota unlimited on users;
-grant create view to jsp;
-create user jsp identified by QAwsedrftg12;
+CREATE USER jsp identified BY jsp;
+grant CONNECT, RESOURCE TO jsp;
+ALTER USER jsp DEFAULT tablespace users quota unlimited ON users;
+grant CREATE view TO jsp;
+CREATE USER jsp identified BY QAwsedrftg12;
 
-alter user prj identified by prj;
-alter user dev identified by dev;
+ALTER USER prj identified BY prj;
+ALTER USER dev identified BY dev;
 
-
-grant select on hr.employees to jsp;
+grant
+    SELECT ON hr.employees TO jsp;

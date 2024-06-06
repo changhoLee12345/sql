@@ -1,200 +1,332 @@
-select * from tab;
+SELECT *
+FROM   tab;
 
 -------------------------------------------------------------------------------------------------------
 -- proj -----------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------
 
-drop table member purge;
-create table member (
- id varchar2(10) primary key,
- name varchar2(50) not null,
- passwd varchar2(10) not null,
- email varchar2(100)
-);
-insert into member(id, name, passwd, email) values('user1','ì‚¬ìš©ì1','1111','user1@email.com');
-insert into member(id, name, passwd, email) values('user2','ì‚¬ìš©ì2','1111','user2@email.com');
-insert into member(id, name, passwd, email) values('user3','ì‚¬ìš©ì3','1111','user3@email.com');
+drop TABLE member purge;
+CREATE TABLE member(id VARCHAR2(10) primary key
+                   ,NAME VARCHAR2(50) NOT NULL
+                   ,passwd VARCHAR2(10) NOT NULL
+                   ,email VARCHAR2(100));
+INSERT INTO member
+    (id
+    ,NAME
+    ,passwd
+    ,email)
+VALUES
+    ('user1'
+    ,'»ç¿ëÀÚ1'
+    ,'1111'
+    ,'user1@email.com');
+INSERT INTO member
+    (id
+    ,NAME
+    ,passwd
+    ,email)
+VALUES
+    ('user2'
+    ,'»ç¿ëÀÚ2'
+    ,'1111'
+    ,'user2@email.com');
+INSERT INTO member
+    (id
+    ,NAME
+    ,passwd
+    ,email)
+VALUES
+    ('user3'
+    ,'»ç¿ëÀÚ3'
+    ,'1111'
+    ,'user3@email.com');
 
-select * from member;
+SELECT *
+FROM   member;
 
-select * from tbl_board order by bno desc;
-select * from tbl_attach;
+SELECT *
+FROM   tbl_board
+ORDER  BY bno DESC;
+SELECT *
+FROM   tbl_attach;
 
-create table tbl_sample1(col1 varchar2(500));
-drop table tbl_sample2 purge;
-create table tbl_sample2(col2 varchar2(50));
+CREATE TABLE tbl_sample1(col1 VARCHAR2(500));
+drop TABLE tbl_sample2 purge;
+CREATE TABLE tbl_sample2(col2 VARCHAR2(50));
 
-select * from tbl_reply
-order by 1 desc;
+SELECT *
+FROM   tbl_reply
+ORDER  BY 1 DESC;
 
-select * from tbl_reply where bno = 2490387
-order by 1;
+SELECT *
+FROM   tbl_reply
+WHERE  bno = 2490387
+ORDER  BY 1;
 
-insert into tbl_reply (rno, bno, reply, replyer)
-select seq_reply.nextval, bno, reply, replyer from tbl_reply where bno = 2490387;
+INSERT INTO tbl_reply
+    (rno
+    ,bno
+    ,reply
+    ,replyer)
+    SELECT seq_reply.nextval
+          ,bno
+          ,reply
+          ,replyer
+    FROM   tbl_reply
+    WHERE  bno = 2490387;
 
+SELECT rno
+      ,bno
+      ,reply
+      ,replyer
+      ,replydate
+      ,updatedate
+FROM   (SELECT /*+INDEX(tbl_reply idx_reply) */
+         ROWNUM rn
+        ,bno
+        ,rno
+        ,reply
+        ,replyer
+        ,replydate
+        ,updatedate
+        FROM   tbl_reply
+        WHERE  bno = 3
+        AND    rno > 0
+        AND    ROWNUM <= 10)
+WHERE  rn >= 1;
 
-select rno, bno, reply, replyer, replydate, updatedate
-from (
-    select /*+INDEX(tbl_reply idx_reply) */
-    rownum rn, bno, rno, reply, replyer, replyDate, updatedate
-    from tbl_reply
-    where bno = 3
-    and rno > 0
-    and rownum <= 10
-) where rn >= 1;
+SELECT /*+ INDEX_DESC(tbl_board pk_board) */
+ *
+FROM   tbl_board
+WHERE  bno > 0;
 
-select /*+ INDEX_DESC(tbl_board pk_board) */
-*
-from tbl_board
-where bno > 0;
+SELECT /*+ INDEX_ASC(tbl_board pk_board) */
+ *
+FROM   tbl_board
+WHERE  bno > 0;
 
-select /*+ INDEX_ASC(tbl_board pk_board) */ *
-from tbl_board 
-where bno > 0;
-
-select rn, bno, title, content, writer, regdate, updatedate
-from (
-    select /*+ INDEX_DESC(tbl_board pk_board) */ rownum rn, bno, title, content, writer, regdate, updatedate
-    from tbl_board
-    where rownum <= 20 
-)
-where rn > 10
+SELECT rn
+      ,bno
+      ,title
+      ,content
+      ,writer
+      ,regdate
+      ,updatedate
+FROM   (SELECT /*+ INDEX_DESC(tbl_board pk_board) */
+         ROWNUM rn
+        ,bno
+        ,title
+        ,content
+        ,writer
+        ,regdate
+        ,updatedate
+        FROM   tbl_board
+        WHERE  ROWNUM <= 20)
+WHERE  rn > 10
 --order by bno
 ;
 
-select * from (
-  select /*+INDEX_DESC(tbl_board pk_board) */
-         rownum rn, bno, title, content, writer, regdate, updatedate
-  from tbl_board
-  where (title like '%test%' or content like '%test%')
-  and   rownum <= 20
-)
-where rn > 10;
+SELECT *
+FROM   (SELECT /*+INDEX_DESC(tbl_board pk_board) */
+         ROWNUM rn
+        ,bno
+        ,title
+        ,content
+        ,writer
+        ,regdate
+        ,updatedate
+        FROM   tbl_board
+        WHERE  (title LIKE '%test%' OR content LIKE '%test%')
+        AND    ROWNUM <= 20)
+WHERE  rn > 10;
 
-update tbl_board
-set writer = case mod(bno, 4) when 0 then 'user00' 
-                              when 1 then 'user01'
-                              when 2 then 'user02'
-                              when 3 then 'user03'
-             end
-where bno > 0;
+UPDATE tbl_board
+SET    writer = CASE MOD(bno, 4)
+                    WHEN 0 THEN
+                     'user00'
+                    WHEN 1 THEN
+                     'user01'
+                    WHEN 2 THEN
+                     'user02'
+                    WHEN 3 THEN
+                     'user03'
+                END
+WHERE  bno > 0;
 
-select count(*) from tbl_board 
-where bno > 0;
+SELECT COUNT(*)
+FROM   tbl_board
+WHERE  bno > 0;
 
-insert into tbl_board (bno, title, content, writer)
-select seq_board.nextval, title, content, writer 
-from tbl_board;
+INSERT INTO tbl_board
+    (bno
+    ,title
+    ,content
+    ,writer)
+    SELECT seq_board.nextval
+          ,title
+          ,content
+          ,writer
+    FROM   tbl_board;
 
-select * from tbl_board 
-order by bno desc;
+SELECT *
+FROM   tbl_board
+ORDER  BY bno DESC;
 
-select to_char(replydate,'rrrr/mm/dd hh24:mi:ss') from tbl_reply order by 1 desc;
-select sysdate,to_char(sysdate,'rrrr/mm/dd hh24:mi:ss')  from dual;
+SELECT TO_CHAR(replydate, 'rrrr/mm/dd hh24:mi:ss')
+FROM   tbl_reply
+ORDER  BY 1 DESC;
+SELECT SYSDATE
+      ,TO_CHAR(SYSDATE, 'rrrr/mm/dd hh24:mi:ss')
+FROM   dual;
 
-insert into tbl_reply (rno, bno, reply, replyer)
-values(seq_reply.nextval, 2490385, 'reply'||seq_reply.currval, 'replyer2');
+INSERT INTO tbl_reply
+    (rno
+    ,bno
+    ,reply
+    ,replyer)
+VALUES
+    (seq_reply.nextval
+    ,2490385
+    ,'reply' || seq_reply.currval
+    ,'replyer2');
 
-create table tbl_attach (
-  uuid varchar2(100) not null,
-  uploadPath varchar2(200) not null,
-  fileName varchar2(100) not null,
-  fileType char(1) default 'I',
-  bno number(10,0)
-);
-alter table tbl_attach add constraint pk_attach primary key (uuid);
-alter table tbl_attach add constraint fk_board_attach foreign key (bno) references tbl_board(bno);
+CREATE TABLE tbl_attach(uuid VARCHAR2(100) NOT NULL
+                       ,uploadpath VARCHAR2(200) NOT NULL
+                       ,filename VARCHAR2(100) NOT NULL
+                       ,filetype   CHAR(1) DEFAULT 'I'
+                       ,bno NUMBER(10, 0));
+ALTER TABLE tbl_attach add CONSTRAINT pk_attach primary key(uuid);
+ALTER TABLE tbl_attach add CONSTRAINT fk_board_attach foreign key(bno) references tbl_board(bno);
 
 -----------------------------------------------
 -----------------------------------------------
-create sequence seq_board;
-create table tbl_board (
- bno number(10,0),
- title varchar2(200) not null,
- content varchar2(2000) not null,
- writer varchar2(50) not null,
- regdate date default sysdate,
- updatedate date default sysdate);
-alter table tbl_board add constraint pk_board primary key(bno);
+CREATE sequence seq_board;
+CREATE TABLE tbl_board(bno NUMBER(10, 0)
+                      ,title VARCHAR2(200) NOT NULL
+                      ,content VARCHAR2(2000) NOT NULL
+                      ,writer VARCHAR2(50) NOT NULL
+                      ,regdate    DATE DEFAULT SYSDATE
+                      ,updatedate DATE DEFAULT SYSDATE);
+ALTER TABLE tbl_board add CONSTRAINT pk_board primary key(bno);
 
-insert into tbl_board (bno, title, content, writer)
-values(seq_board.nextval, 'test title', 'test content', 'user01');
+INSERT INTO tbl_board
+    (bno
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (seq_board.nextval
+    ,'test title'
+    ,'test content'
+    ,'user01');
 
-select * from tbl_board order by 1 desc;
+SELECT *
+FROM   tbl_board
+ORDER  BY 1 DESC;
 
 -----------------------------------------------
 -----------------------------------------------
-create sequence seq_reply;
-create table tbl_reply (
-  rno number(10,0),
-  bno number(10,0) not null,
-  reply varchar2(1000) not null,
-  replyer varchar2(50) not null,
-  replydate date default sysdate,
-  updatedate date default sysdate
-);
-alter table tbl_reply add constraint pk_reply primary key(rno);
-alter table tbl_reply add constraint fk_reply_board foreign key (bno) references tbl_board (bno);
-create index idx_reply on tbl_reply (bno desc, rno asc);
+CREATE sequence seq_reply;
+CREATE TABLE tbl_reply(rno NUMBER(10, 0)
+                      ,bno NUMBER(10, 0) NOT NULL
+                      ,reply VARCHAR2(1000) NOT NULL
+                      ,replyer VARCHAR2(50) NOT NULL
+                      ,replydate  DATE DEFAULT SYSDATE
+                      ,updatedate DATE DEFAULT SYSDATE);
+ALTER TABLE tbl_reply add CONSTRAINT pk_reply primary key(rno);
+ALTER TABLE tbl_reply add CONSTRAINT fk_reply_board foreign key(bno) references tbl_board(bno);
+CREATE INDEX idx_reply ON tbl_reply(bno DESC, rno ASC);
 -----------------------------------------------
 -----------------------------------------------
 
-
---T20230213(3ê°•ì˜ì¥)
-create table product (
- product_code varchar2(10) primary key,
- product_name varchar2(100) not null, --ìƒí’ˆëª…
- product_desc varchar2(1000) not null,
- product_price number not null,
- sale_price number,
- like_it number(3,1),
- image varchar2(100)
-);
-insert into product values('P2023001', 'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„','ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„ ë§›ìˆëŠ” ì»¤í”¼ì…ë‹ˆë‹¤', 5000, 4500, 4.5, 'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„.jpg');
-insert into product values('P2023002', 'ë‹ˆì¹´ë¼êµ¬ì•„ ì•„ë¼ë¹„ì¹´','ë‹ˆì¹´ë¼êµ¬ì•„ ì•„ë¼ë¹„ì¹´ ë§›ìˆëŠ” ì»¤í”¼ì…ë‹ˆë‹¤', 5500, 4500, 4.0, 'ë‹ˆì¹´ë¼êµ¬ì•„ ì•„ë¼ë¹„ì¹´.jpg');
-insert into product values('P2023003', 'ë¸Œë¼ì§ˆì‚°í† ìŠ¤','ë¸Œë¼ì§ˆì‚°í† ìŠ¤ ë§›ìˆëŠ” ì»¤í”¼ì…ë‹ˆë‹¤', 6000, 5000, 3.5, 'ë¸Œë¼ì§ˆì‚°í† ìŠ¤.jpg');
-insert into product values('P2023004', 'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„','ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„ ë§›ìˆëŠ” ì»¤í”¼ì…ë‹ˆë‹¤', 4000, 3500, 4.0, 'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„.jpg');
-insert into product values('P2023005', 'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ ','ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹  ë§›ìˆëŠ” ì»¤í”¼ì…ë‹ˆë‹¤', 4500, 3000, 3.0, 'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ .jpg');
-insert into product values('P2023006', 'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼','ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼ ë§›ìˆëŠ” ì»¤í”¼ì…ë‹ˆë‹¤', 3000, 2500, 5.0, 'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼.jpg');
-
+--T20230213(3°­ÀÇÀå)
+CREATE TABLE product(product_code VARCHAR2(10) primary key
+                    ,product_name VARCHAR2(100) NOT NULL
+                    , --»óÇ°¸í
+                     product_desc VARCHAR2(1000) NOT NULL
+                    ,product_price NUMBER NOT NULL
+                    ,sale_price NUMBER
+                    ,like_it NUMBER(3, 1)
+                    ,image VARCHAR2(100));
+INSERT INTO product
+VALUES
+    ('P2023001'
+    ,'°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ'
+    ,'°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ ¸ÀÀÖ´Â Ä¿ÇÇÀÔ´Ï´Ù'
+    ,5000
+    ,4500
+    ,4.5
+    ,'°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ.jpg');
+INSERT INTO product
+VALUES
+    ('P2023002'
+    ,'´ÏÄ«¶ó±¸¾Æ ¾Æ¶óºñÄ«'
+    ,'´ÏÄ«¶ó±¸¾Æ ¾Æ¶óºñÄ« ¸ÀÀÖ´Â Ä¿ÇÇÀÔ´Ï´Ù'
+    ,5500
+    ,4500
+    ,4.0
+    ,'´ÏÄ«¶ó±¸¾Æ ¾Æ¶óºñÄ«.jpg');
+INSERT INTO product
+VALUES
+    ('P2023003'
+    ,'ºê¶óÁú»êÅä½º'
+    ,'ºê¶óÁú»êÅä½º ¸ÀÀÖ´Â Ä¿ÇÇÀÔ´Ï´Ù'
+    ,6000
+    ,5000
+    ,3.5
+    ,'ºê¶óÁú»êÅä½º.jpg');
+INSERT INTO product
+VALUES
+    ('P2023004'
+    ,'¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ'
+    ,'¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ ¸ÀÀÖ´Â Ä¿ÇÇÀÔ´Ï´Ù'
+    ,4000
+    ,3500
+    ,4.0
+    ,'¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ.jpg');
+INSERT INTO product
+VALUES
+    ('P2023005'
+    ,'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å'
+    ,'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å ¸ÀÀÖ´Â Ä¿ÇÇÀÔ´Ï´Ù'
+    ,4500
+    ,3000
+    ,3.0
+    ,'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å.jpg');
+INSERT INTO product
+VALUES
+    ('P2023006'
+    ,'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ'
+    ,'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ ¸ÀÀÖ´Â Ä¿ÇÇÀÔ´Ï´Ù'
+    ,3000
+    ,2500
+    ,5.0
+    ,'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ.jpg');
 
 -------------------------------------------------------------------------------------------------------
 -- book_ex --------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------
-select * from tab;
-create sequence seq_board;
-create table tbl_board (
- bno number(10, 0),
- title varchar2(200) not null,
- content varchar2(2000) not null,
- writer varchar2(50) not null,
- regdate date default sysdate,
- updatedate date default sysdate
-);
-alter table tbl_board add constraint pk_board primary key (bno);
+SELECT *
+FROM   tab;
+CREATE sequence seq_board;
+CREATE TABLE tbl_board(bno NUMBER(10, 0)
+                      ,title VARCHAR2(200) NOT NULL
+                      ,content VARCHAR2(2000) NOT NULL
+                      ,writer VARCHAR2(50) NOT NULL
+                      ,regdate    DATE DEFAULT SYSDATE
+                      ,updatedate DATE DEFAULT SYSDATE);
+ALTER TABLE tbl_board add CONSTRAINT pk_board primary key(bno);
 
-insert into tbl_board(bno, title, content, writer)
-values(seq_board.nextval, 'test title', 'test content', 'user00');
+INSERT INTO tbl_board
+    (bno
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (seq_board.nextval
+    ,'test title'
+    ,'test content'
+    ,'user00');
 
-select * from tbl_board;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT *
+FROM   tbl_board;

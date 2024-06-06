@@ -1,143 +1,233 @@
+SELECT *
+FROM   tab;
+
 -------------------------------------------------------
 -- spring jdbc user security --
-drop table users purge;
-create table users (
- username varchar2(50) not null primary key,
- password varchar2(50) not null,
- enabled char(1) default '1');
- 
-create table authorities (
- username varchar2(50) not null,
- authority varchar2(50) not null,
- constraint fk_authorities_users foreign key(username) references users(username)
-);
+drop TABLE users purge;
+CREATE TABLE users(username VARCHAR2(50) NOT NULL primary key
+                  ,password VARCHAR2(50) NOT NULL
+                  ,enabled  CHAR(1) DEFAULT '1');
 
-create unique index ix_auth_username on authorities(username, authority);
+CREATE TABLE authorities(username VARCHAR2(50) NOT NULL
+                        ,authority VARCHAR2(50) NOT NULL
+                        ,CONSTRAINT fk_authorities_users foreign key(username)
+                         references users(username));
 
-insert into users (username, password) values('user00', 'pw00');
-insert into users (username, password) values('member00', 'pw00');
-insert into users (username, password) values('admin00', 'pw00');
+CREATE UNIQUE INDEX ix_auth_username ON authorities(username, authority);
 
-insert into authorities (username, authority) values('user00', 'ROLE_USER');
-insert into authorities (username, authority) values('member00', 'ROLE_MANAGER');
-insert into authorities (username, authority) values('admin00', 'ROLE_MANAGER');
-insert into authorities (username, authority) values('admin00', 'ROLE_ADMIN');
+INSERT INTO users
+    (username
+    ,password)
+VALUES
+    ('user00'
+    ,'pw00');
+INSERT INTO users
+    (username
+    ,password)
+VALUES
+    ('member00'
+    ,'pw00');
+INSERT INTO users
+    (username
+    ,password)
+VALUES
+    ('admin00'
+    ,'pw00');
 
-select * from users;
-select * from authorities;
+INSERT INTO authorities
+    (username
+    ,authority)
+VALUES
+    ('user00'
+    ,'ROLE_USER');
+INSERT INTO authorities
+    (username
+    ,authority)
+VALUES
+    ('member00'
+    ,'ROLE_MANAGER');
+INSERT INTO authorities
+    (username
+    ,authority)
+VALUES
+    ('admin00'
+    ,'ROLE_MANAGER');
+INSERT INTO authorities
+    (username
+    ,authority)
+VALUES
+    ('admin00'
+    ,'ROLE_ADMIN');
 
--------------------- user table ÏùÑ ÏÇ¨Ïö©ÌïòÍ∏∞ ----------------------------
-drop table tbl_member purge;
-create table tbl_member (
- userid varchar2(50) not null primary key,
- userpw varchar2(100) not null,
- username varchar2(100) not null,
- regdate date default sysdate,
- updatedate date default sysdate,
- enabled char(1) default '1');
+SELECT *
+FROM   users;
+SELECT *
+FROM   authorities;
 
-drop table tbl_member_auth purge;
-create table tbl_member_auth (
- userid varchar2(50) not null,
- auth varchar2(50) not null,
- constraint fk_member_auth foreign key(userid) references tbl_member(userid)
-);
+-------------------- user table ¿ª ªÁøÎ«œ±‚ ----------------------------
+drop TABLE tbl_member purge;
+CREATE TABLE tbl_member(userid VARCHAR2(50) NOT NULL primary key
+                       ,userpw VARCHAR2(100) NOT NULL
+                       ,username VARCHAR2(100) NOT NULL
+                       ,regdate    DATE DEFAULT SYSDATE
+                       ,updatedate DATE DEFAULT SYSDATE
+                       ,enabled    CHAR(1) DEFAULT '1');
 
-select * from tbl_member;
-select * from tbl_member_auth;
+drop TABLE tbl_member_auth purge;
+CREATE TABLE tbl_member_auth(userid VARCHAR2(50) NOT NULL
+                            ,auth VARCHAR2(50) NOT NULL
+                            ,CONSTRAINT fk_member_auth foreign key(userid)
+                             references tbl_member(userid));
 
-select mem.userid, userpw, username, enabled, regdate, updatedate, auth
-from   tbl_member mem
-left outer join tbl_member_auth auth
-on mem.userid = auth.userid
-where mem.userid = 'user5';
+SELECT *
+FROM   tbl_member;
+SELECT *
+FROM   tbl_member_auth;
 
-create table persistent_logins (
- username varchar(64) not null,
- series varchar(64) primary key,
- token varchar(64) not null,
- last_used timestamp not null);
+SELECT mem.userid
+      ,userpw
+      ,username
+      ,enabled
+      ,regdate
+      ,updatedate
+      ,auth
+FROM   tbl_member mem
+LEFT   OUTER JOIN tbl_member_auth auth
+ON     mem.userid = auth.userid
+WHERE  mem.userid = 'user5';
 
-select * from hr.employees;
+CREATE TABLE persistent_logins(username VARCHAR(64) NOT NULL
+                              ,series VARCHAR(64) primary key
+                              ,token VARCHAR(64) NOT NULL
+                              ,last_used TIMESTAMP NOT NULL);
 
+SELECT *
+FROM   hr.employees;
 
------------------------------------- jsp ÏàòÏóÖÏö© ÌÖåÏù¥Î∏î Î∞è Îç∞Ïù¥ÌÑ∞ ÏÉùÏÑ±.
---ÏÇ¨ÏõêÏ†ïÎ≥¥ ÌÖåÏù¥Î∏î.
-create table employee (
- emp_no number primary key, -- ÏÇ¨ÏõêÎ≤àÌò∏
- emp_name varchar2(50) not null, --ÏÇ¨ÏõêÎ™Ö
- email varchar2(30) not null, --Ïù¥Î©îÏùº
- phone varchar2(10) not null, --Ïó∞ÎùΩÏ≤ò
- hire_date date default sysdate, --ÏûÖÏÇ¨ÏùºÏûê
- salary number default 100,
- department varchar2(30) not null, --Î∂ÄÏÑú
- create_date date default sysdate
-);
+------------------------------------ jsp ºˆæ˜øÎ ≈◊¿Ã∫Ì π◊ µ•¿Ã≈Õ ª˝º∫.
+--ªÁø¯¡§∫∏ ≈◊¿Ã∫Ì.
+CREATE TABLE employee(emp_no NUMBER primary key
+                     , -- ªÁø¯π¯»£
+                      emp_name VARCHAR2(50) NOT NULL
+                     , --ªÁø¯∏Ì
+                      email VARCHAR2(30) NOT NULL
+                     , --¿Ã∏ﬁ¿œ
+                      phone VARCHAR2(10) NOT NULL
+                     , --ø¨∂Ù√≥
+                      hire_date   DATE DEFAULT SYSDATE
+                     , --¿‘ªÁ¿œ¿⁄
+                      salary      NUMBER DEFAULT 100
+                     ,department VARCHAR2(30) NOT NULL
+                     , --∫Œº≠
+                      create_date DATE DEFAULT SYSDATE);
 
-insert into employee (emp_no, emp_name, email, phone, salary, department, hire_date)
-values(108, 'ÌôçÍ∏∏Îèô', 'hong@mail.com', '234-5678', 200, 'Ïù∏ÏÇ¨', to_date('2023-01-05', 'yyyy-mm-dd'));
-insert into employee (emp_no, emp_name, email, phone, salary, department)
-values(102, 'ÍπÄÏÇ¨Ïõê', 'kim@mail.com', '234-5679', 300, 'Ï¥ùÎ¨¥');
-insert into employee (emp_no, emp_name, email, phone, salary, department)
-values(103, 'ÏµúÏ£ºÏûÑ', 'choi@mail.com', '234-5978', 400, 'Í∞úÎ∞ú');
+INSERT INTO employee
+    (emp_no
+    ,emp_name
+    ,email
+    ,phone
+    ,salary
+    ,department
+    ,hire_date)
+VALUES
+    (108
+    ,'»´±Êµø'
+    ,'hong@mail.com'
+    ,'234-5678'
+    ,200
+    ,'¿ŒªÁ'
+    ,TO_DATE('2023-01-05', 'yyyy-mm-dd'));
+INSERT INTO employee
+    (emp_no
+    ,emp_name
+    ,email
+    ,phone
+    ,salary
+    ,department)
+VALUES
+    (102
+    ,'±ËªÁø¯'
+    ,'kim@mail.com'
+    ,'234-5679'
+    ,300
+    ,'√—π´');
+INSERT INTO employee
+    (emp_no
+    ,emp_name
+    ,email
+    ,phone
+    ,salary
+    ,department)
+VALUES
+    (103
+    ,'√÷¡÷¿”'
+    ,'choi@mail.com'
+    ,'234-5978'
+    ,400
+    ,'∞≥πﬂ');
 
-select * from employee;
+SELECT *
+FROM   employee;
 
-update employee
-set salary = salary + 50
-where emp_no = 101;
+UPDATE employee
+SET    salary = salary + 50
+WHERE  emp_no = 101;
 
-select *
-from employee
---where department = 'Ïù∏ÏÇ¨'
-order by 1 desc
-;
+SELECT *
+FROM   employee
+--where department = '¿ŒªÁ'
+ORDER  BY 1 DESC;
 
-select department, count(*) from employee
-group by department
-; --78Í±¥.
+SELECT department
+      ,COUNT(*)
+FROM   employee
+GROUP  BY department; --78∞«.
 
-delete from employee where emp_no = 208;
+DELETE FROM employee
+WHERE  emp_no = 208;
 
-insert into employee(emp_no
-           ,emp_name
-           ,email
-           ,phone
-           ,hire_date
-           ,salary
-           ,department)
-select emp_no+100 --(select max(emp_no)+1 from employee)
-           ,emp_name
-           ,email
-           ,phone
-           ,hire_date
-           ,salary
-           ,department
-from employee; -- 30Í±¥ Ïù¥ÏÉÅ Îç∞Ïù¥ÌÑ∞ ÏÉùÏÑ±.
+INSERT INTO employee
+    (emp_no
+    ,emp_name
+    ,email
+    ,phone
+    ,hire_date
+    ,salary
+    ,department)
+    SELECT emp_no + 100 --(select max(emp_no)+1 from employee)
+          ,emp_name
+          ,email
+          ,phone
+          ,hire_date
+          ,salary
+          ,department
+    FROM   employee; -- 30∞« ¿ÃªÛ µ•¿Ã≈Õ ª˝º∫.
 
---ÌéòÏù¥Ïßï. ÌéòÏù¥ÏßÄÎãπ 5Í∞úÏî© Ï∂úÎ†•.
---78Í±¥ > 16ÌéòÏù¥ÏßÄ
--- 1ÌéòÏù¥ÏßÄ: 5Í±¥, ÏÇ¨ÏõêÎ≤àÌò∏ Í∏∞Ï§ÄÏúºÎ°ú..
+--∆‰¿Ã¬°. ∆‰¿Ã¡ˆ¥Á 5∞≥æø √‚∑¬.
+--78∞« > 16∆‰¿Ã¡ˆ
+-- 1∆‰¿Ã¡ˆ: 5∞«, ªÁø¯π¯»£ ±‚¡ÿ¿∏∑Œ..
 -- 1page: 1 ~ 5, 2page: 6 ~ 10
-select emp_no
+SELECT emp_no
       ,emp_name
       ,email
       ,phone
       ,hire_date
       ,salary
       ,department
-from (select rownum rn, a.*
-      from (select *
-            from employee
-            where department = nvl(:dept, department)
-            order by emp_no) a ) b
-where b.rn > (:page -1 ) * 5 and b.rn <= (:page)*5;
+FROM   (SELECT ROWNUM rn
+              ,a.*
+        FROM   (SELECT *
+                FROM   employee
+                WHERE  department = NVL(:dept, department)
+                ORDER  BY emp_no) a) b
+WHERE  b.rn > (:page - 1) * 5
+AND    b.rn <= (:page) * 5;
 
+SELECT *
+FROM   employee
+WHERE  department = NVL('∞≥πﬂ', department);
 
-select * from employee
-where department = nvl('Í∞úÎ∞ú', department) ;
-
-select rn 
+SELECT rn
       ,emp_no
       ,emp_name
       ,email
@@ -145,241 +235,477 @@ select rn
       ,hire_date
       ,salary
       ,department
-from (select /*+ INDEX_DESC(e SYS_C008368) */ 
-      rownum rn, e.*
-      from employee e
-      where rownum <= 10) a
-where rn > 0;
+FROM   (SELECT /*+ INDEX_DESC(e SYS_C008368) */
+         ROWNUM rn
+        ,e.*
+        FROM   employee e
+        WHERE  ROWNUM <= 10) a
+WHERE  rn > 0;
 
-drop table tbl_board purge;
-create table tbl_board (
- board_no number,
- title varchar2(50) not null,
- content varchar2(300) not null,
- writer varchar2(20) not null,
- view_cnt number default 0,
- create_date date default sysdate
-);
-alter table tbl_board add constraint board_pk primary key (board_no);
-alter table tbl_board add update_date date default sysdate;
+drop TABLE tbl_board purge;
+CREATE TABLE tbl_board(board_no NUMBER
+                      ,title VARCHAR2(50) NOT NULL
+                      ,content VARCHAR2(300) NOT NULL
+                      ,writer VARCHAR2(20) NOT NULL
+                      ,view_cnt    NUMBER DEFAULT 0
+                      ,create_date DATE DEFAULT SYSDATE);
+ALTER TABLE tbl_board add CONSTRAINT board_pk primary key(board_no);
+ALTER TABLE tbl_board add update_date DATE DEFAULT SYSDATE;
 
-create sequence board_seq;
+CREATE sequence board_seq;
 
-insert into tbl_board(board_no, title, content, writer)
-values(board_seq.nextval, 'title11', 'content1', 'user01');
-insert into tbl_board(board_no, title, content, writer)
-values(board_seq.nextval, 'test1', 'nice content 1', 'user02');
-insert into tbl_board(board_no, title, content, writer)
-values(board_seq.nextval, 'good', 'good content', 'user03');
-insert into tbl_board(board_no, title, content, writer)
-values(board_seq.nextval, 'every', 'every content', 'user01');
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (board_seq.nextval
+    ,'title11'
+    ,'content1'
+    ,'user01');
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (board_seq.nextval
+    ,'test1'
+    ,'nice content 1'
+    ,'user02');
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (board_seq.nextval
+    ,'good'
+    ,'good content'
+    ,'user03');
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (board_seq.nextval
+    ,'every'
+    ,'every content'
+    ,'user01');
 
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+    SELECT board_seq.nextval
+          ,title || board_seq.currval
+          ,content || board_seq.currval
+          ,writer
+    FROM   tbl_board;
 
-insert into tbl_board (board_no, title, content, writer)
-select board_seq.nextval, title||board_seq.currval, content||board_seq.currval, writer
-from tbl_board;
-
-select board_no
+SELECT board_no
       ,title
       ,content
       ,writer
       ,view_cnt
       ,create_date
       ,update_date
-from (select /*+ INDEX(b board_pk)*/
-      rownum rn, b.* 
-      from tbl_board b
-      where writer = nvl(:writer, writer)
-      and   title like '%'||:title||'%'
-      and   rownum <= :page * 5
-      ) a
-where rn > (:page - 1) * 5;
+FROM   (SELECT /*+ INDEX(b board_pk)*/
+         ROWNUM rn
+        ,b.*
+        FROM   tbl_board b
+        WHERE  writer = NVL(:writer, writer)
+        AND    title LIKE '%' || :title || '%'
+        AND    ROWNUM <= :page * 5) a
+WHERE  rn > (:page - 1) * 5;
 
-select board_no
+SELECT board_no
       ,title
       ,content
       ,writer
       ,view_cnt
       ,create_date
       ,update_date
-from (select /*+ INDEX(b board_pk)*/
-      rownum rn, b.* 
-      from tbl_board b
-      where title like 'test%' or writer like 'test%'
-      and   rownum <= :page * 5
-      ) a
-where rn > (:page - 1) * 5;
+FROM   (SELECT /*+ INDEX(b board_pk)*/
+         ROWNUM rn
+        ,b.*
+        FROM   tbl_board b
+        WHERE  title LIKE 'test%'
+        OR     writer LIKE 'test%'
+        AND    ROWNUM <= :page * 5) a
+WHERE  rn > (:page - 1) * 5;
 
+SELECT COUNT(*)
+FROM   tbl_board;
 
-select count(*)
-from tbl_board;
+COMMIT;
 
-commit;
+SELECT *
+FROM   tbl_board
+ORDER  BY 1 DESC;
 
-select * from tbl_board
-order by 1 desc;
+DELETE FROM tbl_board
+WHERE  board_no IN (9, 23, 12);
 
-delete from tbl_board
-where board_no in (9, 23, 12);
+CREATE TABLE tbl_member(id VARCHAR2(10) primary key
+                       ,pw VARCHAR2(10) NOT NULL
+                       ,NAME VARCHAR2(100) NOT NULL
+                       ,auth VARCHAR2(10) DEFAULT 'user');
 
+INSERT INTO tbl_member
+    (id
+    ,pw
+    ,NAME)
+VALUES
+    ('user01'
+    ,'1111'
+    ,'»´±Êµø');
+INSERT INTO tbl_member
+    (id
+    ,pw
+    ,NAME)
+VALUES
+    ('user02'
+    ,'1111'
+    ,'±ËπŒ±‘');
+INSERT INTO tbl_member
+    (id
+    ,pw
+    ,NAME
+    ,auth)
+VALUES
+    ('admin'
+    ,'1111'
+    ,'∞¸∏Æ¿⁄'
+    ,'admin');
 
-create table tbl_member (
- id varchar2(10) primary key,
- pw varchar2(10) not null,
- name varchar2(100) not null,
- auth varchar2(10) default 'user'
-);
+COMMIT;
 
-insert into tbl_member(id, pw, name) values ('user01', '1111', 'ÌôçÍ∏∏Îèô');
-insert into tbl_member(id, pw, name) values ('user02', '1111', 'ÍπÄÎØºÍ∑ú');
-insert into tbl_member(id, pw, name, auth) values ('admin', '1111', 'Í¥ÄÎ¶¨Ïûê', 'admin');
+SELECT *
+FROM   tbl_member;
 
-commit;
+SELECT *
+FROM   tab;
 
-select * from tbl_member;
+drop TABLE tbl_reply purge;
+CREATE TABLE tbl_reply(reply_no NUMBER
+                      ,board_no NUMBER NOT NULL
+                      ,reply VARCHAR2(100) NOT NULL
+                      ,replyer VARCHAR2(20) NOT NULL
+                      ,reply_date DATE DEFAULT SYSDATE);
 
-select * from tab;
+ALTER TABLE tbl_reply add CONSTRAINT reply_pk primary key(reply_no);
 
-drop table tbl_reply purge;
-create table tbl_reply (
- reply_no number,
- board_no number not null,
- reply varchar2(100) not null,
- replyer varchar2(20) not null,
- reply_date date default sysdate
-);
+CREATE sequence reply_seq;
 
-alter table tbl_reply add constraint reply_pk primary key (reply_no);
+INSERT INTO tbl_reply
+    (reply_no
+    ,board_no
+    ,reply
+    ,replyer)
+VALUES
+    (reply_seq.nextval
+    ,157
+    ,'reply test'
+    ,'user03');
+INSERT INTO tbl_reply
+    (reply_no
+    ,board_no
+    ,reply
+    ,replyer)
+VALUES
+    (reply_seq.nextval
+    ,157
+    ,'reply test2'
+    ,'user02');
+INSERT INTO tbl_reply
+    (reply_no
+    ,board_no
+    ,reply
+    ,replyer)
+VALUES
+    (reply_seq.nextval
+    ,157
+    ,'reply test3'
+    ,'user01');
 
-create sequence reply_seq;
+INSERT INTO tbl_reply
+    (reply_no
+    ,board_no
+    ,reply
+    ,replyer)
+    SELECT reply_seq.nextval
+          ,157
+          ,'157 reply'
+          ,replyer
+    FROM   tbl_reply;
 
-insert into tbl_reply (reply_no, board_no, reply, replyer)
-values(reply_seq.nextval, 157, 'reply test', 'user03');
-insert into tbl_reply (reply_no, board_no, reply, replyer)
-values(reply_seq.nextval, 157, 'reply test2', 'user02');
-insert into tbl_reply (reply_no, board_no, reply, replyer)
-values(reply_seq.nextval, 157, 'reply test3', 'user01');
+SELECT *
+FROM   tbl_reply
+WHERE  1 = 1 --board_no != 157
+ORDER  BY 1 DESC;
 
-insert into tbl_reply (reply_no, board_no, reply, replyer)
-select reply_seq.nextval, 157, '157 reply', replyer
-from tbl_reply;
+SELECT board_no
+      ,COUNT(*)
+FROM   tbl_reply
+WHERE  1 = 1 --board_no = 521
+GROUP  BY board_no;
 
-select * from tbl_reply
-where 1=1--board_no != 157
-order by 1 desc;
+UPDATE tbl_reply
+SET    board_no = 521;
 
-select board_no, count(*) 
-from tbl_reply
-where 1=1--board_no = 521
-group by board_no
-;
-
-update tbl_reply
-set board_no = 521;
-
-select rn
+SELECT rn
       ,reply_no
       ,reply
       ,replyer
       ,reply_date
       ,board_no
-from (select /*+ INDEX_DESC(r reply_pk)*/rownum rn
-            ,r.*
-      from tbl_reply r
-      where board_no = :bno
-      and   rownum <= :page * 5) a
-where a.rn > (:page - 1) * 5;
+FROM   (SELECT /*+ INDEX_DESC(r reply_pk)*/
+         ROWNUM rn
+        ,r.*
+        FROM   tbl_reply r
+        WHERE  board_no = :bno
+        AND    ROWNUM <= :page * 5) a
+WHERE  a.rn > (:page - 1) * 5;
 
-select /*+ INDEX_DESC(r reply_pk)*/rownum rn
-    ,r.*
-    ,to_char(r.reply_date,'yyyy-mm-dd hh24:mi:ss')
-from tbl_reply r
-where board_no = 521;
+SELECT /*+ INDEX_DESC(r reply_pk)*/
+ ROWNUM rn
+,r.*
+,TO_CHAR(r.reply_date, 'yyyy-mm-dd hh24:mi:ss')
+FROM   tbl_reply r
+WHERE  board_no = 521;
 
-create table tbl_center (
- id number,
- center_name varchar2(200),
- sido varchar2(100)
-);
+CREATE TABLE tbl_center(id NUMBER
+                       ,center_name VARCHAR2(200)
+                       ,sido VARCHAR2(100));
 
-select * from tbl_center
-order by 1;
+SELECT *
+FROM   tbl_center
+ORDER  BY 1;
 
 ------------------------
-create table cart (
-	no number primary key,
-	porduct_nm varchar2(50),
-	price number,
-	qty number
-);
+CREATE TABLE cart(no NUMBER primary key
+                 ,porduct_nm VARCHAR2(50)
+                 ,price NUMBER
+                 ,qty NUMBER);
 
-insert into cart values( 1, 'ÏΩîÎìú Ïä§ÌîÑÎßÅ', 45000, 3);
-insert into cart values( 2, 'ÌòºÏûê ÏûêÎ∞î', 35000, 1);
+INSERT INTO cart
+VALUES
+    (1
+    ,'ƒ⁄µÂ Ω∫«¡∏µ'
+    ,45000
+    ,3);
+INSERT INTO cart
+VALUES
+    (2
+    ,'»•¿⁄ ¿⁄πŸ'
+    ,35000
+    ,1);
 
-commit;
+COMMIT;
 
+--drop table pet;
+--drop table adopt;
+CREATE TABLE pet(id NUMBER primary key
+                ,NAME VARCHAR2(50)
+                ,picture VARCHAR2(100)
+                ,age NUMBER
+                ,breed VARCHAR2(100)
+                ,location VARCHAR2(100));
 
-  --drop table pet;
-  --drop table adopt;
-  create table pet(
-    id number primary key,
-    name varchar2(50),
-    picture varchar2(100),
-    age number,
-    breed varchar2(100),
-    location varchar2(100)
-  );
-  
-  create table adopt(
-  	id number primary key,
-  	price number
-  );
+CREATE TABLE adopt(id NUMBER primary key, price NUMBER);
 
-insert into pet values( 0, 'Frieda','resources/images/scottish-terrier.jpeg', 3, 'Scottish Terrier','Lisco, Alabama');
-insert into pet values( 1, 'Gina','resources/images/scottish-terrier.jpeg', 3, 'Scottish Terrier','Tooleville, West Virginia');
-insert into pet values( 2, 'Collins','resources/images/french-bulldog.jpeg', 2, 'French Bulldog','Freeburn, Idaho');
-insert into pet values( 3, 'Melissa','resources/images/boxer.jpeg', 2, 'Boxer','Camas, Pennsylvania');
-insert into pet values( 4, 'Jeanine','resources/images/french-bulldog.jpeg', 2,'French Bulldog','Gerber, South Dakota');
-insert into pet values( 5, 'Elvia','resources/images/french-bulldog.jpeg',3, 'French Bulldog','Innsbrook, Illinois');
-insert into pet values( 6, 'Latisha','resources/images/golden-retriever.jpeg', 3, 'Golden Retriever','Soudan, Louisiana');
-insert into pet values( 7, 'Coleman','resources/images/golden-retriever.jpeg', 3, 'Golden Retriever','Jacksonwald, Palau');
-insert into pet values( 8, 'Nichole','resources/images/french-bulldog.jpeg', 2, 'French Bulldog','Honolulu, Hawaii');
-insert into pet values( 9, 'Fran','resources/images/boxer.jpeg', 3, '"Boxer','Matheny, Utah');
-insert into pet values( 10, 'Leonor','resources/images/boxer.jpeg',2,  'Boxer','Tyhee, Indiana');
-insert into pet values( 11, 'Dean','resources/images/scottish-terrier.jpeg', 3, 'Scottish Terrier','Windsor, Montana');
-insert into pet values( 12, 'Stevenson','resources/images/french-bulldog.jpeg', 3,'French Bulldog','Kingstowne, Nevada');
-insert into pet values( 13, 'Kristina','resources/images/golden-retriever.jpeg', 4, 'Golden Retriever','Sultana, Massachusetts');
-insert into pet values( 14, 'Ethel','resources/images/golden-retriever.jpeg', 2, 'Golden Retriever','Broadlands, Oregon');
-insert into pet values( 15, 'Terry','resources/images/golden-retriever.jpeg', 2, 'Golden Retriever','Dawn, Wisconsin');
+INSERT INTO pet
+VALUES
+    (0
+    ,'Frieda'
+    ,'resources/images/scottish-terrier.jpeg'
+    ,3
+    ,'Scottish Terrier'
+    ,'Lisco, Alabama');
+INSERT INTO pet
+VALUES
+    (1
+    ,'Gina'
+    ,'resources/images/scottish-terrier.jpeg'
+    ,3
+    ,'Scottish Terrier'
+    ,'Tooleville, West Virginia');
+INSERT INTO pet
+VALUES
+    (2
+    ,'Collins'
+    ,'resources/images/french-bulldog.jpeg'
+    ,2
+    ,'French Bulldog'
+    ,'Freeburn, Idaho');
+INSERT INTO pet
+VALUES
+    (3
+    ,'Melissa'
+    ,'resources/images/boxer.jpeg'
+    ,2
+    ,'Boxer'
+    ,'Camas, Pennsylvania');
+INSERT INTO pet
+VALUES
+    (4
+    ,'Jeanine'
+    ,'resources/images/french-bulldog.jpeg'
+    ,2
+    ,'French Bulldog'
+    ,'Gerber, South Dakota');
+INSERT INTO pet
+VALUES
+    (5
+    ,'Elvia'
+    ,'resources/images/french-bulldog.jpeg'
+    ,3
+    ,'French Bulldog'
+    ,'Innsbrook, Illinois');
+INSERT INTO pet
+VALUES
+    (6
+    ,'Latisha'
+    ,'resources/images/golden-retriever.jpeg'
+    ,3
+    ,'Golden Retriever'
+    ,'Soudan, Louisiana');
+INSERT INTO pet
+VALUES
+    (7
+    ,'Coleman'
+    ,'resources/images/golden-retriever.jpeg'
+    ,3
+    ,'Golden Retriever'
+    ,'Jacksonwald, Palau');
+INSERT INTO pet
+VALUES
+    (8
+    ,'Nichole'
+    ,'resources/images/french-bulldog.jpeg'
+    ,2
+    ,'French Bulldog'
+    ,'Honolulu, Hawaii');
+INSERT INTO pet
+VALUES
+    (9
+    ,'Fran'
+    ,'resources/images/boxer.jpeg'
+    ,3
+    ,'"Boxer'
+    ,'Matheny, Utah');
+INSERT INTO pet
+VALUES
+    (10
+    ,'Leonor'
+    ,'resources/images/boxer.jpeg'
+    ,2
+    ,'Boxer'
+    ,'Tyhee, Indiana');
+INSERT INTO pet
+VALUES
+    (11
+    ,'Dean'
+    ,'resources/images/scottish-terrier.jpeg'
+    ,3
+    ,'Scottish Terrier'
+    ,'Windsor, Montana');
+INSERT INTO pet
+VALUES
+    (12
+    ,'Stevenson'
+    ,'resources/images/french-bulldog.jpeg'
+    ,3
+    ,'French Bulldog'
+    ,'Kingstowne, Nevada');
+INSERT INTO pet
+VALUES
+    (13
+    ,'Kristina'
+    ,'resources/images/golden-retriever.jpeg'
+    ,4
+    ,'Golden Retriever'
+    ,'Sultana, Massachusetts');
+INSERT INTO pet
+VALUES
+    (14
+    ,'Ethel'
+    ,'resources/images/golden-retriever.jpeg'
+    ,2
+    ,'Golden Retriever'
+    ,'Broadlands, Oregon');
+INSERT INTO pet
+VALUES
+    (15
+    ,'Terry'
+    ,'resources/images/golden-retriever.jpeg'
+    ,2
+    ,'Golden Retriever'
+    ,'Dawn, Wisconsin');
 
-insert into adopt values (1, 100);
-insert into adopt values (3, 200);
+INSERT INTO adopt
+VALUES
+    (1
+    ,100);
+INSERT INTO adopt
+VALUES
+    (3
+    ,200);
 
-commit;
+COMMIT;
 
-select * from pet;
-select * from adopt;
+SELECT *
+FROM   pet;
+SELECT *
+FROM   adopt;
 
-create table todo (
-	no number primary key,
-	contents varchar2(100),
-	todoyn char(1) default '0'
-);
+CREATE TABLE todo(no NUMBER primary key
+                 ,contents VARCHAR2(100)
+                 ,todoyn   CHAR(1) DEFAULT '0');
 
-insert into todo values(1, 'java', '1');
-insert into todo values(2, 'html', '1');
-insert into todo values(3, 'javascript', '0');
-insert into todo values(4, 'spring', '0');
+INSERT INTO todo
+VALUES
+    (1
+    ,'java'
+    ,'1');
+INSERT INTO todo
+VALUES
+    (2
+    ,'html'
+    ,'1');
+INSERT INTO todo
+VALUES
+    (3
+    ,'javascript'
+    ,'0');
+INSERT INTO todo
+VALUES
+    (4
+    ,'spring'
+    ,'0');
 
-commit;
+COMMIT;
 
-create table users(
-id       varchar2(8) primary key,
-password varchar2(8),
-name     varchar2(20),
-role     varchar2(5));
+CREATE TABLE users(id VARCHAR2(8) primary key
+                  ,password VARCHAR2(8)
+                  ,NAME VARCHAR2(20)
+                  ,role VARCHAR2(5));
 
-insert into users values('test','test123','Í¥ÄÎ¶¨Ïûê','Admin');
-insert into users values('user1','user1','ÏÇ¨Ïö©Ïûê','User');
+INSERT INTO users
+VALUES
+    ('test'
+    ,'test123'
+    ,'∞¸∏Æ¿⁄'
+    ,'Admin');
+INSERT INTO users
+VALUES
+    ('user1'
+    ,'user1'
+    ,'ªÁøÎ¿⁄'
+    ,'User');
 
-commit;
+COMMIT;

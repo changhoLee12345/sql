@@ -1,162 +1,334 @@
-select * from tab;
+SELECT *
+FROM   tab;
 
-create table cart (
-	no number primary key,
-	product_nm varchar2(50),
-	price number,
-	qty number
-);
+CREATE TABLE cart(no NUMBER primary key
+                 ,product_nm VARCHAR2(50)
+                 ,price NUMBER
+                 ,qty NUMBER);
 
-insert into cart values( 1, 'ì½”ë“œ ìŠ¤í”„ë§', 45000, 3);
-insert into cart values( 2, 'í˜¼ìž ìžë°”', 35000, 1);
+INSERT INTO cart
+VALUES
+    (1
+    ,'ÄÚµå ½ºÇÁ¸µ'
+    ,45000
+    ,3);
+INSERT INTO cart
+VALUES
+    (2
+    ,'È¥ÀÚ ÀÚ¹Ù'
+    ,35000
+    ,1);
 
-commit;
+COMMIT;
 
-select * from tbl_cart;
-select *
-from tbl_cart
-order by 1;
+SELECT *
+FROM   tbl_cart;
+SELECT *
+FROM   tbl_cart
+ORDER  BY 1;
 
-create table tbl_cart (
-  no number primary key,
-  product_nm varchar2(50),
-  price number,
-  qty number
-);
-insert into tbl_cart values(1, 'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„', 1200, 2);
-insert into tbl_cart values(2, 'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ ', 1500, 2);
-insert into tbl_cart values(3, 'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼', 1800, 2);
-insert into tbl_cart values(4, 'ë‹ˆì¹´ë¼êµ¬ì•„ ë”ì¹˜í•¸ë“œë“œë¦½', 2200, 2);
-insert into tbl_cart values(5, 'ë¸Œë¼ì§ˆì‚°í† ìŠ¤', 3200, 2);
-insert into tbl_cart values(6, 'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„', 3300, 2);
+CREATE TABLE tbl_cart(no NUMBER primary key
+                     ,product_nm VARCHAR2(50)
+                     ,price NUMBER
+                     ,qty NUMBER);
+INSERT INTO tbl_cart
+VALUES
+    (1
+    ,'°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ'
+    ,1200
+    ,2);
+INSERT INTO tbl_cart
+VALUES
+    (2
+    ,'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å'
+    ,1500
+    ,2);
+INSERT INTO tbl_cart
+VALUES
+    (3
+    ,'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ'
+    ,1800
+    ,2);
+INSERT INTO tbl_cart
+VALUES
+    (4
+    ,'´ÏÄ«¶ó±¸¾Æ ´õÄ¡ÇÚµåµå¸³'
+    ,2200
+    ,2);
+INSERT INTO tbl_cart
+VALUES
+    (5
+    ,'ºê¶óÁú»êÅä½º'
+    ,3200
+    ,2);
+INSERT INTO tbl_cart
+VALUES
+    (6
+    ,'¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ'
+    ,3300
+    ,2);
 -----------------------------------------------------------------------------------------------------
 
-drop table tbl_users purge;
-create table tbl_users (
-  user_id varchar2(100) primary key,
-  user_pw varchar2(10) not null,
-  user_name varchar2(100) not null,
-  user_birth date,
-  user_phone varchar2(20),
-  user_addr varchar2(100)
-);
+drop TABLE tbl_users purge;
+CREATE TABLE tbl_users(user_id VARCHAR2(100) primary key
+                      ,user_pw VARCHAR2(10) NOT NULL
+                      ,user_name VARCHAR2(100) NOT NULL
+                      ,user_birth DATE
+                      ,user_phone VARCHAR2(20)
+                      ,user_addr VARCHAR2(100));
 
-insert into tbl_users (user_id, user_pw, user_name, user_birth)
-values('user1', '1111', 'Hong', to_date('2005-01-01','yyyy-mm-dd'));
+INSERT INTO tbl_users
+    (user_id
+    ,user_pw
+    ,user_name
+    ,user_birth)
+VALUES
+    ('user1'
+    ,'1111'
+    ,'Hong'
+    ,TO_DATE('2005-01-01', 'yyyy-mm-dd'));
 
-insert into tbl_users (user_id, user_pw, user_name, user_birth)
-values('user3', '1111', 'Park', '1995-01-01');
+INSERT INTO tbl_users
+    (user_id
+    ,user_pw
+    ,user_name
+    ,user_birth)
+VALUES
+    ('user3'
+    ,'1111'
+    ,'Park'
+    ,'1995-01-01');
 
-insert into tbl_users (user_id, user_pw, user_name, user_birth)
-values('user2','1111','Hwang',to_date('1995-01-01','yyyy-mm-dd'));
+INSERT INTO tbl_users
+    (user_id
+    ,user_pw
+    ,user_name
+    ,user_birth)
+VALUES
+    ('user2'
+    ,'1111'
+    ,'Hwang'
+    ,TO_DATE('1995-01-01', 'yyyy-mm-dd'));
 
-select * from tbl_users;
+SELECT *
+FROM   tbl_users;
 
-update tbl_users
-set    user_pw = '2222',
-       user_phone = '010-1111-2222',
-       user_addr = 'Daegu 100'
-where user_id = 'user3';
+UPDATE tbl_users
+SET    user_pw    = '2222'
+      ,user_phone = '010-1111-2222'
+      ,user_addr  = 'Daegu 100'
+WHERE  user_id = 'user3';
 
-update tbl_users
-set    user_pw = '3333',
-       user_addr = 'Seoul 100'
-where user_id = 'user3';
+UPDATE tbl_users
+SET    user_pw   = '3333'
+      ,user_addr = 'Seoul 100'
+WHERE  user_id = 'user3';
 
-delete from tbl_users where user_id = 'user2';
+DELETE FROM tbl_users
+WHERE  user_id = 'user2';
 
-commit;
-rollback;
+COMMIT;
+ROLLBACK;
 
-create table tbl_board (
-  brd_no number primary key,
-  brd_title varchar2(100) not null,
-  brd_writer varchar2(10) not null, -- user1, user2
-  brd_content varchar2(100) not null,
-  create_date date default sysdate,
-  click_cnt number default 0
-);
-create sequence board_seq;
+CREATE TABLE tbl_board(brd_no NUMBER primary key
+                      ,brd_title VARCHAR2(100) NOT NULL
+                      ,brd_writer VARCHAR2(10) NOT NULL
+                      , -- user1, user2
+                       brd_content VARCHAR2(100) NOT NULL
+                      ,create_date DATE DEFAULT SYSDATE
+                      ,click_cnt   NUMBER DEFAULT 0);
+CREATE sequence board_seq;
 
-insert into tbl_board (brd_no, brd_title, brd_content, brd_writer)
-values (board_seq.nextval, 'title test'||board_seq.currval, 'content test', 'user1');
+INSERT INTO tbl_board
+    (brd_no
+    ,brd_title
+    ,brd_content
+    ,brd_writer)
+VALUES
+    (board_seq.nextval
+    ,'title test' || board_seq.currval
+    ,'content test'
+    ,'user1');
 
-update tbl_board
-set    brd_content = 'modify content'
-where brd_no = 5;
+UPDATE tbl_board
+SET    brd_content = 'modify content'
+WHERE  brd_no = 5;
 
-delete from tbl_board 
-where brd_no = 7;
+DELETE FROM tbl_board
+WHERE  brd_no = 7;
 
-select * from tbl_board where brd_no = 3;
+SELECT *
+FROM   tbl_board
+WHERE  brd_no = 3;
 
-update tbl_board
-set    click_cnt = click_cnt + 1
-where brd_no = 3;
+UPDATE tbl_board
+SET    click_cnt = click_cnt + 1
+WHERE  brd_no = 3;
 
-drop table prod_info purge;
-create table prod_info (
-  prod_code char(4) primary key,
-  prod_name varchar2(100) not null,
-  prod_desc varchar2(500),
-  rct_price number default 1000,
-  sale_price number default 2000,
-  safe_qty number default 5,
-  create_date date default sysdate,
-  update_date date default sysdate
-);
-insert into prod_info (prod_code, prod_name, prod_desc) values('P001', 'ë…¸íŠ¸ë¶1', 'ì¢‹ì€ë…¸íŠ¸ë¶ìž…ë‹ˆë‹¤.1');
+drop TABLE prod_info purge;
+CREATE TABLE prod_info(prod_code CHAR(4) primary key
+                      ,prod_name VARCHAR2(100) NOT NULL
+                      ,prod_desc VARCHAR2(500)
+                      ,rct_price   NUMBER DEFAULT 1000
+                      ,sale_price  NUMBER DEFAULT 2000
+                      ,safe_qty    NUMBER DEFAULT 5
+                      ,create_date DATE DEFAULT SYSDATE
+                      ,update_date DATE DEFAULT SYSDATE);
+INSERT INTO prod_info
+    (prod_code
+    ,prod_name
+    ,prod_desc)
+VALUES
+    ('P001'
+    ,'³ëÆ®ºÏ1'
+    ,'ÁÁÀº³ëÆ®ºÏÀÔ´Ï´Ù.1');
 
-select * from prod_info;
+SELECT *
+FROM   prod_info;
 
-create table in_out_txn (
-  txn_id number primary key,
-  prod_code char(4) not null,
-  qty number not null,
-  txn_date date default sysdate
-);
-create sequence txn_seq;
+CREATE TABLE in_out_txn(txn_id NUMBER primary key
+                       ,prod_code CHAR(4) NOT NULL
+                       ,qty NUMBER NOT NULL
+                       ,txn_date  DATE DEFAULT SYSDATE);
+CREATE sequence txn_seq;
 
-insert into in_out_txn values(txn_seq.nextval, 'P001', 10, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P001', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P001', -3, sysdate);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P001'
+    ,10
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P001'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P001'
+    ,-3
+    ,SYSDATE);
 
-insert into in_out_txn values(txn_seq.nextval, 'P011', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P011', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P012', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P012', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P013', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P013', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P015', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P015', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P016', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P016', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P017', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P017', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P018', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P018', -5, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P019', 9, sysdate);
-insert into in_out_txn values(txn_seq.nextval, 'P019', -5, sysdate);
-select * from in_out_txn;
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P011'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P011'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P012'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P012'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P013'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P013'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P015'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P015'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P016'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P016'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P017'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P017'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P018'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P018'
+    ,-5
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P019'
+    ,9
+    ,SYSDATE);
+INSERT INTO in_out_txn
+VALUES
+    (txn_seq.nextval
+    ,'P019'
+    ,-5
+    ,SYSDATE);
+SELECT *
+FROM   in_out_txn;
 
-select * from (
-    select rownum rn, prod_code, qty
-    from (
-        select prod_code, sum(qty) qty
-        from in_out_txn
-        group by prod_code
-        --having sum(qty) > 0
-        order by prod_code
-    ) a
-    where rownum <= 10
-) b
-where rn > 5
-;
+SELECT *
+FROM   (SELECT ROWNUM rn
+              ,prod_code
+              ,qty
+        FROM   (SELECT prod_code
+                      ,SUM(qty) qty
+                FROM   in_out_txn
+                GROUP  BY prod_code
+                --having sum(qty) > 0
+                ORDER  BY prod_code) a
+        WHERE  ROWNUM <= 10) b
+WHERE  rn > 5;
 
-select count(*) 
-from (select  prod_code 
-      from in_out_txn 
-      group by prod_code
-      having sum(qty) > 0);
+SELECT COUNT(*)
+FROM   (SELECT prod_code
+        FROM   in_out_txn
+        GROUP  BY prod_code
+        HAVING SUM(qty) > 0);
 
-select * from prod_info order by 1;
+SELECT *
+FROM   prod_info
+ORDER  BY 1;
