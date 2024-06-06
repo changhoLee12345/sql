@@ -1,4 +1,4 @@
-CREATE OR REPLACE NONEDITIONABLE PACKAGE jsp_common IS
+CREATE OR REPLACE PACKAGE jsp_common IS
 
     -- Author  : WINNIE
     -- Created : 2024-06-06 ¿ÀÈÄ 2:26:15
@@ -27,7 +27,7 @@ CREATE OR REPLACE NONEDITIONABLE PACKAGE jsp_common IS
 
 END jsp_common;
 /
-CREATE OR REPLACE NONEDITIONABLE PACKAGE BODY jsp_common IS
+CREATE OR REPLACE PACKAGE BODY jsp_common IS
 
     -- Private type declarations
     --type <TypeName> is <Datatype>;
