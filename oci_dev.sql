@@ -1,7 +1,7 @@
 -----------------------------------------------------
---------------- jsp ¼ö¾÷ÁøÇàÇÒ ¶§ »ç¿ëÇÒ sql ------------
+--------------- jsp ìˆ˜ì—…ì§„í–‰í•  ë•Œ ì‚¬ìš©í•  sql ------------
 -----------------------------------------------------
--- 11g, 21c »ç¿ë.
+-- 11g, 21c ì‚¬ìš©.
 select * from tab;
 
 select * from employee;
@@ -42,13 +42,13 @@ where s.enabled = 'Y';
 create table tbl_swim (
  swim_code char(2) primary key, -- B1, B2, B3, M1, M2, M3
  swim_name varchar2(30) not null,
- coach varchar2(100) not null, -- °­»çÀÌ¸§.
+ coach varchar2(100) not null, -- ê°•ì‚¬ì´ë¦„.
  swim_fee number not null,
- enabled char(1) default 'Y' --»ç¿ë¿©ºÎ
+ enabled char(1) default 'Y' --ì‚¬ìš©ì—¬ë¶€
 );
-insert into tbl_swim values('B1', '±âÃÊ¹İ1', '±è°­»ç', 10000, 'Y');
-insert into tbl_swim values('M1', 'Áß±Ş¹İ1', '±èÁß±Ş', 20000, 'Y');
-insert into tbl_swim values('S1', '»ó±Ş¹İ1', '±è»ó±Ş', 30000, 'Y');
+insert into tbl_swim values('B1', 'ê¸°ì´ˆë°˜1', 'ê¹€ê°•ì‚¬', 10000, 'Y');
+insert into tbl_swim values('M1', 'ì¤‘ê¸‰ë°˜1', 'ê¹€ì¤‘ê¸‰', 20000, 'Y');
+insert into tbl_swim values('S1', 'ìƒê¸‰ë°˜1', 'ê¹€ìƒê¸‰', 30000, 'Y');
 select * from tbl_swim;
 
 drop table tbl_auth purge;
@@ -89,11 +89,11 @@ alter table tbl_member add constraint member_pk primary key (mem_id);
 alter table tbl_board add update_date date default sysdate;
 
 insert into tbl_member (mem_id, mem_name, mem_pw, mem_phone)
-values('user01', '»ç¿ëÀÚ1', '0000', '010-9999-8888');
+values('user01', 'ì‚¬ìš©ì1', '0000', '010-9999-8888');
 insert into tbl_member (mem_id, mem_name, mem_pw, mem_phone)
-values('user02', '»ç¿ëÀÚ2', '0000', '010-8888-7777');
+values('user02', 'ì‚¬ìš©ì2', '0000', '010-8888-7777');
 insert into tbl_member (mem_id, mem_name, mem_pw, mem_phone)
-values('admin', '°ü¸®ÀÚ', '0000', '010-8888-7777');
+values('admin', 'ê´€ë¦¬ì', '0000', '010-8888-7777');
 
 select * from tbl_member;
 
@@ -156,10 +156,9 @@ create table tbl_cart (
 	price number,
 	qty number
 );
-insert into tbl_cart values(1, '°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ', 1200, 2);
-insert into tbl_cart values(2, 'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å', 1500, 2);
-insert into tbl_cart values(3, 'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ', 1800, 2);
-insert into tbl_cart values(4, '´ÏÄ«¶ó±¸¾Æ ´õÄ¡ÇÚµåµå¸³', 2200, 2);
-insert into tbl_cart values(5, 'ºê¶óÁú»êÅä½º', 3200, 2);
-insert into tbl_cart values(6, '¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ', 3300, 2);
-
+insert into tbl_cart values(1, 'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„', 1200, 2);
+insert into tbl_cart values(2, 'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ ', 1500, 2);
+insert into tbl_cart values(3, 'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼', 1800, 2);
+insert into tbl_cart values(4, 'ë‹ˆì¹´ë¼êµ¬ì•„ ë”ì¹˜í•¸ë“œë“œë¦½', 2200, 2);
+insert into tbl_cart values(5, 'ë¸Œë¼ì§ˆì‚°í† ìŠ¤', 3200, 2);
+insert into tbl_cart values(6, 'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„', 3300, 2);

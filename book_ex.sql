@@ -64,7 +64,7 @@ FROM   users;
 SELECT *
 FROM   authorities;
 
--------------------- user table À» »ç¿ëÇÏ±â ----------------------------
+-------------------- user table ì„ ì‚¬ìš©í•˜ê¸° ----------------------------
 drop TABLE tbl_member purge;
 CREATE TABLE tbl_member(userid VARCHAR2(50) NOT NULL primary key
                        ,userpw VARCHAR2(100) NOT NULL
@@ -104,21 +104,21 @@ CREATE TABLE persistent_logins(username VARCHAR(64) NOT NULL
 SELECT *
 FROM   hr.employees;
 
------------------------------------- jsp ¼ö¾÷¿ë Å×ÀÌºí ¹× µ¥ÀÌÅÍ »ý¼º.
---»ç¿øÁ¤º¸ Å×ÀÌºí.
+------------------------------------ jsp ìˆ˜ì—…ìš© í…Œì´ë¸” ë° ë°ì´í„° ìƒì„±.
+--ì‚¬ì›ì •ë³´ í…Œì´ë¸”.
 CREATE TABLE employee(emp_no NUMBER primary key
-                     , -- »ç¿ø¹øÈ£
+                     , -- ì‚¬ì›ë²ˆí˜¸
                       emp_name VARCHAR2(50) NOT NULL
-                     , --»ç¿ø¸í
+                     , --ì‚¬ì›ëª…
                       email VARCHAR2(30) NOT NULL
-                     , --ÀÌ¸ÞÀÏ
+                     , --ì´ë©”ì¼
                       phone VARCHAR2(10) NOT NULL
-                     , --¿¬¶ôÃ³
+                     , --ì—°ë½ì²˜
                       hire_date   DATE DEFAULT SYSDATE
-                     , --ÀÔ»çÀÏÀÚ
+                     , --ìž…ì‚¬ì¼ìž
                       salary      NUMBER DEFAULT 100
                      ,department VARCHAR2(30) NOT NULL
-                     , --ºÎ¼­
+                     , --ë¶€ì„œ
                       create_date DATE DEFAULT SYSDATE);
 
 INSERT INTO employee
@@ -131,11 +131,11 @@ INSERT INTO employee
     ,hire_date)
 VALUES
     (108
-    ,'È«±æµ¿'
+    ,'í™ê¸¸ë™'
     ,'hong@mail.com'
     ,'234-5678'
     ,200
-    ,'ÀÎ»ç'
+    ,'ì¸ì‚¬'
     ,TO_DATE('2023-01-05', 'yyyy-mm-dd'));
 INSERT INTO employee
     (emp_no
@@ -146,11 +146,11 @@ INSERT INTO employee
     ,department)
 VALUES
     (102
-    ,'±è»ç¿ø'
+    ,'ê¹€ì‚¬ì›'
     ,'kim@mail.com'
     ,'234-5679'
     ,300
-    ,'ÃÑ¹«');
+    ,'ì´ë¬´');
 INSERT INTO employee
     (emp_no
     ,emp_name
@@ -160,11 +160,11 @@ INSERT INTO employee
     ,department)
 VALUES
     (103
-    ,'ÃÖÁÖÀÓ'
+    ,'ìµœì£¼ìž„'
     ,'choi@mail.com'
     ,'234-5978'
     ,400
-    ,'°³¹ß');
+    ,'ê°œë°œ');
 
 SELECT *
 FROM   employee;
@@ -175,13 +175,13 @@ WHERE  emp_no = 101;
 
 SELECT *
 FROM   employee
---where department = 'ÀÎ»ç'
+--where department = 'ì¸ì‚¬'
 ORDER  BY 1 DESC;
 
 SELECT department
       ,COUNT(*)
 FROM   employee
-GROUP  BY department; --78°Ç.
+GROUP  BY department; --78ê±´.
 
 DELETE FROM employee
 WHERE  emp_no = 208;
@@ -201,11 +201,11 @@ INSERT INTO employee
           ,hire_date
           ,salary
           ,department
-    FROM   employee; -- 30°Ç ÀÌ»ó µ¥ÀÌÅÍ »ý¼º.
+    FROM   employee; -- 30ê±´ ì´ìƒ ë°ì´í„° ìƒì„±.
 
---ÆäÀÌÂ¡. ÆäÀÌÁö´ç 5°³¾¿ Ãâ·Â.
---78°Ç > 16ÆäÀÌÁö
--- 1ÆäÀÌÁö: 5°Ç, »ç¿ø¹øÈ£ ±âÁØÀ¸·Î..
+--íŽ˜ì´ì§•. íŽ˜ì´ì§€ë‹¹ 5ê°œì”© ì¶œë ¥.
+--78ê±´ > 16íŽ˜ì´ì§€
+-- 1íŽ˜ì´ì§€: 5ê±´, ì‚¬ì›ë²ˆí˜¸ ê¸°ì¤€ìœ¼ë¡œ..
 -- 1page: 1 ~ 5, 2page: 6 ~ 10
 SELECT emp_no
       ,emp_name
@@ -225,7 +225,7 @@ AND    b.rn <= (:page) * 5;
 
 SELECT *
 FROM   employee
-WHERE  department = NVL('°³¹ß', department);
+WHERE  department = NVL('ê°œë°œ', department);
 
 SELECT rn
       ,emp_no
@@ -362,7 +362,7 @@ INSERT INTO tbl_member
 VALUES
     ('user01'
     ,'1111'
-    ,'È«±æµ¿');
+    ,'í™ê¸¸ë™');
 INSERT INTO tbl_member
     (id
     ,pw
@@ -370,7 +370,7 @@ INSERT INTO tbl_member
 VALUES
     ('user02'
     ,'1111'
-    ,'±è¹Î±Ô');
+    ,'ê¹€ë¯¼ê·œ');
 INSERT INTO tbl_member
     (id
     ,pw
@@ -379,7 +379,7 @@ INSERT INTO tbl_member
 VALUES
     ('admin'
     ,'1111'
-    ,'°ü¸®ÀÚ'
+    ,'ê´€ë¦¬ìž'
     ,'admin');
 
 COMMIT;
@@ -495,13 +495,13 @@ CREATE TABLE cart(no NUMBER primary key
 INSERT INTO cart
 VALUES
     (1
-    ,'ÄÚµå ½ºÇÁ¸µ'
+    ,'ì½”ë“œ ìŠ¤í”„ë§'
     ,45000
     ,3);
 INSERT INTO cart
 VALUES
     (2
-    ,'È¥ÀÚ ÀÚ¹Ù'
+    ,'í˜¼ìž ìžë°”'
     ,35000
     ,1);
 
@@ -699,13 +699,13 @@ INSERT INTO users
 VALUES
     ('test'
     ,'test123'
-    ,'°ü¸®ÀÚ'
+    ,'ê´€ë¦¬ìž'
     ,'Admin');
 INSERT INTO users
 VALUES
     ('user1'
     ,'user1'
-    ,'»ç¿ëÀÚ'
+    ,'ì‚¬ìš©ìž'
     ,'User');
 
 COMMIT;

@@ -17,7 +17,7 @@ INSERT INTO member
     ,email)
 VALUES
     ('user1'
-    ,'�����1'
+    ,'사용자1'
     ,'1111'
     ,'user1@email.com');
 INSERT INTO member
@@ -27,7 +27,7 @@ INSERT INTO member
     ,email)
 VALUES
     ('user2'
-    ,'�����2'
+    ,'사용자2'
     ,'1111'
     ,'user2@email.com');
 INSERT INTO member
@@ -37,7 +37,7 @@ INSERT INTO member
     ,email)
 VALUES
     ('user3'
-    ,'�����3'
+    ,'사용자3'
     ,'1111'
     ,'user3@email.com');
 
@@ -239,10 +239,10 @@ CREATE INDEX idx_reply ON tbl_reply(bno DESC, rno ASC);
 -----------------------------------------------
 -----------------------------------------------
 
---T20230213(3������)
+--T20230213(3강의장)
 CREATE TABLE product(product_code VARCHAR2(10) primary key
                     ,product_name VARCHAR2(100) NOT NULL
-                    , --��ǰ��
+                    , --상품명
                      product_desc VARCHAR2(1000) NOT NULL
                     ,product_price NUMBER NOT NULL
                     ,sale_price NUMBER
@@ -251,57 +251,57 @@ CREATE TABLE product(product_code VARCHAR2(10) primary key
 INSERT INTO product
 VALUES
     ('P2023001'
-    ,'���׸��� ��Ƽ����'
-    ,'���׸��� ��Ƽ���� ���ִ� Ŀ���Դϴ�'
+    ,'과테말라 안티구아'
+    ,'과테말라 안티구아 맛있는 커피입니다'
     ,5000
     ,4500
     ,4.5
-    ,'���׸��� ��Ƽ����.jpg');
+    ,'과테말라 안티구아.jpg');
 INSERT INTO product
 VALUES
     ('P2023002'
-    ,'��ī�󱸾� �ƶ��ī'
-    ,'��ī�󱸾� �ƶ��ī ���ִ� Ŀ���Դϴ�'
+    ,'니카라구아 아라비카'
+    ,'니카라구아 아라비카 맛있는 커피입니다'
     ,5500
     ,4500
     ,4.0
-    ,'��ī�󱸾� �ƶ��ī.jpg');
+    ,'니카라구아 아라비카.jpg');
 INSERT INTO product
 VALUES
     ('P2023003'
-    ,'��������佺'
-    ,'��������佺 ���ִ� Ŀ���Դϴ�'
+    ,'브라질산토스'
+    ,'브라질산토스 맛있는 커피입니다'
     ,6000
     ,5000
     ,3.5
-    ,'��������佺.jpg');
+    ,'브라질산토스.jpg');
 INSERT INTO product
 VALUES
     ('P2023004'
-    ,'��Ƽ���Ǿ� ����ü��'
-    ,'��Ƽ���Ǿ� ����ü�� ���ִ� Ŀ���Դϴ�'
+    ,'에티오피아 예가체프'
+    ,'에티오피아 예가체프 맛있는 커피입니다'
     ,4000
     ,3500
     ,4.0
-    ,'��Ƽ���Ǿ� ����ü��.jpg');
+    ,'에티오피아 예가체프.jpg');
 INSERT INTO product
 VALUES
     ('P2023005'
-    ,'�ɳ� ��ũ�����'
-    ,'�ɳ� ��ũ����� ���ִ� Ŀ���Դϴ�'
+    ,'케냐 오크라톡신'
+    ,'케냐 오크라톡신 맛있는 커피입니다'
     ,4500
     ,3000
     ,3.0
-    ,'�ɳ� ��ũ�����.jpg');
+    ,'케냐 오크라톡신.jpg');
 INSERT INTO product
 VALUES
     ('P2023006'
-    ,'�ڽ�Ÿ��ī ������'
-    ,'�ڽ�Ÿ��ī ������ ���ִ� Ŀ���Դϴ�'
+    ,'코스타리카 따라주'
+    ,'코스타리카 따라주 맛있는 커피입니다'
     ,3000
     ,2500
     ,5.0
-    ,'�ڽ�Ÿ��ī ������.jpg');
+    ,'코스타리카 따라주.jpg');
 
 -------------------------------------------------------------------------------------------------------
 -- book_ex --------------------------------------------------------------------------------------------

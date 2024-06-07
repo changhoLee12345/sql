@@ -5,8 +5,8 @@ ORDER  BY tname;
 SELECT jsp_common.get_version2()
 FROM   dual;
 
---procedure ¿¬½À³»¿ë.
---»óÇ°Å×ÀÌºíÀÇ »óÇ°Á¤º¸¸¦ È°¿ëÇØ¼­ Àå¹Ù±¸´ÏÀÇ »óÇ°À» ±¸¸ÅÇÒ ¶§...ÁÖ¹®Á¤º¸¿Í ÁÖ¹®»ó¼¼Á¤º¸¸¦ ¸¸µå´Â ÀÛ¾÷À» ½ÇÇà. 
+--procedure ì—°ìŠµë‚´ìš©.
+--ìƒí’ˆí…Œì´ë¸”ì˜ ìƒí’ˆì •ë³´ë¥¼ í™œìš©í•´ì„œ ìž¥ë°”êµ¬ë‹ˆì˜ ìƒí’ˆì„ êµ¬ë§¤í•  ë•Œ...ì£¼ë¬¸ì •ë³´ì™€ ì£¼ë¬¸ìƒì„¸ì •ë³´ë¥¼ ë§Œë“œëŠ” ìž‘ì—…ì„ ì‹¤í–‰. 
 CREATE TABLE tbl_product(product_no NUMBER
                         ,product_name VARCHAR2(100) NOT NULL
                         ,product_desc VARCHAR2(300) NOT NULL
@@ -26,8 +26,8 @@ INSERT INTO tbl_product
     ,sale_price)
 VALUES
     (product_seq.nextval
-    ,'»þÇÁ2000'
-    ,'¸ð³ª¹ÌÀÇ »þÇÁ 2000Àº ÁÁ½À´Ï´Ù'
+    ,'ìƒ¤í”„2000'
+    ,'ëª¨ë‚˜ë¯¸ì˜ ìƒ¤í”„ 2000ì€ ì¢‹ìŠµë‹ˆë‹¤'
     ,2000
     ,1800);
 INSERT INTO tbl_product
@@ -38,8 +38,8 @@ INSERT INTO tbl_product
     ,sale_price)
 VALUES
     (product_seq.nextval
-    ,'¸¶¿ì½º5000'
-    ,'´ÙÀÌ¼ÒÀÇ ¸¶¿ì½º·Î 5000Àº ÁÁ½À´Ï´Ù'
+    ,'ë§ˆìš°ìŠ¤5000'
+    ,'ë‹¤ì´ì†Œì˜ ë§ˆìš°ìŠ¤ë¡œ 5000ì€ ì¢‹ìŠµë‹ˆë‹¤'
     ,5000
     ,4000);
 INSERT INTO tbl_product
@@ -50,8 +50,8 @@ INSERT INTO tbl_product
     ,sale_price)
 VALUES
     (product_seq.nextval
-    ,'Áö¿ì°³1000'
-    ,'¸ð³ª¹ÌÀÇ Áö¿ì°³ 1000Àº ÁÁ½À´Ï´Ù'
+    ,'ì§€ìš°ê°œ1000'
+    ,'ëª¨ë‚˜ë¯¸ì˜ ì§€ìš°ê°œ 1000ì€ ì¢‹ìŠµë‹ˆë‹¤'
     ,1000
     ,900);
 INSERT INTO tbl_product
@@ -62,8 +62,8 @@ INSERT INTO tbl_product
     ,sale_price)
 VALUES
     (product_seq.nextval
-    ,'ÇÊÅë2000'
-    ,'¸ð³ª¹ÌÀÇ ÇÊÅë 2000Àº ÁÁ½À´Ï´Ù'
+    ,'í•„í†µ2000'
+    ,'ëª¨ë‚˜ë¯¸ì˜ í•„í†µ 2000ì€ ì¢‹ìŠµë‹ˆë‹¤'
     ,2000
     ,1500);
 
@@ -143,12 +143,12 @@ CREATE OR REPLACE view v_order_items AS
     ON     pd.product_no = od.product_no
     ORDER  BY od.order_detail_no;
 
---ÁÖ¹®Á¤º¸.
+--ì£¼ë¬¸ì •ë³´.
 drop TABLE purchase_order purge;
 CREATE TABLE purchase_order(order_no VARCHAR2(10) --P202406001
                            ,user_id VARCHAR2(10) NOT NULL
                            ,address_to VARCHAR2(100) NOT NULL
-                           ,order_status VARCHAR2(20) NOT NULL --ÁÖ¹®, ¹è¼Û, ¿Ï·á
+                           ,order_status VARCHAR2(20) NOT NULL --ì£¼ë¬¸, ë°°ì†¡, ì™„ë£Œ
                            ,order_date   DATE DEFAULT SYSDATE);
 ALTER TABLE purchase_order add CONSTRAINT order_pk primary key(order_no);
 
@@ -207,7 +207,7 @@ VALUES
 SELECT *
 FROM   tbl_member;
 
---git form¿¬½À.
+--git formì—°ìŠµ.
 SELECT /*+ INDEX_DESC(tbl_board SYS_C0031805) */
  *
 FROM   tbl_board
@@ -245,7 +245,7 @@ WHERE  rn > 10;
 
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
---¿©·¯°Ç ³Ö±â.
+--ì—¬ëŸ¬ê±´ ë„£ê¸°.
 INSERT INTO tbl_board
     (board_no
     ,title
@@ -307,87 +307,87 @@ ALTER TABLE book_info add(book_desc VARCHAR2(1000));
 INSERT INTO book_info
 VALUES
     ('B0001'
-    ,'´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇÐ'
-    ,'±èÃ¶ÇÐ'
-    ,'ÀÌ¾ß±â'
+    ,'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™'
+    ,'ê¹€ì² í•™'
+    ,'ì´ì•¼ê¸°'
     ,21000
-    ,'´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇÐ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+    ,'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™ ì•„ì£¼ ìž¬ë¯¸ìžˆìŠµë‹ˆë‹¤');
 INSERT INTO book_info
 VALUES
     ('B0002'
-    ,'Çö´ëÃ¶ÇÐ¸Å´º'
-    ,'¹ÚÃ¶ÇÐ'
-    ,'´º¿åÅ¸ÀÓÁî'
+    ,'í˜„ëŒ€ì² í•™ë§¤ë‰´'
+    ,'ë°•ì² í•™'
+    ,'ë‰´ìš•íƒ€ìž„ì¦ˆ'
     ,23000
-    ,'Çö´ëÃ¶ÇÐ¸Å´º ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+    ,'í˜„ëŒ€ì² í•™ë§¤ë‰´ ì•„ì£¼ ìž¬ë¯¸ìžˆìŠµë‹ˆë‹¤');
 INSERT INTO book_info
 VALUES
     ('B0003'
-    ,'È£¸ðÇÈÅõ½ºÀÇ¸ðÇè'
-    ,'¸ð´×±Û·Î¸®'
-    ,'ÀÚ¹ÙÃâÆÇ»ç'
+    ,'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜'
+    ,'ëª¨ë‹ê¸€ë¡œë¦¬'
+    ,'ìžë°”ì¶œíŒì‚¬'
     ,15500
-    ,'È£¸ðÇÈÅõ½ºÀÇ¸ðÇè ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+    ,'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜ ì•„ì£¼ ìž¬ë¯¸ìžˆìŠµë‹ˆë‹¤');
 INSERT INTO book_info
 VALUES
     ('B0004'
-    ,'ÀÎ·ùÀÇ¿©Á¤'
-    ,'Á¶¿©Á¤'
-    ,'±è¿µ»ç'
+    ,'ì¸ë¥˜ì˜ì—¬ì •'
+    ,'ì¡°ì—¬ì •'
+    ,'ê¹€ì˜ì‚¬'
     ,10000
-    ,'ÀÎ·ùÀÇ¿©Á¤ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+    ,'ì¸ë¥˜ì˜ì—¬ì • ì•„ì£¼ ìž¬ë¯¸ìžˆìŠµë‹ˆë‹¤');
 INSERT INTO book_info
 VALUES
     ('B0005'
-    ,'¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡'
-    ,'Àú¼¼»ó'
-    ,'±×¸°ºñ'
+    ,'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€'
+    ,'ì €ì„¸ìƒ'
+    ,'ê·¸ë¦°ë¹„'
     ,22000
-    ,'¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡ ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+    ,'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€ ì•„ì£¼ ìž¬ë¯¸ìžˆìŠµë‹ˆë‹¤');
 INSERT INTO book_info
 VALUES
     ('B0006'
-    ,'»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù'
-    ,'È²¿¬¼Ó'
-    ,'½Ã°ø»ç'
+    ,'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤'
+    ,'í™©ì—°ì†'
+    ,'ì‹œê³µì‚¬'
     ,11000
-    ,'»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù ¾ÆÁÖ Àç¹ÌÀÖ½À´Ï´Ù');
+    ,'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤ ì•„ì£¼ ìž¬ë¯¸ìžˆìŠµë‹ˆë‹¤');
 
 INSERT INTO book_file
 VALUES
     (1
     ,'B0001'
-    ,'´õÁÁÀº»îÀ»À§ÇÑÃ¶ÇÐ.png'
+    ,'ë”ì¢‹ì€ì‚¶ì„ìœ„í•œì² í•™.png'
     ,'bookImages');
 INSERT INTO book_file
 VALUES
     (2
     ,'B0002'
-    ,'Çö´ëÃ¶ÇÐ¸Å´º.png'
+    ,'í˜„ëŒ€ì² í•™ë§¤ë‰´.png'
     ,'bookImages');
 INSERT INTO book_file
 VALUES
     (3
     ,'B0003'
-    ,'È£¸ðÇÈÅõ½ºÀÇ¸ðÇè.png'
+    ,'í˜¸ëª¨í”½íˆ¬ìŠ¤ì˜ëª¨í—˜.png'
     ,'bookImages');
 INSERT INTO book_file
 VALUES
     (4
     ,'B0004'
-    ,'ÀÎ·ùÀÇ¿©Á¤.png'
+    ,'ì¸ë¥˜ì˜ì—¬ì •.png'
     ,'bookImages');
 INSERT INTO book_file
 VALUES
     (5
     ,'B0005'
-    ,'¼¼»óÀº¾î¶»°Ôµ¹¾Æ°¡´Â°¡.png'
+    ,'ì„¸ìƒì€ì–´ë–»ê²ŒëŒì•„ê°€ëŠ”ê°€.png'
     ,'bookImages');
 INSERT INTO book_file
 VALUES
     (6
     ,'B0006'
-    ,'»îÀº¹®Á¦ÇØ°áÀÇ¿¬¼ÓÀÌ´Ù.png'
+    ,'ì‚¶ì€ë¬¸ì œí•´ê²°ì˜ì—°ì†ì´ë‹¤.png'
     ,'bookImages');
 
 -- book_file table.
@@ -420,7 +420,7 @@ INSERT INTO members
 VALUES
     ('user6'
     ,'1234'
-    ,'»ç¿ëÀÚ6'
+    ,'ì‚¬ìš©ìž6'
     ,'user6@email'
     ,'User'
     ,'member6.png'
@@ -627,13 +627,13 @@ CREATE TABLE cart(no NUMBER primary key
 INSERT INTO cart
 VALUES
     (1
-    ,'ÄÚµå ½ºÇÁ¸µ'
+    ,'ì½”ë“œ ìŠ¤í”„ë§'
     ,45000
     ,3);
 INSERT INTO cart
 VALUES
     (2
-    ,'È¥ÀÚ ÀÚ¹Ù'
+    ,'í˜¼ìž ìžë°”'
     ,35000
     ,1);
 

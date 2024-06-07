@@ -9,13 +9,13 @@ CREATE TABLE cart(no NUMBER primary key
 INSERT INTO cart
 VALUES
     (1
-    ,'�ڵ� ������'
+    ,'코드 스프링'
     ,45000
     ,3);
 INSERT INTO cart
 VALUES
     (2
-    ,'ȥ�� �ڹ�'
+    ,'혼자 자바'
     ,35000
     ,1);
 
@@ -34,37 +34,37 @@ CREATE TABLE tbl_cart(no NUMBER primary key
 INSERT INTO tbl_cart
 VALUES
     (1
-    ,'���׸��� ��Ƽ����'
+    ,'과테말라 안티구아'
     ,1200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (2
-    ,'�ɳ� ��ũ�����'
+    ,'케냐 오크라톡신'
     ,1500
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (3
-    ,'�ڽ�Ÿ��ī ������'
+    ,'코스타리카 따라주'
     ,1800
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (4
-    ,'��ī�󱸾� ��ġ�ڵ�帳'
+    ,'니카라구아 더치핸드드립'
     ,2200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (5
-    ,'��������佺'
+    ,'브라질산토스'
     ,3200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (6
-    ,'��Ƽ���Ǿ� ����ü��'
+    ,'에티오피아 예가체프'
     ,3300
     ,2);
 -----------------------------------------------------------------------------------------------------
@@ -180,8 +180,8 @@ INSERT INTO prod_info
     ,prod_desc)
 VALUES
     ('P001'
-    ,'��Ʈ��1'
-    ,'������Ʈ���Դϴ�.1');
+    ,'노트북1'
+    ,'좋은노트북입니다.1');
 
 SELECT *
 FROM   prod_info;
