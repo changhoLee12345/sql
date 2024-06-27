@@ -21,12 +21,12 @@ from tbl_books;
 select *
 from tbl_cart;
 
-insert into tbl_cart values(1, '°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ', 1200, 2);
-insert into tbl_cart values(2, 'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å', 1500, 2);
-insert into tbl_cart values(3, 'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ', 1800, 2);
-insert into tbl_cart values(4, '´ÏÄ«¶ó±¸¾Æ ´õÄ¡ÇÚµåµå¸³', 2200, 2);
-insert into tbl_cart values(5, 'ºê¶óÁú»êÅä½º', 3200, 2);
-insert into tbl_cart values(6, '¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ', 3300, 2);
+insert into tbl_cart values(1, 'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„', 1200, 2);
+insert into tbl_cart values(2, 'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ ', 1500, 2);
+insert into tbl_cart values(3, 'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼', 1800, 2);
+insert into tbl_cart values(4, 'ë‹ˆì¹´ë¼êµ¬ì•„ ë”ì¹˜í•¸ë“œë“œë¦½', 2200, 2);
+insert into tbl_cart values(5, 'ë¸Œë¼ì§ˆì‚°í† ìŠ¤', 3200, 2);
+insert into tbl_cart values(6, 'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„', 3300, 2);
 
 select *
 from emp
@@ -37,24 +37,24 @@ where emp_name = 'kildongHong';
 
 
 create table tbl_books (
- book_code char(4) primary key, --µµ¼­ÄÚµå
- book_title varchar2(50) not null, --µµ¼­¸í
- author varchar2(100) not null, --ÀúÀÚ
- company varchar2(100) not null, --ÃâÆÇ»ç
- price number not null, --ÆÇ¸Å°¡°İ
+ book_code char(4) primary key, --ë„ì„œì½”ë“œ
+ book_title varchar2(50) not null, --ë„ì„œëª…
+ author varchar2(100) not null, --ì €ì
+ company varchar2(100) not null, --ì¶œíŒì‚¬
+ price number not null, --íŒë§¤ê°€ê²©
  create_date date default sysdate
 );
 
 insert into tbl_books
-values('B001', '³ª´Â ÀĞ°í ¾²°í ¹ö¸°´Ù', '¼Õ¿õÁ¤', '³­´Ù', 15300, sysdate);
+values('B001', 'ë‚˜ëŠ” ì½ê³  ì“°ê³  ë²„ë¦°ë‹¤', 'ì†ì›…ì •', 'ë‚œë‹¤', 15300, sysdate);
 insert into tbl_books
-values('B002', '½£¼Ó ÀçºÀ»çÀÇ ¿ÊÀå', 'ÃÖÇâ¶û', 'Ã¢ºñ', 14400, sysdate);
+values('B002', 'ìˆ²ì† ì¬ë´‰ì‚¬ì˜ ì˜·ì¥', 'ìµœí–¥ë‘', 'ì°½ë¹„', 14400, sysdate);
 insert into tbl_books
-values('B003', 'À¯Æ©ºê, Á¦±¹ÀÇ Åº»ı', '¸¶Å© ¹ö°Õ', 'Çö´ëÁö¼º', 22500, sysdate);
+values('B003', 'ìœ íŠœë¸Œ, ì œêµ­ì˜ íƒ„ìƒ', 'ë§ˆí¬ ë²„ê²', 'í˜„ëŒ€ì§€ì„±', 22500, sysdate);
 insert into tbl_books
-values('B004', '»óÀÚ ¼Ó ¿ìÁÖ', '¾Øµå·ù ÆùÃ¾', 'RHÄÚ¸®¾Æ', 23400, sysdate);
+values('B004', 'ìƒì ì† ìš°ì£¼', 'ì•¤ë“œë¥˜ í°ì²¸', 'RHì½”ë¦¬ì•„', 23400, sysdate);
 insert into tbl_books
-values('B005', 'ÇÁ·¹³Ê¹Ì', '½É¾ÆÁø', '°­', 13500, sysdate);
+values('B005', 'í”„ë ˆë„ˆë¯¸', 'ì‹¬ì•„ì§„', 'ê°•', 13500, sysdate);
 
 
 
