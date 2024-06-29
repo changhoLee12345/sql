@@ -21,7 +21,8 @@ create table template_prod (
 );
 
 select *
-from template_prod;
+from template_prod
+order by 1;
 
 select *
 from board_tbl
