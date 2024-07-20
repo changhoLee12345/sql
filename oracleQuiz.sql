@@ -1,4 +1,4 @@
-﻿select * from tab;
+select * from tab;
 
 -- create table.
 drop table prod_tbl purge;
