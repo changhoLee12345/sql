@@ -148,6 +148,93 @@ and   rn > (:page - 1) * 5;
 insert into tbl_board (board_no, title, content, writer)
 select board_seq.nextval, title, content, writer
 from tbl_board;
+--git form연습.
+SELECT /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+ *
+FROM   tbl_board
+WHERE  board_no > 0;
+
+UPDATE tbl_board
+SET    writer = CASE MOD(board_no, 4)
+                    WHEN 0 THEN 'user0'
+                    WHEN 1 THEN 'user1'
+                    WHEN 2 THEN 'user2'
+                    ELSE 'user3'
+                END
+WHERE  board_no > 0;
+
+SELECT /*+ FULL(tbl_board) */
+ ROWNUM rn
+,board_no
+,title
+FROM   tbl_board
+WHERE  board_no > 0
+ORDER  BY board_no;
+
+SELECT rn
+      ,board_no
+      ,title
+      ,content
+FROM   (SELECT /*+ INDEX_DESC(tbl_board SYS_C0031805) */
+         ROWNUM rn
+        ,board_no
+        ,title
+        ,content
+        FROM   tbl_board
+        WHERE  ROWNUM <= 20)
+WHERE  rn > 10;
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+--여러건 넣기.
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+    SELECT board_seq.nextval
+          ,title
+          ,content
+          ,writer
+    FROM   tbl_board;
+SELECT COUNT(*)
+FROM   tbl_board;
+
+INSERT INTO tbl_board
+    (board_no
+    ,title
+    ,content
+    ,writer)
+VALUES
+    (board_seq.nextval
+    ,'title' || board_seq.currval
+    ,'content' || board_seq.currval
+    ,'writer' || board_seq.currval);
+
+SELECT *
+FROM   tbl_board
+ORDER  BY 1 DESC;
+
+DELETE FROM tbl_board
+WHERE  board_no > 500;
+
+drop TABLE tbl_reply purge;
+CREATE sequence reply_seq;
+CREATE TABLE tbl_reply(reply_no INT primary key
+                      ,bno INT NOT NULL
+                      ,content VARCHAR2(300) NOT NULL
+                      ,writer VARCHAR2(100) NOT NULL
+                      ,create_date DATE DEFAULT SYSDATE);
+SELECT *
+FROM   tbl_reply;
+INSERT INTO tbl_reply
+VALUES
+    (reply_seq.nextval
+    ,3813048
+    ,'test reply'
+    ,'user01'
+    ,SYSDATE);
+
 
 drop table cart purge;
 create table tbl_cart (

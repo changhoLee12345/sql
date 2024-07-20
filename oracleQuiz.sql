@@ -1,4 +1,5 @@
-select * from tab;
+select * 
+from tab;
 
 -- create table.
 drop table prod_tbl purge;
@@ -105,6 +106,3 @@ insert into tbl_books
 values('B004', '상자 속 우주', '앤드류 폰첸', 'RH코리아', 23400, sysdate);
 insert into tbl_books
 values('B005', '프레너미', '심아진', '강', 13500, sysdate);
-
-
-
