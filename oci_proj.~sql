@@ -9,13 +9,13 @@ CREATE TABLE cart(no NUMBER primary key
 INSERT INTO cart
 VALUES
     (1
-    ,'ÄÚµå ½ºÇÁ¸µ'
+    ,'ì½”ë“œ ìŠ¤í”„ë§'
     ,45000
     ,3);
 INSERT INTO cart
 VALUES
     (2
-    ,'È¥ÀÚ ÀÚ¹Ù'
+    ,'í˜¼ì ìë°”'
     ,35000
     ,1);
 
@@ -34,37 +34,37 @@ CREATE TABLE tbl_cart(no NUMBER primary key
 INSERT INTO tbl_cart
 VALUES
     (1
-    ,'°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ'
+    ,'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„'
     ,1200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (2
-    ,'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å'
+    ,'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ '
     ,1500
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (3
-    ,'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ'
+    ,'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼'
     ,1800
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (4
-    ,'´ÏÄ«¶ó±¸¾Æ ´õÄ¡ÇÚµåµå¸³'
+    ,'ë‹ˆì¹´ë¼êµ¬ì•„ ë”ì¹˜í•¸ë“œë“œë¦½'
     ,2200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (5
-    ,'ºê¶óÁú»êÅä½º'
+    ,'ë¸Œë¼ì§ˆì‚°í† ìŠ¤'
     ,3200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (6
-    ,'¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ'
+    ,'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„'
     ,3300
     ,2);
 -----------------------------------------------------------------------------------------------------
@@ -130,20 +130,20 @@ WHERE  user_id = 'user2';
 COMMIT;
 ROLLBACK;
 
-drop table tbl_board purge;
-CREATE TABLE tbl_board(board_no NUMBER primary key
-                      ,title VARCHAR2(100) NOT NULL
-                      ,content VARCHAR2(100) NOT NULL
-                      ,writer VARCHAR2(10) NOT NULL -- user1, user2
+CREATE TABLE tbl_board(brd_no NUMBER primary key
+                      ,brd_title VARCHAR2(100) NOT NULL
+                      ,brd_writer VARCHAR2(10) NOT NULL
+                      , -- user1, user2
+                       brd_content VARCHAR2(100) NOT NULL
                       ,create_date DATE DEFAULT SYSDATE
                       ,click_cnt   NUMBER DEFAULT 0);
 CREATE sequence board_seq;
 
 INSERT INTO tbl_board
-    (board_no
-    ,title
-    ,content
-    ,writer)
+    (brd_no
+    ,brd_title
+    ,brd_content
+    ,brd_writer)
 VALUES
     (board_seq.nextval
     ,'title test' || board_seq.currval
@@ -159,17 +159,11 @@ WHERE  brd_no = 7;
 
 SELECT *
 FROM   tbl_board
---WHERE  brd_no = 3
-order by board_no desc;
+WHERE  brd_no = 3;
 
 UPDATE tbl_board
 SET    click_cnt = click_cnt + 1
 WHERE  brd_no = 3;
-
-drop table tbl_reply purge;
-
-select *
-from tbl_reply;
 
 drop TABLE prod_info purge;
 CREATE TABLE prod_info(prod_code CHAR(4) primary key
@@ -186,8 +180,8 @@ INSERT INTO prod_info
     ,prod_desc)
 VALUES
     ('P001'
-    ,'³ëÆ®ºÏ1'
-    ,'ÁÁÀº³ëÆ®ºÏÀÔ´Ï´Ù.1');
+    ,'ë…¸íŠ¸ë¶1'
+    ,'ì¢‹ì€ë…¸íŠ¸ë¶ì…ë‹ˆë‹¤.1');
 
 SELECT *
 FROM   prod_info;
