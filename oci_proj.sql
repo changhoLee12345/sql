@@ -1,5 +1,98 @@
 SELECT *
 FROM   tab;
+-----------------------------------------------------------------------
+-----------------------------------------------------------------------
+drop table tbl_swim_class purge;
+create table tbl_swim_lecture (
+ mem_id varchar2(10) not null,
+ swim_code char(2) not null,
+ creation_date date default sysdate
+);
+insert into tbl_swim_lecture values('user01', 'B1', sysdate);
+insert into tbl_swim_lecture values('user02', 'B1', sysdate);
+insert into tbl_swim_lecture values('user03', 'M1', sysdate);
+insert into tbl_swim_lecture values('user04', 'M1', sysdate);
+insert into tbl_swim_lecture values('user05', 'S1', sysdate);
+insert into tbl_swim_lecture values('user06', 'S1', sysdate);
+
+select * from tbl_swim_lecture;
+select mem_id
+      ,s.swim_code
+      ,s.swim_name
+      ,s.coach
+      ,s.swim_fee
+      ,sl.creation_date
+from tbl_swim_lecture sl
+join tbl_swim s
+on sl.swim_code = s.swim_code
+where s.enabled = 'Y';
+
+create table tbl_swim (
+ swim_code char(2) primary key, -- B1, B2, B3, M1, M2, M3
+ swim_name varchar2(30) not null,
+ coach varchar2(100) not null, -- ê°•ì‚¬ì´ë¦„.
+ swim_fee number not null,
+ enabled char(1) default 'Y' --ì‚¬ìš©ì—¬ë¶€
+);
+insert into tbl_swim values('B1', 'ê¸°ì´ˆë°˜1', 'ê¹€ê°•ì‚¬', 10000, 'Y');
+insert into tbl_swim values('M1', 'ì¤‘ê¸‰ë°˜1', 'ê¹€ì¤‘ê¸‰', 20000, 'Y');
+insert into tbl_swim values('S1', 'ìƒê¸‰ë°˜1', 'ê¹€ìƒê¸‰', 30000, 'Y');
+select * from tbl_swim;
+
+-- tbl_auth
+-----------------------------------------------------------
+drop table tbl_auth purge;
+create table tbl_auth (
+ mem_id varchar2(10),
+ auth varchar2(10) not null,
+ enabled char(1) default 'Y'
+);
+alter table tbl_auth add constraint fk_mem_id
+foreign key (mem_id) references tbl_member(mem_id);
+
+insert into tbl_auth
+values('user01', 'USER', 'Y');
+insert into tbl_auth
+values('user02', 'USER', 'Y');
+insert into tbl_auth
+values('admin', 'ADMIN', 'Y');
+
+select *
+from tbl_auth;
+
+select *
+from tbl_member;
+
+select *
+from tbl_auth a
+right join tbl_member m
+on a.mem_id = m.mem_id;
+
+create table tbl_member (
+ mem_id varchar2(10),
+ mem_name varchar2(50) not null,
+ mem_pw varchar2(100) not null,
+ mem_phone varchar2(20),
+ creation_date date default sysdate
+);
+alter table tbl_member add constraint member_pk primary key (mem_id);
+alter table tbl_board add update_date date default sysdate;
+
+insert into tbl_member (mem_id, mem_name, mem_pw, mem_phone)
+values('user01', 'ì‚¬ìš©ì1', '0000', '010-9999-8888');
+insert into tbl_member (mem_id, mem_name, mem_pw, mem_phone)
+values('user02', 'ì‚¬ìš©ì2', '0000', '010-8888-7777');
+insert into tbl_member (mem_id, mem_name, mem_pw, mem_phone)
+values('admin', 'ê´€ë¦¬ì', '0000', '010-8888-7777');
+
+select * from tbl_member;
+
+select *
+from tbl_member m
+where not exists (select 1 
+                  from tbl_auth a
+                  where m.mem_id = a.mem_id);
+
 
 CREATE TABLE cart(no NUMBER primary key
                  ,product_nm VARCHAR2(50)
@@ -9,13 +102,13 @@ CREATE TABLE cart(no NUMBER primary key
 INSERT INTO cart
 VALUES
     (1
-    ,'ÄÚµå ½ºÇÁ¸µ'
+    ,'ì½”ë“œ ìŠ¤í”„ë§'
     ,45000
     ,3);
 INSERT INTO cart
 VALUES
     (2
-    ,'È¥ÀÚ ÀÚ¹Ù'
+    ,'í˜¼ì ìë°”'
     ,35000
     ,1);
 
@@ -34,137 +127,41 @@ CREATE TABLE tbl_cart(no NUMBER primary key
 INSERT INTO tbl_cart
 VALUES
     (1
-    ,'°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ'
+    ,'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„'
     ,1200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (2
-    ,'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å'
+    ,'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ '
     ,1500
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (3
-    ,'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ'
+    ,'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼'
     ,1800
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (4
-    ,'´ÏÄ«¶ó±¸¾Æ ´õÄ¡ÇÚµåµå¸³'
+    ,'ë‹ˆì¹´ë¼êµ¬ì•„ ë”ì¹˜í•¸ë“œë“œë¦½'
     ,2200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (5
-    ,'ºê¶óÁú»êÅä½º'
+    ,'ë¸Œë¼ì§ˆì‚°í† ìŠ¤'
     ,3200
     ,2);
 INSERT INTO tbl_cart
 VALUES
     (6
-    ,'¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ'
+    ,'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„'
     ,3300
     ,2);
 -----------------------------------------------------------------------------------------------------
 
-drop TABLE tbl_users purge;
-CREATE TABLE tbl_users(user_id VARCHAR2(100) primary key
-                      ,user_pw VARCHAR2(10) NOT NULL
-                      ,user_name VARCHAR2(100) NOT NULL
-                      ,user_birth DATE
-                      ,user_phone VARCHAR2(20)
-                      ,user_addr VARCHAR2(100));
-
-INSERT INTO tbl_users
-    (user_id
-    ,user_pw
-    ,user_name
-    ,user_birth)
-VALUES
-    ('user1'
-    ,'1111'
-    ,'Hong'
-    ,TO_DATE('2005-01-01', 'yyyy-mm-dd'));
-
-INSERT INTO tbl_users
-    (user_id
-    ,user_pw
-    ,user_name
-    ,user_birth)
-VALUES
-    ('user3'
-    ,'1111'
-    ,'Park'
-    ,'1995-01-01');
-
-INSERT INTO tbl_users
-    (user_id
-    ,user_pw
-    ,user_name
-    ,user_birth)
-VALUES
-    ('user2'
-    ,'1111'
-    ,'Hwang'
-    ,TO_DATE('1995-01-01', 'yyyy-mm-dd'));
-
-SELECT *
-FROM   tbl_users;
-
-UPDATE tbl_users
-SET    user_pw    = '2222'
-      ,user_phone = '010-1111-2222'
-      ,user_addr  = 'Daegu 100'
-WHERE  user_id = 'user3';
-
-UPDATE tbl_users
-SET    user_pw   = '3333'
-      ,user_addr = 'Seoul 100'
-WHERE  user_id = 'user3';
-
-DELETE FROM tbl_users
-WHERE  user_id = 'user2';
-
-COMMIT;
-ROLLBACK;
-
-drop table tbl_board purge;
-CREATE TABLE tbl_board(board_no NUMBER primary key
-                      ,title VARCHAR2(100) NOT NULL
-                      ,content VARCHAR2(100) NOT NULL
-                      ,writer VARCHAR2(10) NOT NULL -- user1, user2
-                      ,create_date DATE DEFAULT SYSDATE
-                      ,click_cnt   NUMBER DEFAULT 0);
-CREATE sequence board_seq;
-
-INSERT INTO tbl_board
-    (board_no
-    ,title
-    ,content
-    ,writer)
-VALUES
-    (board_seq.nextval
-    ,'title test' || board_seq.currval
-    ,'content test'
-    ,'user1');
-
-UPDATE tbl_board
-SET    brd_content = 'modify content'
-WHERE  brd_no = 5;
-
-DELETE FROM tbl_board
-WHERE  brd_no = 7;
-
-SELECT *
-FROM   tbl_board
---WHERE  brd_no = 3
-order by board_no desc;
-
-UPDATE tbl_board
-SET    click_cnt = click_cnt + 1
-WHERE  brd_no = 3;
 
 drop table tbl_reply purge;
 
@@ -186,8 +183,8 @@ INSERT INTO prod_info
     ,prod_desc)
 VALUES
     ('P001'
-    ,'³ëÆ®ºÏ1'
-    ,'ÁÁÀº³ëÆ®ºÏÀÔ´Ï´Ù.1');
+    ,'ë…¸íŠ¸ë¶1'
+    ,'ì¢‹ì€ë…¸íŠ¸ë¶ì…ë‹ˆë‹¤.1');
 
 SELECT *
 FROM   prod_info;
