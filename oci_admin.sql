@@ -6,7 +6,7 @@ ORDER  BY username;
 --oracle 11g.
 ALTER USER hr identified BY hr account unlock;
 
-ALTER USER dev identified BY '';
+ALTER USER prj identified BY prj;
 
 ALTER session SET "_ORACLE_SCRIPT" = TRUE;
 
