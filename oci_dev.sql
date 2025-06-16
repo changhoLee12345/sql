@@ -1,7 +1,7 @@
 -----------------------------------------------------
---------------- jsp ¼ö¾÷ÁøÇàÇÒ ¶§ »ç¿ëÇÒ sql ------------
+--------------- jsp ìˆ˜ì—…ì§„í–‰í•  ë•Œ ì‚¬ìš©í•  sql ------------
 -----------------------------------------------------
--- 11g, 21c »ç¿ë.
+-- 11g, 21c ì‚¬ìš©.
 select * from tab;
 -----------------------------------------------------------
 
@@ -16,7 +16,7 @@ create table tbl_member (
   creation_date date default sysdate
 );
 alter table tbl_member add constraint pk_member primary key (member_id);
-insert into tbl_member (member_id, member_name, password) values('user01', '»ç¿ëÀÚ1', '1111');
+insert into tbl_member (member_id, member_name, password) values('user01', 'ì‚¬ìš©ì1', '1111');
 
 -----------------------------------------------------------
 
@@ -107,7 +107,7 @@ FROM   (SELECT /*+ INDEX_DESC(tbl_board SYS_C0031805) */
 WHERE  rn > 10;
 
 -----------------------------------------------------------
---¿©·¯°Ç ³Ö±â.
+--ì—¬ëŸ¬ê±´ ë„£ê¸°.
 INSERT INTO tbl_board
     (board_no
     ,title
@@ -173,10 +173,10 @@ create table tbl_cart (
 	price number,
 	qty number
 );
-insert into tbl_cart values(1, '°úÅ×¸»¶ó ¾ÈÆ¼±¸¾Æ', 1200, 2);
-insert into tbl_cart values(2, 'ÄÉ³Ä ¿ÀÅ©¶óÅå½Å', 1500, 2);
-insert into tbl_cart values(3, 'ÄÚ½ºÅ¸¸®Ä« µû¶óÁÖ', 1800, 2);
-insert into tbl_cart values(4, '´ÏÄ«¶ó±¸¾Æ ´õÄ¡ÇÚµåµå¸³', 2200, 2);
-insert into tbl_cart values(5, 'ºê¶óÁú»êÅä½º', 3200, 2);
-insert into tbl_cart values(6, '¿¡Æ¼¿ÀÇÇ¾Æ ¿¹°¡Ã¼ÇÁ', 3300, 2);
+insert into tbl_cart values(1, 'ê³¼í…Œë§ë¼ ì•ˆí‹°êµ¬ì•„', 1200, 2);
+insert into tbl_cart values(2, 'ì¼€ëƒ ì˜¤í¬ë¼í†¡ì‹ ', 1500, 2);
+insert into tbl_cart values(3, 'ì½”ìŠ¤íƒ€ë¦¬ì¹´ ë”°ë¼ì£¼', 1800, 2);
+insert into tbl_cart values(4, 'ë‹ˆì¹´ë¼êµ¬ì•„ ë”ì¹˜í•¸ë“œë“œë¦½', 2200, 2);
+insert into tbl_cart values(5, 'ë¸Œë¼ì§ˆì‚°í† ìŠ¤', 3200, 2);
+insert into tbl_cart values(6, 'ì—í‹°ì˜¤í”¼ì•„ ì˜ˆê°€ì²´í”„', 3300, 2);
 -----------------------------------------------------------
