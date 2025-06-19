@@ -1,4 +1,4 @@
------------------------------------------------------
+﻿-----------------------------------------------------
 --------------- jsp 수업진행할 때 사용할 sql ------------
 -----------------------------------------------------
 -- 11g, 21c 사용.
@@ -18,6 +18,8 @@ create table tbl_member (
 alter table tbl_member add constraint pk_member primary key (member_id);
 insert into tbl_member (member_id, member_name, password) values('user01', '사용자1', '1111');
 
+select *
+from tbl_member;
 -----------------------------------------------------------
 
 --    tbl_board
